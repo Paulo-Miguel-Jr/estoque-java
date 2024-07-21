@@ -1,4 +1,4 @@
-package com.example.estoquejava;
+package com.example.estoquejava.helloJavaFX;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
