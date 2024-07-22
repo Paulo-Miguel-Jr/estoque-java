@@ -2,7 +2,7 @@ package com.example.estoquejava.models;
 import java.time.LocalDate;
 
 public class PedidoFornecedor {
-    private int id;
+    private int numero;
     private LocalDate dataPedido;
     private Lista<ItemCompra> itemCompra;
 
@@ -32,13 +32,6 @@ public class PedidoFornecedor {
         this.dataPedido = dataPedido;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
 
       public List<ItemCompra> getitemCompra() {
         return itemCompra;
