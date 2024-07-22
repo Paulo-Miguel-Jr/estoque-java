@@ -8,7 +8,7 @@ public class Produto {
     private double quantidade;
     private String unidadeDeMedida;
     private double estoqueMinimo;
-    private Fornecedor fornecedor;
+   
 
     private Categoria cat = new Categoria();
     private Fornecedor forn = new Fornecedor();
