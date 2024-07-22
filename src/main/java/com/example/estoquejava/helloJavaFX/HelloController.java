@@ -1,4 +1,4 @@
-package com.example.estoquejava;
+package com.example.estoquejava.helloJavaFX;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
