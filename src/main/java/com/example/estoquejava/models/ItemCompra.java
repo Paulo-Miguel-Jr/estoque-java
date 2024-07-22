@@ -59,14 +59,7 @@ public class ItemCompra {
         this.dataEntrega = dataEntrega;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
+  
     @Override
     public String toString() {
         return "ItemCompra{" +
