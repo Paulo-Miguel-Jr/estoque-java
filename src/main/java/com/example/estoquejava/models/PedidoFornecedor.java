@@ -6,10 +6,10 @@ public class PedidoFornecedor {
     private LocalDate dataPedido;
     private Lista<ItemCompra> itemCompra;
 
-    public PedidoFornecedor(int numero, LocalDate dataPedido, Fornecedor fornecedor) {
+    public PedidoFornecedor(int numero, LocalDate dataPedido, Lista<ItemCompra> itemCompra) {
         this.numero = numero;
         this.dataPedido = dataPedido;
-        this.fornecedor = fornecedor;
+        this.itemCompra = itemCompra;
     }
 
     public PedidoFornecedor() {
@@ -47,7 +47,7 @@ public class PedidoFornecedor {
         return "PedidoFornecedor{" +
                 "numero=" + numero +
                 ", dataPedido=" + dataPedido +
-                ", fornecedor=" + fornecedor +
+                ", Lista<ItemCompra>=" + itemCompra +
                 '}';
     }
 }
