@@ -10,13 +10,13 @@ public class ItemCompra {
     private LocalDate dataCompra;
     private Produto produto;
 
-    public ItemCompra(int codigo, int quantidade, double valor, LocalDate dataCompra, LocalDate dataEntrega, List<Produto> produtos) {
+    public ItemCompra(int codigo, int quantidade, double valor, LocalDate dataCompra, LocalDate dataEntrega, Produto produto) {
         this.codigo = codigo;
         this.quantidade = quantidade;
         this.valor = valor;
         this.dataCompra = dataCompra;
         this.dataEntrega = dataEntrega;
-        this.produtos = produtos;
+        this.produto = produto;
     }
 
     public int getCodigo() {
@@ -51,13 +51,14 @@ public class ItemCompra {
         this.dataCompra = dataCompra;
     }
 
-    public LocalDate getDataEntrega() {
-        return dataEntrega;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setDataEntrega(LocalDate dataEntrega) {
-        this.dataEntrega = dataEntrega;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
+
 
   
     @Override
@@ -67,8 +68,7 @@ public class ItemCompra {
                 ", quantidade=" + quantidade +
                 ", valor=" + valor +
                 ", dataCompra=" + dataCompra +
-                ", dataEntrega=" + dataEntrega +
-                ", produtos=" + produtos +
+                ", produto=" + produto +
                 '}';
     }
 
