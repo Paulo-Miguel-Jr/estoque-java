@@ -2,9 +2,9 @@ package com.example.estoquejava.models;
 import java.time.LocalDate;
 
 public class PedidoFornecedor {
-    private int numero;
+    private int id;
     private LocalDate dataPedido;
-    private Fornecedor fornecedor;
+    private Lista<ItemCompra> itemCompra;
 
     public PedidoFornecedor(int numero, LocalDate dataPedido, Fornecedor fornecedor) {
         this.numero = numero;
