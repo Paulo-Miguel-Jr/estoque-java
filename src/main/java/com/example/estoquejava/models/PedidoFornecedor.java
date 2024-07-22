@@ -40,6 +40,15 @@ public class PedidoFornecedor {
         this.fornecedor = fornecedor;
     }
 
+      public List<ItemCompra> getitemCompra() {
+        return itemCompra;
+    }
+
+    public void setProdutos(List<ItemCoompra> itemCompra) {
+        this.itemCompra = itemCompra;
+    }
+
+
     @Override
     public String toString() {
         return "PedidoFornecedor{" +
