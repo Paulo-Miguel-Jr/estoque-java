@@ -8,8 +8,7 @@ public class ItemCompra {
     private int quantidade;
     private double valor;
     private LocalDate dataCompra;
-    private LocalDate dataEntrega;
-    private List<Produto> produtos;
+    private Produto produto;
 
     public ItemCompra(int codigo, int quantidade, double valor, LocalDate dataCompra, LocalDate dataEntrega, List<Produto> produtos) {
         this.codigo = codigo;
