@@ -8,28 +8,22 @@ public class Produto {
     private double quantidade;
     private String unidadeDeMedida;
     private double estoqueMinimo;
-   
+    private String categoria;
 
-    private Categoria cat = new Categoria();
+
     private Fornecedor forn = new Fornecedor();
 
-    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo) {
+    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo, String categoria, Fornecedor forn) {
         this.nome = nome;
         this.id = id;
         this.preco = preco;
         this.quantidade = quantidade;
         this.unidadeDeMedida = unidadeDeMedida;
         this.estoqueMinimo = estoqueMinimo;
+        this.categoria = categoria;
+        this.forn = forn;
     }
 
-    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, Categoria cat) {
-        this.nome = nome;
-        this.id = id;
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.unidadeDeMedida = unidadeDeMedida;
-        this.cat = cat;
-    }
 
     public Produto() {
 
@@ -83,14 +77,6 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    public Categoria getCat() {
-        return cat;
-    }
-
-    public void setCat(Categoria cat) {
-        this.cat = cat;
-    }
-
     public Fornecedor getForn() {
         return forn;
     }
@@ -99,8 +85,26 @@ public class Produto {
         this.forn = forn;
     }
 
-    @Override
-    public String toString(){
-        return this.id + " - " + this.nome;
+    public String getCategoria() {
+        return categoria;
     }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "nome='" + nome + '\'' +
+                ", id=" + id +
+                ", preco=" + preco +
+                ", quantidade=" + quantidade +
+                ", unidadeDeMedida='" + unidadeDeMedida + '\'' +
+                ", estoqueMinimo=" + estoqueMinimo +
+                ", categoria='" + categoria + '\'' +
+                ", forn=" + forn +
+                '}';
+    }
+    
 }
