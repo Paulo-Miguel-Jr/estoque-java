@@ -6,14 +6,14 @@ import java.util.List;
 public class ItemCompra {
     private int codigo;
     private int quantidade;
-    private double valor;
+    private double valorTotal;
     private LocalDate dataCompra;
     private Produto produto;
 
-    public ItemCompra(int codigo, int quantidade, double valor, LocalDate dataCompra, LocalDate dataEntrega, Produto produto) {
+    public ItemCompra(int codigo, int quantidade, double valorTotal, LocalDate dataCompra, LocalDate dataEntrega, Produto produto) {
         this.codigo = codigo;
         this.quantidade = quantidade;
-        this.valor = valor;
+        this.valorTotal = valorTotal;
         this.dataCompra = dataCompra;
         this.dataEntrega = dataEntrega;
         this.produto = produto;
