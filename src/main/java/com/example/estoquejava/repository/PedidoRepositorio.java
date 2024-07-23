@@ -75,6 +75,14 @@ public class PedidoRepositorio {
         return resposta;
     }
 
+    public void imprimirPedidos() {
+        for (int i = 0; i < proxIndLivre; i++) {
+            System.out.println("Número do Pedido: " + pedidos[i].getNumero());
+            System.out.println("Valor Total: " + pedidos[i].getValorTotal());
+            System.out.println(); 
+        }
+    }
+
     
 
 }
