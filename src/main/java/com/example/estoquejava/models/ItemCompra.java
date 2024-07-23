@@ -10,12 +10,11 @@ public class ItemCompra {
     private LocalDate dataCompra;
     private Produto produto;
 
-    public ItemCompra(int codigo, int quantidade, double valorTotal, LocalDate dataCompra, LocalDate dataEntrega, Produto produto) {
+    public ItemCompra(int codigo, int quantidade, double valorTotal, LocalDate dataCompra, Produto produto) {
         this.codigo = codigo;
         this.quantidade = quantidade;
         this.valorTotal = valorTotal;
         this.dataCompra = dataCompra;
-        this.dataEntrega = dataEntrega;
         this.produto = produto;
     }
 
@@ -35,12 +34,12 @@ public class ItemCompra {
         this.quantidade = quantidade;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public LocalDate getDataCompra() {
@@ -60,18 +59,15 @@ public class ItemCompra {
     }
 
 
-  
     @Override
     public String toString() {
         return "ItemCompra{" +
                 "codigo=" + codigo +
                 ", quantidade=" + quantidade +
-                ", valor=" + valor +
+                ", valorTotal=" + valorTotal +
                 ", dataCompra=" + dataCompra +
                 ", produto=" + produto +
                 '}';
     }
-
-    
 }
 
