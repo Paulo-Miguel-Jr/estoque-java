@@ -1,5 +1,7 @@
 package com.example.estoquejava.models;
 
+import java.util.regex.Pattern;
+
 public class Fornecedor {
     private String nome;
     private int id;
@@ -15,17 +17,17 @@ public class Fornecedor {
 
     public Fornecedor(String nome, int id, String cnpj, String telefone, String cep, int numero,
                       String rua, String complemento, String bairro, String cidade, String estado) {
-        this.nome = nome;
-        this.id = id;
-        this.cnpj = cnpj;
-        this.telefone = telefone;
-        this.cep = cep;
-        this.numero = numero;
-        this.rua = rua;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.setNome(nome);
+        this.setId(id);
+        this.setCnpj(cnpj);
+        this.setTelefone(telefone);
+        this.setCep(cep);
+        this.setNumero(numero);
+        this.setRua(rua);
+        this.setComplemento(complemento);
+        this.setBairro(bairro);
+        this.setCidade(cidade);
+        this.setEstado(estado);
     }
 
     public Fornecedor() {}
@@ -35,6 +37,9 @@ public class Fornecedor {
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");
+        }
         this.nome = nome;
     }
 
@@ -43,6 +48,9 @@ public class Fornecedor {
     }
 
     public void setId(int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID deve ser positivo.");
+        }
         this.id = id;
     }
 
@@ -51,6 +59,9 @@ public class Fornecedor {
     }
 
     public void setCnpj(String cnpj) {
+        if (!Pattern.matches("\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}", cnpj)) {
+            throw new IllegalArgumentException("CNPJ inválido.");
+        }
         this.cnpj = cnpj;
     }
 
@@ -59,6 +70,9 @@ public class Fornecedor {
     }
 
     public void setTelefone(String telefone) {
+        if (!Pattern.matches("\\d{5}-\\d{4}", telefone)) {
+            throw new IllegalArgumentException("Telefone inválido.");
+        }
         this.telefone = telefone;
     }
 
@@ -67,6 +81,9 @@ public class Fornecedor {
     }
 
     public void setCep(String cep) {
+        if (!Pattern.matches("\\d{5}-\\d{3}", cep)) {
+            throw new IllegalArgumentException("CEP inválido.");
+        }
         this.cep = cep;
     }
 
@@ -75,6 +92,9 @@ public class Fornecedor {
     }
 
     public void setNumero(int numero) {
+        if (numero <= 0) {
+            throw new IllegalArgumentException("Número deve ser positivo.");
+        }
         this.numero = numero;
     }
 
@@ -83,6 +103,9 @@ public class Fornecedor {
     }
 
     public void setRua(String rua) {
+        if (rua == null || rua.isEmpty()) {
+            throw new IllegalArgumentException("Rua não pode ser vazia.");
+        }
         this.rua = rua;
     }
 
@@ -99,6 +122,9 @@ public class Fornecedor {
     }
 
     public void setBairro(String bairro) {
+        if (bairro == null || bairro.isEmpty()) {
+            throw new IllegalArgumentException("Bairro não pode ser vazio.");
+        }
         this.bairro = bairro;
     }
 
@@ -107,6 +133,9 @@ public class Fornecedor {
     }
 
     public void setCidade(String cidade) {
+        if (cidade == null || cidade.isEmpty()) {
+            throw new IllegalArgumentException("Cidade não pode ser vazia.");
+        }
         this.cidade = cidade;
     }
 
@@ -115,6 +144,9 @@ public class Fornecedor {
     }
 
     public void setEstado(String estado) {
+        if (estado == null || estado.isEmpty()) {
+            throw new IllegalArgumentException("Estado não pode ser vazio.");
+        }
         this.estado = estado;
     }
 
@@ -122,6 +154,7 @@ public class Fornecedor {
     public String toString() {
         return "Fornecedor{" +
                 "nome='" + nome + '\'' +
+                ", id=" + id +
                 ", cnpj='" + cnpj + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", cep='" + cep + '\'' +
