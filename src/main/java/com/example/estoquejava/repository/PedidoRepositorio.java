@@ -4,19 +4,19 @@ import com.example.estoquejava.models.PedidoFornecedor;
 
 public class PedidoRepositorio {
     private PedidoFornecedor[] pedidos;
-    private int proxIndLivre;
+    private int proxIdLivre;
     private String[] historicoAlteracoes;
     private int contadorHistorico;
 
     public PedidoRepositorio(int capacidade) {
         this.pedidos = new PedidoFornecedor[capacidade];
-        proxIndLivre = 0;
+        proxIdLivre = 0;
         historicoAlteracoes = new String[capacidade * 2]; //historico de alterações n deve exceder o dobro da capacidade
         contadorHistorico = 0;
     }
 
-    private int getIndicePedido(int numero) {
-        for (int i = 0; i < proxIndLivre; i++) {
+    private int getIdPedido(int numero) {
+        for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i].getNumero() == numero) {
                 return i;
             }
@@ -25,9 +25,9 @@ public class PedidoRepositorio {
     }
 
     public void adicionarPedido(PedidoFornecedor pedido) {
-        if (proxIndLivre < pedidos.length) {
-            pedidos[proxIndLivre] = pedido;
-            proxIndLivre++;
+        if (proxIdLivre < pedidos.length) {
+            pedidos[proxIdLivre] = pedido;
+            proxIdLivre++;
             adicionarHistorico("Pedido adicionado: " + pedido.getNumero());
         } else {
             System.out.println("Repositório cheio, não é possível adicionar mais pedidos.");
@@ -35,19 +35,19 @@ public class PedidoRepositorio {
     }
 
     public void removerPedido(int numero) {
-        int indice = getIndicePedido(numero);
+        int indice = getIdPedido(numero);
         if (indice == -1) {
             System.out.println("Pedido não encontrado.");
         } else {
             adicionarHistorico("Pedido removido: " + pedidos[indice].getNumero());
-            pedidos[indice] = pedidos[proxIndLivre - 1];
-            pedidos[proxIndLivre - 1] = null;
-            proxIndLivre--;
+            pedidos[indice] = pedidos[proxIdLivre - 1];
+            pedidos[proxIdLivre - 1] = null;
+            proxIdLivre--;
         }
     }
 
     public void atualizarPedido(PedidoFornecedor pedido) {
-        int indice = getIndicePedido(pedido.getNumero());
+        int indice = getIdPedido(pedido.getNumero());
         if (indice == -1) {
             System.out.println("Pedido não encontrado.");
         } else {
@@ -57,7 +57,7 @@ public class PedidoRepositorio {
     }
 
     public void listarPedidos() {
-        for (int i = 0; i < proxIndLivre; i++) {
+        for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i] != null) {
                 System.out.println(pedidos[i]);
             }
@@ -65,7 +65,7 @@ public class PedidoRepositorio {
     }
 
     public PedidoFornecedor procurarPedido(int numero) {
-        int indice = getIndicePedido(numero);
+        int indice = getIdPedido(numero);
         if (indice == -1) {
             System.out.println("Pedido não encontrado.");
             return null;
