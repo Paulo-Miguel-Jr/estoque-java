@@ -1,23 +1,22 @@
 package com.example.estoquejava.models;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class PedidoFornecedor {
     private int numero;
     private LocalDate dataPedido;
-    private List<ItemCompra> itemCompra;
+    private List<ItemCompra> itensCompra;
     private double valorTotal;
 
-    public PedidoFornecedor(int numero, LocalDate dataPedido, List<ItemCompra> itemCompra, double valorTotal) {
+    public PedidoFornecedor(int numero, LocalDate dataPedido, List<ItemCompra> itensCompra) {
         this.numero = numero;
         this.dataPedido = dataPedido;
-        this.itemCompra = itemCompra;
-        this.valorTotal = valorTotal;
+        this.itensCompra = itensCompra;
+        this.valorTotal = calcularValorTotal();
     }
 
-    public PedidoFornecedor() {
-
-    }
+    public PedidoFornecedor() {}
 
     public int getNumero() {
         return numero;
@@ -35,20 +34,21 @@ public class PedidoFornecedor {
         this.dataPedido = dataPedido;
     }
 
-    public List<ItemCompra> getItemCompra() {
-        return itemCompra;
+    public List<ItemCompra> getItensCompra() {
+        return itensCompra;
     }
 
-    public void setItemCompra(List<ItemCompra> itemCompra) {
-        this.itemCompra = itemCompra;
+    public void setItensCompra(List<ItemCompra> itensCompra) {
+        this.itensCompra = itensCompra;
+        this.valorTotal = calcularValorTotal();
     }
 
     public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+    private double calcularValorTotal() {
+        return itensCompra.stream().mapToDouble(ItemCompra::getValorTotal).sum();
     }
 
     @Override
@@ -56,7 +56,8 @@ public class PedidoFornecedor {
         return "PedidoFornecedor{" +
                 "numero=" + numero +
                 ", dataPedido=" + dataPedido +
-                ", List<ItemCompra>=" + itemCompra +
+                ", itensCompra=" + itensCompra +
+                ", valorTotal=" + valorTotal +
                 '}';
     }
 }

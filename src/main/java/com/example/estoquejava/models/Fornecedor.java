@@ -6,22 +6,21 @@ public class Fornecedor {
     private String cnpj;
     private String telefone;
     private String cep;
-    private int num;
+    private int numero;
     private String rua;
     private String complemento;
     private String bairro;
     private String cidade;
     private String estado;
 
-    public Fornecedor(String nome, int id, String cnpj, String telefone, String cep,
-                      int num, String rua, String complemento, String bairro, String cidade,
-                      String estado) {
+    public Fornecedor(String nome, int id, String cnpj, String telefone, String cep, int numero,
+                      String rua, String complemento, String bairro, String cidade, String estado) {
         this.nome = nome;
         this.id = id;
         this.cnpj = cnpj;
         this.telefone = telefone;
         this.cep = cep;
-        this.num = num;
+        this.numero = numero;
         this.rua = rua;
         this.complemento = complemento;
         this.bairro = bairro;
@@ -29,9 +28,7 @@ public class Fornecedor {
         this.estado = estado;
     }
 
-    public Fornecedor() {
-
-    }
+    public Fornecedor() {}
 
     public String getNome() {
         return nome;
@@ -73,12 +70,12 @@ public class Fornecedor {
         this.cep = cep;
     }
 
-    public int getNum() {
-        return num;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public String getRua() {
@@ -124,9 +121,16 @@ public class Fornecedor {
     @Override
     public String toString() {
         return "Fornecedor{" +
-                "nome=" + nome +
-                ", cnpj=" + cnpj +
-                ", telefone=" + telefone +
+                "nome='" + nome + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", cep='" + cep + '\'' +
+                ", numero=" + numero +
+                ", rua='" + rua + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
                 '}';
     }
 }

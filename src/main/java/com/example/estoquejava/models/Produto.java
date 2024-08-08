@@ -1,19 +1,21 @@
 package com.example.estoquejava.models;
 
-public class Produto {
+import com.example.estoquejava.models.enums.Categoria;
+import com.example.estoquejava.models.enums.TipoProduto;
 
+public class Produto {
     private String nome;
     private int id;
     private double preco;
     private double quantidade;
     private String unidadeDeMedida;
     private double estoqueMinimo;
-    private String categoria;
+    private Categoria categoria;
+    private TipoProduto tipoProduto;
+    private Fornecedor fornecedor;
 
-
-    private Fornecedor forn = new Fornecedor();
-
-    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo, String categoria, Fornecedor forn) {
+    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo,
+                   Categoria categoria, TipoProduto tipoProduto, Fornecedor fornecedor) {
         this.nome = nome;
         this.id = id;
         this.preco = preco;
@@ -21,13 +23,11 @@ public class Produto {
         this.unidadeDeMedida = unidadeDeMedida;
         this.estoqueMinimo = estoqueMinimo;
         this.categoria = categoria;
-        this.forn = forn;
+        this.tipoProduto = tipoProduto;
+        this.fornecedor = fornecedor;
     }
 
-
-    public Produto() {
-
-    }
+    public Produto() {}
 
     public String getNome() {
         return nome;
@@ -77,20 +77,28 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    public Fornecedor getForn() {
-        return forn;
-    }
-
-    public void setForn(Fornecedor forn) {
-        this.forn = forn;
-    }
-
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public TipoProduto getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public void setTipoProduto(TipoProduto tipoProduto) {
+        this.tipoProduto = tipoProduto;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     @Override
@@ -102,9 +110,9 @@ public class Produto {
                 ", quantidade=" + quantidade +
                 ", unidadeDeMedida='" + unidadeDeMedida + '\'' +
                 ", estoqueMinimo=" + estoqueMinimo +
-                ", categoria='" + categoria + '\'' +
-                ", forn=" + forn +
+                ", categoria=" + categoria +
+                ", tipoProduto=" + tipoProduto +
+                ", fornecedor=" + fornecedor +
                 '}';
     }
-
 }

@@ -1,7 +1,6 @@
 package com.example.estoquejava.models;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class ItemCompra {
     private int codigo;
@@ -58,7 +57,6 @@ public class ItemCompra {
         this.produto = produto;
     }
 
-
     @Override
     public String toString() {
         return "ItemCompra{" +
@@ -70,4 +68,3 @@ public class ItemCompra {
                 '}';
     }
 }
-
