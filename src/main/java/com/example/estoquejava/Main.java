@@ -171,5 +171,34 @@ public class Main {
         //listar histórico de alterações de pedidos
         System.out.println("\nHistórico de alterações de pedidos:");
         pedidoRepositorio.listarHistoricoAlteracoes();
+
+        //teste de caso não encontrado
+        System.out.println("\nTeste de caso não encontrado (Procurando pedido número 3):");
+        PedidoFornecedor pedidoNaoEncontrado = pedidoRepositorio.procurarPedido(3);
+        if (pedidoNaoEncontrado == null) {
+            System.out.println("Pedido número 3 não encontrado.");
+        }
+
+        //teste de repositório cheio
+        System.out.println("\nTeste de repositório cheio:");
+        for (int i = 0; i < 10; i++) {
+            PedidoFornecedor pedido = new PedidoFornecedor(
+                    i + 3,
+                    LocalDate.now(),
+                    new ItemCompra[]{itemCompra1}
+            );
+            pedidoRepositorio.adicionarPedido(pedido);
+        }
+        pedidoRepositorio.adicionarPedido(new PedidoFornecedor(
+                13,
+                LocalDate.now(),
+                new ItemCompra[]{itemCompra2}));
+
+        //verificação final de todos os pedidos e histórico de alterações
+        System.out.println("\nTodos os pedidos após testes:");
+        pedidoRepositorio.listarPedidos();
+
+        System.out.println("\nHistórico de alterações final:");
+        pedidoRepositorio.listarHistoricoAlteracoes();
     }
 }
