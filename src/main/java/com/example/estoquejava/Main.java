@@ -14,31 +14,31 @@ public class Main {
         //criar fornecedores
 
         Fornecedor fornecedor1 = new Fornecedor(
-                "Fornecedor A",
+                "Fornecedor teste",
                 1,
                 "12.345.678/0001-90",
-                "1234-5678",
+                "91241-1234",
                 "12345-678",
-                123, "Rua A",
+                123, "Rua teste",
                 "Apt 1",
-                "Bairro A",
-                "Cidade A",
-                "Estado A");
+                "Bairro teste",
+                "Cidade teste",
+                "Estado teste");
 
         Fornecedor fornecedor2 = new Fornecedor(
                 "Fornecedor B",
 
                 2,
                 "23.456.789/0001-00",
-                "9876-5432",
+                "99876-5432",
                 "87654-321",
 
                 456,
                 "Rua B",
-                "Apt 2",
-                "Bairro B",
-                "Cidade B"
-                , "Estado B");
+                "Apt 1",
+                "Bairro 1",
+                "Cidade 1"
+                , "Estado 1");
 
         //criar produtos
         Produto produto1 = new Produto("Produto 1",
@@ -198,7 +198,5 @@ public class Main {
         System.out.println("\nTodos os pedidos após testes:");
         pedidoRepositorio.listarPedidos();
 
-        System.out.println("\nHistórico de alterações final:");
-        pedidoRepositorio.listarHistoricoAlteracoes();
     }
 }
