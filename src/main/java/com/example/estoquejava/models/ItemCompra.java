@@ -50,6 +50,10 @@ public class ItemCompra {
         this.valorTotal = valorTotal;
     }
 
+    public double CalcularValorTotal() {
+        return produto.getPreco()*quantidade;
+    }
+
     public LocalDate getDataCompra() {
         return dataCompra;
     }
