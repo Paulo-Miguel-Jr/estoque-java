@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         URL resource = HelloApplication.class.getResource("hello-view.fxml");
         if (resource == null) {
-            System.err.println("Erro: arquivo teste.fxml não encontrado!");
+            System.out.println("arquivo teste.fxml n encontrado");
             System.out.println(HelloApplication.class.getResource(""));
             return;
         }
