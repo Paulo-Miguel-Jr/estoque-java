@@ -11,7 +11,7 @@ import java.net.URL;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        URL resource = HelloApplication.class.getResource("hello-view.fxml");
+        URL resource = HelloApplication.class.getResource("teste.fxml");
         if (resource == null) {
             System.out.println("arquivo teste.fxml n encontrado");
             System.out.println(HelloApplication.class.getResource(""));
