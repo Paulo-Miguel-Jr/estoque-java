@@ -88,8 +88,8 @@ public class Main {
 
         //criar pedidos
         ItemCompra[] itensCompra = {itemCompra1, itemCompra2};
-        PedidoFornecedor pedido1 = new PedidoFornecedor(1, LocalDate.now(), itensCompra);
-        PedidoFornecedor pedido2 = new PedidoFornecedor(2, LocalDate.now(), itensCompra);
+        Pedido pedido1 = new Pedido(1, LocalDate.now(), itensCompra);
+        Pedido pedido2 = new Pedido(2, LocalDate.now(), itensCompra);
 
         //criar repositórios
         ProdutoRepositorio produtoRepositorio = new ProdutoRepositorio(10);
@@ -147,7 +147,7 @@ public class Main {
 
         //procurar pedido por número
         System.out.println("\nProcurando pedido número 1:");
-        PedidoFornecedor pedidoEncontrado = pedidoRepositorio.procurarPedido(1);
+        Pedido pedidoEncontrado = pedidoRepositorio.procurarPedido(1);
         if (pedidoEncontrado != null) {
             System.out.println(pedidoEncontrado);
         }
@@ -174,7 +174,7 @@ public class Main {
 
         //teste de caso não encontrado
         System.out.println("\nTeste de caso não encontrado (Procurando pedido número 3):");
-        PedidoFornecedor pedidoNaoEncontrado = pedidoRepositorio.procurarPedido(3);
+        Pedido pedidoNaoEncontrado = pedidoRepositorio.procurarPedido(3);
         if (pedidoNaoEncontrado == null) {
             System.out.println("Pedido número 3 não encontrado.");
         }
@@ -182,14 +182,14 @@ public class Main {
         //teste de repositório cheio
         System.out.println("\nTeste de repositório cheio:");
         for (int i = 0; i < 10; i++) {
-            PedidoFornecedor pedido = new PedidoFornecedor(
+            Pedido pedido = new Pedido(
                     i + 3,
                     LocalDate.now(),
                     new ItemCompra[]{itemCompra1}
             );
             pedidoRepositorio.adicionarPedido(pedido);
         }
-        pedidoRepositorio.adicionarPedido(new PedidoFornecedor(
+        pedidoRepositorio.adicionarPedido(new Pedido(
                 13,
                 LocalDate.now(),
                 new ItemCompra[]{itemCompra2}));
