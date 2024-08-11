@@ -1,5 +1,8 @@
 package com.example.estoquejava.models;
 
+import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
+
+
 import java.time.LocalDate;
 
 public class Pedido {
@@ -22,11 +25,11 @@ public class Pedido {
         this.quantidadeItens = 0;
     }
 
-    public int getNumero() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setNumero(int numero) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -62,13 +65,13 @@ public class Pedido {
         return total;
     }
 
-    public void adicionarItemCompra(ItemCompra item) {
+    public void adicionarItemCompra(ItemCompra item) throws LimiteItensAlcancadoException {
         if (quantidadeItens < itensCompra.length) {
             itensCompra[quantidadeItens] = item;
             quantidadeItens++;
             this.valorTotal = calcularValorTotal();
         } else {
-            System.out.println("Não é possível adicionar mais itens. Limite de itens alcançado.");
+           throw new LimiteItensAlcancadoException("Não é possível adicionar mais itens. Limite de itens alcançado.");
         }
     }
 
