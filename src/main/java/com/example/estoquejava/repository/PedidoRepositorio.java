@@ -1,15 +1,15 @@
 package com.example.estoquejava.repository;
 
-import com.example.estoquejava.models.PedidoFornecedor;
+import com.example.estoquejava.models.Pedido;
 
 public class PedidoRepositorio {
-    private PedidoFornecedor[] pedidos;
+    private Pedido[] pedidos;
     private int proxIdLivre;
     private String[] historicoAlteracoes;
     private int contadorHistorico;
 
     public PedidoRepositorio(int capacidade) {
-        this.pedidos = new PedidoFornecedor[capacidade];
+        this.pedidos = new Pedido[capacidade];
         proxIdLivre = 0;
         historicoAlteracoes = new String[capacidade * 2]; //historico de alterações n deve exceder o dobro da capacidade
         contadorHistorico = 0;
@@ -24,7 +24,7 @@ public class PedidoRepositorio {
         return -1; //não encontrado
     }
 
-    public void adicionarPedido(PedidoFornecedor pedido) {
+    public void adicionarPedido(Pedido pedido) {
         if (proxIdLivre < pedidos.length) {
             pedidos[proxIdLivre] = pedido;
             proxIdLivre++;
@@ -46,7 +46,7 @@ public class PedidoRepositorio {
         }
     }
 
-    public void atualizarPedido(PedidoFornecedor pedido) {
+    public void atualizarPedido(Pedido pedido) {
         int indice = getIdPedido(pedido.getNumero());
         if (indice == -1) {
             System.out.println("Pedido não encontrado.");
@@ -64,7 +64,7 @@ public class PedidoRepositorio {
         }
     }
 
-    public PedidoFornecedor procurarPedido(int numero) {
+    public Pedido procurarPedido(int numero) {
         int indice = getIdPedido(numero);
         if (indice == -1) {
             System.out.println("Pedido não encontrado.");
