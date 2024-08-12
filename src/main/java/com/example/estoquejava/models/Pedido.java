@@ -1,5 +1,6 @@
 package com.example.estoquejava.models;
 
+import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 
 
@@ -11,18 +12,21 @@ public class Pedido {
     private ItemCompra[] itensCompra;
     private int quantidadeItens;
     private double valorTotal;
+    private StatusPedido status;
 
-    public Pedido(int idPedido, LocalDate dataPedido, ItemCompra[] itensCompra) {
+    public Pedido(int idPedido, LocalDate dataPedido, ItemCompra[] itensCompra, StatusPedido status) {
         this.idPedido = idPedido;
         this.dataPedido = dataPedido;
         this.itensCompra = itensCompra;
         this.quantidadeItens = itensCompra.length;
         this.valorTotal = calcularValorTotal();
+        this.status = status;
     }
 
     public Pedido() {
         this.itensCompra = new ItemCompra[10];
         this.quantidadeItens = 0;
+        this.status = StatusPedido.PENDENTE;
     }
 
     public int getIdPedido() {
@@ -53,6 +57,14 @@ public class Pedido {
 
     public double getValorTotal() {
         return valorTotal;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
     }
 
     private double calcularValorTotal() {
@@ -88,6 +100,7 @@ public class Pedido {
         }
         sb.append("]");
         sb.append(", valorTotal=").append(valorTotal);
+        sb.append(", status=").append(status);
         sb.append('}');
         return sb.toString();
     }
