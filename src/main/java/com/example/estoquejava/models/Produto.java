@@ -12,10 +12,10 @@ public class Produto {
     private double estoqueMinimo;
     private Categoria categoria;
     private TipoProduto tipoProduto;
-    private Fornecedor fornecedor;
+
 
     public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo,
-                   Categoria categoria, TipoProduto tipoProduto, Fornecedor fornecedor) {
+                   Categoria categoria, TipoProduto tipoProduto) {
         this.nome = nome;
         this.id = id;
         this.preco = preco;
@@ -24,7 +24,6 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
         this.categoria = categoria;
         this.tipoProduto = tipoProduto;
-        this.fornecedor = fornecedor;
     }
 
     public Produto() {}
@@ -93,14 +92,6 @@ public class Produto {
         this.tipoProduto = tipoProduto;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
     @Override
     public String toString() {
         return "Produto{" +
@@ -112,7 +103,6 @@ public class Produto {
                 ", estoqueMinimo=" + estoqueMinimo +
                 ", categoria=" + categoria +
                 ", tipoProduto=" + tipoProduto +
-                ", fornecedor=" + fornecedor +
                 '}';
     }
 }
