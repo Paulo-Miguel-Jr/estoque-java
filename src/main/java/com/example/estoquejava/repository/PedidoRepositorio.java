@@ -1,6 +1,7 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.Pedido;
+import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 
@@ -73,6 +74,21 @@ public class PedidoRepositorio {
             // return null; - nunca executado
         } else {
             return pedidos[indice];
+        }
+    }
+
+    public void processarVenda(int numero) throws PedNaoEncontException {
+        int indice = getIdPedido(numero);
+        if (indice == -1) {
+            throw new PedNaoEncontException("Pedido não encontrado.");
+        } else {
+            Pedido pedido = pedidos[indice];
+            if (pedido.getStatus() == StatusPedido.PENDENTE) {
+                pedido.setStatus(StatusPedido.PROCESSADO); //muda o pedido de pendente para processado
+                adicionarHistorico("Venda processada para o pedido: " + pedido.getIdPedido());
+            } else {
+                System.out.println("O pedido já foi processado ou cancelado.");
+            }
         }
     }
 
