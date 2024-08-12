@@ -2,43 +2,16 @@ package com.example.estoquejava;
 
 import com.example.estoquejava.models.*;
 import com.example.estoquejava.models.enums.Categoria;
+import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.enums.TipoProduto;
 import com.example.estoquejava.repository.PedidoRepositorio;
 import com.example.estoquejava.repository.ProdutoRepositorio;
 
 import java.time.LocalDate;
+import com.example.estoquejava.models.enums.StatusPedido;
 
 public class Main {
     public static void main(String[] args) {
-
-        //criar fornecedores
-
-        Fornecedor fornecedor1 = new Fornecedor(
-                "Fornecedor teste",
-                1,
-                "12.345.678/0001-90",
-                "91241-1234",
-                "12345-678",
-                123, "Rua teste",
-                "Apt 1",
-                "Bairro teste",
-                "Cidade teste",
-                "Estado teste");
-
-        Fornecedor fornecedor2 = new Fornecedor(
-                "Fornecedor B",
-
-                2,
-                "23.456.789/0001-00",
-                "99876-5432",
-                "87654-321",
-
-                456,
-                "Rua B",
-                "Apt 1",
-                "Bairro 1",
-                "Cidade 1"
-                , "Estado 1");
 
         //criar produtos
         Produto produto1 = new Produto("Produto 1",
@@ -48,8 +21,7 @@ public class Main {
                 "kg",
                 10,
                 Categoria.ALIMENTOS,
-                TipoProduto.DETERGENTE,
-                fornecedor1);
+                TipoProduto.DETERGENTE);
 
         Produto produto2 = new Produto("Produto 2",
                 102,
@@ -58,8 +30,7 @@ public class Main {
                 "litro",
                 5,
                 Categoria.BEBIDAS,
-                TipoProduto.REFRIGERANTE,
-                fornecedor2);
+                TipoProduto.REFRIGERANTE);
 
         Produto produto3 = new Produto("Produto 3",
                 103,
@@ -68,8 +39,7 @@ public class Main {
                 "unidade",
                 20,
                 Categoria.LIMPEZA,
-                TipoProduto.CAMISA,
-                fornecedor1);
+                TipoProduto.CAMISA);
 
         //criar itens de compra
         ItemCompra itemCompra1 = new ItemCompra(
@@ -88,8 +58,8 @@ public class Main {
 
         //criar pedidos
         ItemCompra[] itensCompra = {itemCompra1, itemCompra2};
-        Pedido pedido1 = new Pedido(1, LocalDate.now(), itensCompra);
-        Pedido pedido2 = new Pedido(2, LocalDate.now(), itensCompra);
+        Pedido pedido1 = new Pedido(1, LocalDate.now(), itensCompra, StatusPedido.PENDENTE);
+        Pedido pedido2 = new Pedido(2, LocalDate.now(), itensCompra, StatusPedido.PENDENTE);
 
         //criar repositórios
         ProdutoRepositorio produtoRepositorio = new ProdutoRepositorio(10);
@@ -185,14 +155,16 @@ public class Main {
             Pedido pedido = new Pedido(
                     i + 3,
                     LocalDate.now(),
-                    new ItemCompra[]{itemCompra1}
+                    new ItemCompra[]{itemCompra1},
+                    StatusPedido.PENDENTE
             );
             pedidoRepositorio.adicionarPedido(pedido);
         }
         pedidoRepositorio.adicionarPedido(new Pedido(
                 13,
                 LocalDate.now(),
-                new ItemCompra[]{itemCompra2}));
+                new ItemCompra[]{itemCompra2},
+                StatusPedido.PENDENTE));
 
         //verificação final de todos os pedidos e histórico de alterações
         System.out.println("\nTodos os pedidos após testes:");
