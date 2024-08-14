@@ -10,20 +10,16 @@ public class Produto {
     private double quantidade;
     private String unidadeDeMedida;
     private double estoqueMinimo;
-    private Categoria categoria;
-    private TipoProduto tipoProduto;
 
 
-    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo,
-                   Categoria categoria, TipoProduto tipoProduto) {
+
+    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo) {
         this.nome = nome;
         this.id = id;
         this.preco = preco;
         this.quantidade = quantidade;
         this.unidadeDeMedida = unidadeDeMedida;
         this.estoqueMinimo = estoqueMinimo;
-        this.categoria = categoria;
-        this.tipoProduto = tipoProduto;
     }
 
     public Produto() {}
@@ -76,21 +72,6 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public TipoProduto getTipoProduto() {
-        return tipoProduto;
-    }
-
-    public void setTipoProduto(TipoProduto tipoProduto) {
-        this.tipoProduto = tipoProduto;
-    }
 
     @Override
     public String toString() {
@@ -101,8 +82,6 @@ public class Produto {
                 ", quantidade=" + quantidade +
                 ", unidadeDeMedida='" + unidadeDeMedida + '\'' +
                 ", estoqueMinimo=" + estoqueMinimo +
-                ", categoria=" + categoria +
-                ", tipoProduto=" + tipoProduto +
                 '}';
     }
 }

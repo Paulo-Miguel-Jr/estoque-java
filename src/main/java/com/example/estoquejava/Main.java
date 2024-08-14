@@ -19,27 +19,21 @@ public class Main {
                 10.0,
                 100,
                 "kg",
-                10,
-                Categoria.ALIMENTOS,
-                TipoProduto.DETERGENTE);
+                10);
 
         Produto produto2 = new Produto("Produto 2",
                 102,
                 20.0,
                 50,
                 "litro",
-                5,
-                Categoria.BEBIDAS,
-                TipoProduto.REFRIGERANTE);
+                5);
 
         Produto produto3 = new Produto("Produto 3",
                 103,
                 5.0,
                 200,
                 "unidade",
-                20,
-                Categoria.LIMPEZA,
-                TipoProduto.CAMISA);
+                20);
 
         //criar itens de compra
         ItemCompra itemCompra1 = new ItemCompra(
