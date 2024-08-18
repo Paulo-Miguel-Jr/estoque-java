@@ -1,9 +1,11 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.ItemPedido;
+import com.example.estoquejava.repository.interfaces.ItemPedidoRepositorioInter;
+
 import java.util.ArrayList;
 
-public  class ItemPedidoRepositorio {
+public  class ItemPedidoRepositorio implements ItemPedidoRepositorioInter {
 
     private final ArrayList<ItemPedido> ItemPedidoLista;
 
@@ -13,7 +15,7 @@ public  class ItemPedidoRepositorio {
     }
 
     ///Função para auxiliar as operações de busca e inserção.
-    private int getTamanho(){
+    public int getTamanho(){
         return (this.ItemPedidoLista.size());
     }
 
@@ -55,7 +57,7 @@ public  class ItemPedidoRepositorio {
     }
 
     ///Função auxiliar para a operação de busca.
-    private int buscaBinaria(ItemPedido item, int inicio, int fim){
+    public int buscaBinaria(ItemPedido item, int inicio, int fim){
         int aux = (inicio + fim)/2;
         int resultado = -1;
 
