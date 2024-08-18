@@ -1,10 +1,9 @@
 package com.example.estoquejava;
 
 import com.example.estoquejava.models.*;
-import com.example.estoquejava.models.enums.Categoria;
 import com.example.estoquejava.models.enums.StatusPedido;
-import com.example.estoquejava.repository.PedidoRepositorioImpl;
-import com.example.estoquejava.repository.ProdutoRepositoryImpl;
+import com.example.estoquejava.repository.PedidoRepositorio;
+import com.example.estoquejava.repository.ProdutoRepositorio;
 
 import java.time.LocalDate;
 
@@ -54,8 +53,8 @@ public class Main {
         Pedido pedido2 = new Pedido(2, LocalDate.now(), itensCompra, StatusPedido.PENDENTE);
 
         //criar repositórios
-        ProdutoRepositoryImpl produtoRepositorio = new ProdutoRepositoryImpl(10);
-        PedidoRepositorioImpl pedidoRepositorioImpl = new PedidoRepositorioImpl(10);
+        ProdutoRepositorio produtoRepositorio = new ProdutoRepositorio(10);
+        PedidoRepositorio pedidoRepositorioImpl = new PedidoRepositorio(10);
 
         //adicionar produtos ao repositório
         produtoRepositorio.adicionarProduto(produto1);

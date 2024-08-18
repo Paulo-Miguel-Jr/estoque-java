@@ -1,14 +1,14 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.Usuario;
-import com.example.estoquejava.repository.interfaces.UsuarioRepository;
+import com.example.estoquejava.repository.interfaces.UsuarioRepositorioInter;
 
-public class UsuarioRepositoryImpl implements UsuarioRepository {
+public class UsuarioRepositorio implements UsuarioRepositorioInter {
     private static final int MAX_USUARIOS = 100; // Define um tamanho máximo para o array
     private Usuario[] usuarios;
     private int count;
 
-    public UsuarioRepositoryImpl() {
+    public UsuarioRepositorio() {
         usuarios = new Usuario[MAX_USUARIOS];
         count = 0;
     }

@@ -2,9 +2,8 @@ package com.example.estoquejava.repository.interfaces;
 
 
 import com.example.estoquejava.models.Produto;
-import com.example.estoquejava.models.enums.Categoria;
 
-public interface ProdutoRepository {
+public interface ProdutoRepositorioInter {
     void adicionarProduto(Produto produto);
     Produto obterProdutoPorId(int id);
     Produto[] listarTodos();

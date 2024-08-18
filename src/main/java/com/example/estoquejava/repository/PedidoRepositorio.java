@@ -4,15 +4,15 @@ import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
-import com.example.estoquejava.repository.interfaces.PedidoRepository;
+import com.example.estoquejava.repository.interfaces.PedidoRepositorioInter;
 
-public class PedidoRepositorioImpl implements PedidoRepository {
+public class PedidoRepositorio implements PedidoRepositorioInter {
     private Pedido[] pedidos;
     private int proxIdLivre;
     private String[] historicoAlteracoes;
     private int contadorHistorico;
 
-    public PedidoRepositorioImpl(int capacidade) {
+    public PedidoRepositorio(int capacidade) {
         this.pedidos = new Pedido[capacidade];
         proxIdLivre = 0;
         historicoAlteracoes = new String[capacidade * 2];

@@ -1,15 +1,15 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.Produto;
-import com.example.estoquejava.repository.interfaces.ProdutoRepository;
+import com.example.estoquejava.repository.interfaces.ProdutoRepositorioInter;
 
-public class ProdutoRepositoryImpl implements ProdutoRepository {
+public class ProdutoRepositorio implements ProdutoRepositorioInter {
     private Produto[] produtos;
     private int contador;
     private String[] historicoAlteracoes;
     private int contadorHistorico;
 
-    public ProdutoRepositoryImpl(int capacidade) {
+    public ProdutoRepositorio(int capacidade) {
         produtos = new Produto[capacidade];
         contador = 0;
         historicoAlteracoes = new String[capacidade * 2];
