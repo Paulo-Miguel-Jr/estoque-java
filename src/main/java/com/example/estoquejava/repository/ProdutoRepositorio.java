@@ -98,6 +98,7 @@ public class ProdutoRepositorio {
         return resultadoFinal;
     }
 
+    /*
     public Produto[] filtrarProdutosPorCategoria(Categoria categoria) {
         Produto[] resultado = new Produto[contador];
         int resultadoContador = 0;
@@ -111,6 +112,7 @@ public class ProdutoRepositorio {
         System.arraycopy(resultado, 0, resultadoFinal, 0, resultadoContador);
         return resultadoFinal;
     }
+    */
 
     //atualização em massa
     public void atualizarPrecos(double percentual) {
