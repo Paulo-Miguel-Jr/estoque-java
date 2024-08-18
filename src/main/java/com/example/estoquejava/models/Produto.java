@@ -1,7 +1,6 @@
 package com.example.estoquejava.models;
 
-import com.example.estoquejava.models.enums.Categoria;
-import com.example.estoquejava.models.enums.TipoProduto;
+
 
 public class Produto {
     private String nome;

@@ -4,17 +4,18 @@ import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
+import com.example.estoquejava.repository.interfaces.PedidoRepository;
 
-public class PedidoRepositorio {
+public class PedidoRepositorioImpl implements PedidoRepository {
     private Pedido[] pedidos;
     private int proxIdLivre;
     private String[] historicoAlteracoes;
     private int contadorHistorico;
 
-    public PedidoRepositorio(int capacidade) {
+    public PedidoRepositorioImpl(int capacidade) {
         this.pedidos = new Pedido[capacidade];
         proxIdLivre = 0;
-        historicoAlteracoes = new String[capacidade * 2]; //historico de alterações não deve exceder o dobro da capacidade
+        historicoAlteracoes = new String[capacidade * 2];
         contadorHistorico = 0;
     }
 
@@ -24,19 +25,21 @@ public class PedidoRepositorio {
                 return i;
             }
         }
-        return -1; // pedido não encontrado
+        return -1;
     }
 
+    @Override
     public void adicionarPedido(Pedido pedido) throws PedidoRepCheioException {
         if (proxIdLivre < pedidos.length) {
             pedidos[proxIdLivre] = pedido;
             proxIdLivre++;
             adicionarHistorico("Pedido adicionado: " + pedido.getIdPedido());
         } else {
-            throw new PedidoRepCheioException("Repositorio cheio. Não é possível adicionar mais pedidos.");
+            throw new PedidoRepCheioException("Repositório cheio. Não é possível adicionar mais pedidos.");
         }
     }
 
+    @Override
     public void removerPedido(int numero) throws PedNaoEncontException {
         int indice = getIdPedido(numero);
         if (indice == -1) {
@@ -49,6 +52,7 @@ public class PedidoRepositorio {
         }
     }
 
+    @Override
     public void atualizarPedido(Pedido pedido) throws PedNaoEncontException {
         int indice = getIdPedido(pedido.getIdPedido());
         if (indice == -1) {
@@ -59,6 +63,7 @@ public class PedidoRepositorio {
         }
     }
 
+    @Override
     public void listarPedidos() {
         for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i] != null) {
@@ -67,16 +72,17 @@ public class PedidoRepositorio {
         }
     }
 
+    @Override
     public Pedido procurarPedido(int numero) throws PedNaoEncontException {
         int indice = getIdPedido(numero);
         if (indice == -1) {
             throw new PedNaoEncontException("Pedido não encontrado.");
-            // return null; - nunca executado
         } else {
             return pedidos[indice];
         }
     }
 
+    @Override
     public void processarVenda(int numero) throws PedNaoEncontException {
         int indice = getIdPedido(numero);
         if (indice == -1) {
@@ -84,7 +90,7 @@ public class PedidoRepositorio {
         } else {
             Pedido pedido = pedidos[indice];
             if (pedido.getStatus() == StatusPedido.PENDENTE) {
-                pedido.setStatus(StatusPedido.PROCESSADO); //muda o pedido de pendente para processado
+                pedido.setStatus(StatusPedido.PROCESSADO);
                 adicionarHistorico("Venda processada para o pedido: " + pedido.getIdPedido());
             } else {
                 System.out.println("O pedido já foi processado ou cancelado.");
@@ -92,7 +98,14 @@ public class PedidoRepositorio {
         }
     }
 
-    //histórico de alterações
+    @Override
+    public void listarHistoricoAlteracoes() {
+        System.out.println("Histórico de Alterações:");
+        for (int i = 0; i < contadorHistorico; i++) {
+            System.out.println(historicoAlteracoes[i]);
+        }
+    }
+
     private void adicionarHistorico(String alteracao) {
         if (contadorHistorico < historicoAlteracoes.length) {
             historicoAlteracoes[contadorHistorico] = alteracao;
@@ -101,22 +114,4 @@ public class PedidoRepositorio {
             System.out.println("Histórico de alterações cheio.");
         }
     }
-
-    public void listarHistoricoAlteracoes() {
-        System.out.println("Histórico de Alterações:");
-        for (int i = 0; i < contadorHistorico; i++) {
-            System.out.println(historicoAlteracoes[i]);
-        }
-    }
-
-    //avaliar se é permitido arraylist no repositorio (tam é acessado por size)
-
-    // Serialização
-   // public void salvarParaArquivo(String caminhoArquivo) {
-        //implementar método
-   // }
-
-  //  public void carregarDeArquivo(String caminhoArquivo) {
-        //implementar método
-   // }
 }

@@ -3,12 +3,10 @@ package com.example.estoquejava;
 import com.example.estoquejava.models.*;
 import com.example.estoquejava.models.enums.Categoria;
 import com.example.estoquejava.models.enums.StatusPedido;
-import com.example.estoquejava.models.enums.TipoProduto;
-import com.example.estoquejava.repository.PedidoRepositorio;
-import com.example.estoquejava.repository.ProdutoRepositorio;
+import com.example.estoquejava.repository.PedidoRepositorioImpl;
+import com.example.estoquejava.repository.ProdutoRepositoryImpl;
 
 import java.time.LocalDate;
-import com.example.estoquejava.models.enums.StatusPedido;
 
 public class Main {
     public static void main(String[] args) {
@@ -56,8 +54,8 @@ public class Main {
         Pedido pedido2 = new Pedido(2, LocalDate.now(), itensCompra, StatusPedido.PENDENTE);
 
         //criar repositórios
-        ProdutoRepositorio produtoRepositorio = new ProdutoRepositorio(10);
-        PedidoRepositorio pedidoRepositorio = new PedidoRepositorio(10);
+        ProdutoRepositoryImpl produtoRepositorio = new ProdutoRepositoryImpl(10);
+        PedidoRepositorioImpl pedidoRepositorioImpl = new PedidoRepositorioImpl(10);
 
         //adicionar produtos ao repositório
         produtoRepositorio.adicionarProduto(produto1);
@@ -65,8 +63,8 @@ public class Main {
         produtoRepositorio.adicionarProduto(produto3);
 
         //adicionar pedidos ao repositório
-        pedidoRepositorio.adicionarPedido(pedido1);
-        pedidoRepositorio.adicionarPedido(pedido2);
+        pedidoRepositorioImpl.adicionarPedido(pedido1);
+        pedidoRepositorioImpl.adicionarPedido(pedido2);
 
         //listar todos os produtos
         System.out.println("Todos os produtos:");
@@ -82,12 +80,6 @@ public class Main {
             System.out.println(produto);
         }
 
-        //filtrar produtos por categoria
-        System.out.println("\nFiltrando produtos por categoria ALIMENTOS:");
-        Produto[] produtosPorCategoria = produtoRepositorio.filtrarProdutosPorCategoria(Categoria.ALIMENTOS);
-        for (Produto produto : produtosPorCategoria) {
-            System.out.println(produto);
-        }
 
         //atualizar preços
         produtoRepositorio.atualizarPrecos(10.0);
@@ -107,19 +99,19 @@ public class Main {
 
         //listar todos os pedidos
         System.out.println("\nTodos os pedidos:");
-        pedidoRepositorio.listarPedidos();
+        pedidoRepositorioImpl.listarPedidos();
 
         //procurar pedido por número
         System.out.println("\nProcurando pedido número 1:");
-        Pedido pedidoEncontrado = pedidoRepositorio.procurarPedido(1);
+        Pedido pedidoEncontrado = pedidoRepositorioImpl.procurarPedido(1);
         if (pedidoEncontrado != null) {
             System.out.println(pedidoEncontrado);
         }
 
         //remover pedido por número
         System.out.println("\nRemovendo pedido número 1:");
-        pedidoRepositorio.removerPedido(1);
-        pedidoRepositorio.listarPedidos();
+        pedidoRepositorioImpl.removerPedido(1);
+        pedidoRepositorioImpl.listarPedidos();
 
         //atualizar pedido
         pedido2.adicionarItemCompra(new ItemCompra(
@@ -128,17 +120,17 @@ public class Main {
                 produto3.getPreco(),
                 LocalDate.now(),
                 produto3));
-        pedidoRepositorio.atualizarPedido(pedido2);
+        pedidoRepositorioImpl.atualizarPedido(pedido2);
         System.out.println("\nPedido número 2 após atualização:");
-        pedidoRepositorio.listarPedidos();
+        pedidoRepositorioImpl.listarPedidos();
 
         //listar histórico de alterações de pedidos
         System.out.println("\nHistórico de alterações de pedidos:");
-        pedidoRepositorio.listarHistoricoAlteracoes();
+        pedidoRepositorioImpl.listarHistoricoAlteracoes();
 
         //teste de caso não encontrado
         System.out.println("\nTeste de caso não encontrado (Procurando pedido número 3):");
-        Pedido pedidoNaoEncontrado = pedidoRepositorio.procurarPedido(3);
+        Pedido pedidoNaoEncontrado = pedidoRepositorioImpl.procurarPedido(3);
         if (pedidoNaoEncontrado == null) {
             System.out.println("Pedido número 3 não encontrado.");
         }
@@ -152,9 +144,9 @@ public class Main {
                     new ItemCompra[]{itemCompra1},
                     StatusPedido.PENDENTE
             );
-            pedidoRepositorio.adicionarPedido(pedido);
+            pedidoRepositorioImpl.adicionarPedido(pedido);
         }
-        pedidoRepositorio.adicionarPedido(new Pedido(
+        pedidoRepositorioImpl.adicionarPedido(new Pedido(
                 13,
                 LocalDate.now(),
                 new ItemCompra[]{itemCompra2},
@@ -162,7 +154,7 @@ public class Main {
 
         //verificação final de todos os pedidos e histórico de alterações
         System.out.println("\nTodos os pedidos após testes:");
-        pedidoRepositorio.listarPedidos();
+        pedidoRepositorioImpl.listarPedidos();
 
     }
 }
