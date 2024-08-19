@@ -19,5 +19,4 @@ public interface PedidoRepositorioInter {
 
     void processarVenda(int numero) throws PedNaoEncontException;
 
-    void listarHistoricoAlteracoes();
 }
