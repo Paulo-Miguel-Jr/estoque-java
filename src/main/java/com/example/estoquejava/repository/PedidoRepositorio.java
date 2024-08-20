@@ -9,10 +9,18 @@ import com.example.estoquejava.repository.interfaces.PedidoRepositorioInter;
 public class PedidoRepositorio implements PedidoRepositorioInter {
     private Pedido[] pedidos;
     private int proxIdLivre;
+    private static PedidoRepositorio singletonPedRep;
     
     public PedidoRepositorio(int capacidade) {
         this.pedidos = new Pedido[capacidade];
         proxIdLivre = 0;
+    }
+
+    public static PedidoRepositorio getInstance(int capacidade){
+        if (singletonPedRep == null) {
+            singletonPedRep = new PedidoRepositorio(capacidade);
+        }
+        return singletonPedRep;
     }
 
     private int getIdPedido(int numero) {
@@ -40,11 +48,21 @@ public class PedidoRepositorio implements PedidoRepositorioInter {
         if (indice == -1) {
             throw new PedNaoEncontException("Pedido não encontrado.");
         } else {
-            pedidos[indice] = pedidos[proxIdLivre - 1];
+            // Move todos os elementos após o índice para uma posição anterior
+            for (int i = indice; i < proxIdLivre - 1; i++) {
+                pedidos[i] = pedidos[i + 1];
+            }
+            // Limpa o último elemento, que foi movido para frente
             pedidos[proxIdLivre - 1] = null;
             proxIdLivre--;
         }
     }
+   //else {
+    //            pedidos[indice] = pedidos[proxIdLivre - 1];
+    //            pedidos[proxIdLivre - 1] = null;
+    //            proxIdLivre--;
+    //        }
+
 
     @Override
     public void atualizarPedido(Pedido pedido) throws PedNaoEncontException {
