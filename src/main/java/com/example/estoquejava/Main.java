@@ -123,9 +123,7 @@ public class Main {
         System.out.println("\nPedido número 2 após atualização:");
         pedidoRepositorioImpl.listarPedidos();
 
-        //listar histórico de alterações de pedidos
-        System.out.println("\nHistórico de alterações de pedidos:");
-        pedidoRepositorioImpl.listarHistoricoAlteracoes();
+
 
         //teste de caso não encontrado
         System.out.println("\nTeste de caso não encontrado (Procurando pedido número 3):");

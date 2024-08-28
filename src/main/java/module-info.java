@@ -5,6 +5,6 @@ module com.example.estoquejava {
 
     opens com.example.estoquejava to javafx.fxml;
     exports com.example.estoquejava;
-    exports com.example.estoquejava.helloJavaFX;
-    opens com.example.estoquejava.helloJavaFX to javafx.fxml;
+    exports com.example.estoquejava.gui;
+    opens com.example.estoquejava.gui to javafx.fxml;
 }
