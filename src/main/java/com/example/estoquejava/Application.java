@@ -1,7 +1,5 @@
-package com.example.estoquejava.gui;
+package com.example.estoquejava;
 
-import com.example.estoquejava.Main;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,10 +7,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public class HelloApplication extends Application {
+public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        URL resource = Main.class.getResource("tela.fxml");
+        URL resource = Application.class.getResource("tela.fxml");
 
 
 
