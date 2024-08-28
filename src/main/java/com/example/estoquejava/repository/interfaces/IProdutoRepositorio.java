@@ -3,7 +3,7 @@ package com.example.estoquejava.repository.interfaces;
 
 import com.example.estoquejava.models.Produto;
 
-public interface ProdutoRepositorioInter {
+public interface IProdutoRepositorio {
     void adicionarProduto(Produto produto);
     Produto obterProdutoPorId(int id);
     Produto[] listarTodos();

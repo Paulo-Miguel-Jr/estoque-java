@@ -5,7 +5,7 @@ import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 
-public interface PedidoRepositorioInter {
+public interface IPedidoRepositorio {
 
     void adicionarPedido(Pedido pedido) throws PedidoRepCheioException;
 

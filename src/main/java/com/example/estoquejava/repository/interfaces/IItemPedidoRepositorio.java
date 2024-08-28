@@ -3,7 +3,7 @@ package com.example.estoquejava.repository.interfaces;
 
 import com.example.estoquejava.models.ItemPedido;
 
-public interface ItemPedidoRepositorioInter {
+public interface IItemPedidoRepositorio {
 
     int getTamanho();
 

@@ -1,11 +1,11 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.ItemPedido;
-import com.example.estoquejava.repository.interfaces.ItemPedidoRepositorioInter;
+import com.example.estoquejava.repository.interfaces.IItemPedidoRepositorio;
 
 import java.util.ArrayList;
 
-public  class ItemPedidoRepositorio implements ItemPedidoRepositorioInter {
+public  class ItemPedidoRepositorio implements IItemPedidoRepositorio {
 
     private final ArrayList<ItemPedido> ItemPedidoLista;
 
