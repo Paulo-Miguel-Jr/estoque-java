@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args){
 
         Usuario usuario = new Usuario("Wendell", "123", 1, TipoUsuario.USUARIO);
-        Fachada.getInstacia().cadastrarUsuario(usuario);
+        Fachada.getInstacia().cadastrarUsuario(usuario);// chamar na tela esse método
     }
 }
