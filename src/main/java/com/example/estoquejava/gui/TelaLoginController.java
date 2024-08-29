@@ -1,5 +1,6 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.ScreenManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -53,5 +54,7 @@ public class TelaLoginController implements Initializable {
                 label.setText(newValue);
             }
         });
+
+        button.setText("Trocar Tela");
     }
 }
