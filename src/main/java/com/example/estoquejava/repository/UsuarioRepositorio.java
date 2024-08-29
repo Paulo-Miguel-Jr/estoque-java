@@ -4,7 +4,7 @@ import com.example.estoquejava.models.Usuario;
 import com.example.estoquejava.repository.interfaces.IUsuarioRepositorio;
 
 public class UsuarioRepositorio implements IUsuarioRepositorio {
-    private static final int MAX_USUARIOS = 100; // Define um tamanho máximo para o array
+    private static final int MAX_USUARIOS = 100; //define um tamanho máximo para o array
     private Usuario[] usuarios;
     private int count;
 
@@ -15,17 +15,10 @@ public class UsuarioRepositorio implements IUsuarioRepositorio {
 
     @Override
     public void adicionarUsuario(Usuario usuario) {
-        if (count >= MAX_USUARIOS) {
-            throw new IllegalStateException("Número máximo de usuários atingido.");
-        }
-        if (buscarUsuarioPorId(usuario.getId()) != null) {
-            throw new IllegalArgumentException("Usuário com o mesmo ID já existe.");
-        }
-        if (buscarUsuarioPorNome(usuario.getNome()) != null) {
-            throw new IllegalArgumentException("Usuário com o mesmo nome já existe.");
-        }
-        usuarios[count++] = usuario;
+        validacaoUsuario(usuario);
     }
+
+
 
     @Override
     public Usuario buscarUsuarioPorId(int id) {
@@ -60,6 +53,19 @@ public class UsuarioRepositorio implements IUsuarioRepositorio {
             }
         }
         throw new IllegalArgumentException("Usuário com o ID especificado não encontrado.");
+    }
+
+    private void validacaoUsuario(Usuario usuario) {
+        if (count >= MAX_USUARIOS) {
+            throw new IllegalStateException("Número máximo de usuários atingido.");
+        }
+        if (buscarUsuarioPorId(usuario.getId()) != null) {
+            throw new IllegalArgumentException("Usuário com o mesmo ID já existe.");
+        }
+        if (buscarUsuarioPorNome(usuario.getNome()) != null) {
+            throw new IllegalArgumentException("Usuário com o mesmo nome já existe.");
+        }
+        usuarios[count++] = usuario;
     }
 
     @Override
