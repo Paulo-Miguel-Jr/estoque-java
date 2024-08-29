@@ -12,7 +12,9 @@ public class ScreenManager {
     private Scene telaLogin;
     private Scene telaPrincipal;
 
+
     private TelaLoginController telaLoginController;
+
 
     private TelaPrincipalController telaPrincipalController;
 
@@ -65,6 +67,7 @@ public class ScreenManager {
             FXMLLoader TelaPrincipalPane = new FXMLLoader(getClass().getResource("TelaPrincipal.fxml"));
             this.telaPrincipal = new Scene(TelaPrincipalPane.load());
             this.telaPrincipalController = TelaPrincipalPane.getController();
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);

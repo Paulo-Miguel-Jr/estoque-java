@@ -2,7 +2,8 @@ package com.example.estoquejava.models;
 
 import java.time.LocalDate;
 
-public class ItemCompra {
+public class
+ItemCompra {
     private int codigo;
     private int quantidade;
     private double valorTotal;
