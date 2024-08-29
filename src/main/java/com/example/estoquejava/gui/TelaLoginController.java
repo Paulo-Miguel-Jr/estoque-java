@@ -1,5 +1,7 @@
 package com.example.estoquejava.gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,12 +33,25 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     public void setarLabel() {
-        label.setText("Mudamos a label.");
+        label.setText(comboBox.getValue());
+    }
+
+    public void irParaTela() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboBox.setItems(listaDeOpcoes);
-        label.setText("Hello World");
+        comboBox.setValue(listaDeOpcoes.get(0));
+        label.setText(comboBox.getValue());
+
+        comboBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                label.setText(newValue);
+            }
+        });
     }
 }
