@@ -1,5 +1,7 @@
-package com.example.estoquejava.gui;
+package com.example.estoquejava;
 
+import com.example.estoquejava.gui.TelaLoginController;
+import com.example.estoquejava.gui.TelaPrincipalController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,8 +9,8 @@ public class ScreenManager {
     private static ScreenManager instance;
     private static Stage stg;
 
-    private Scene TelaLogin;
-    private Scene TelaPrincipal;
+    private Scene telaLogin;
+    private Scene telaPrincipal;
 
     private TelaLoginController telaLoginController;
 
@@ -37,11 +39,11 @@ public class ScreenManager {
 
     //Getters das Scenes
     public Scene getTelaLogin(){
-        return TelaLogin;
+        return telaLogin;
     }
 
     public Scene getTelaPrincipal(){
-        return TelaPrincipal;
+        return telaPrincipal;
     }
 
 
@@ -57,11 +59,11 @@ public class ScreenManager {
     private void screenLoader(){
         try {
             FXMLLoader TelaLoginPane = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
-            this.TelaLogin = new Scene(TelaLoginPane.load());
+            this.telaLogin = new Scene(TelaLoginPane.load());
             this.telaLoginController = TelaLoginPane.getController();
 
             FXMLLoader TelaPrincipalPane = new FXMLLoader(getClass().getResource("TelaPrincipal.fxml"));
-            this.TelaPrincipal = new Scene(TelaPrincipalPane.load());
+            this.telaPrincipal = new Scene(TelaPrincipalPane.load());
             this.telaPrincipalController = TelaPrincipalPane.getController();
 
         } catch (Exception e) {
@@ -74,8 +76,8 @@ public class ScreenManager {
         if(max) stg.setMaximized(false);
 
         switch (fileNameFxml){
-            case "TelaLogin.fxml" -> stg.setScene(TelaLogin);
-            case "TelaPrincipal.fxml" -> stg.setScene(TelaPrincipal);
+            case "TelaLogin.fxml" -> stg.setScene(telaLogin);
+            case "TelaPrincipal.fxml" -> stg.setScene(telaPrincipal);
         }
         stg.setTitle(titleScreen);
 
