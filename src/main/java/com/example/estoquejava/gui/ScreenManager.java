@@ -10,7 +10,6 @@ public class ScreenManager {
     private Scene TelaLogin;
     private Scene TelaPrincipal;
 
-
     private TelaLoginController telaLoginController;
 
 
