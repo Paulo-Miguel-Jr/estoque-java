@@ -1,7 +1,9 @@
 package com.example.estoquejava.repository;
 
+import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.enums.StatusPedido;
+import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.interfaces.IPedidoRepositorio;
@@ -10,11 +12,12 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     private Pedido[] pedidos;
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
-    private ItemPedidoRepositorio itemPedidoRepositorio;
+    private PedidoRepositorio itemPedidoRepositorio;
     
     public PedidoRepositorio() {
         this.pedidos = new Pedido[100];
         proxIdLivre = 0;
+        this.itemPedidoRepositorio = ItemPedidoRepositorio.getInstance();
     }
 
     public static PedidoRepositorio getInstance(){
@@ -94,6 +97,15 @@ public class PedidoRepositorio implements IPedidoRepositorio {
         }
     }
 
+    @Override
+    public void adicionarItemAoPedido(int idPedido, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException {
+        Pedido pedido = procurarPedido(idPedido);
+        if (pedido != null) {
+            pedido.adicionarItemPedido(item);
+        } else {
+            throw new PedNaoEncontException("Pedido não encontrado.");
+        }
+    }
 
 
     public void processarVenda(int numero) throws PedNaoEncontException {
