@@ -18,8 +18,7 @@ public interface IPedidoRepositorio {
 
     Pedido procurarPedido(int numero) throws PedNaoEncontException;
 
-    //void processarVenda(int numero) throws PedNaoEncontException;
 
-    //adicionarItemAoPedido (int idPedido, ItemPedido item)
+    //adicionarItemAoPedido (int idPedido, ItemPedido item) throws PedNaoEncontException;
 
 }
