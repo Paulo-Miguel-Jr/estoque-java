@@ -46,9 +46,9 @@ public class Fachada {
         pedidoCadastro.listarPedido();
     }
 
-    public void adicionarItemAoPedido(int numero, ItemPedido item) {
-        pedidoCadastro.adicionarItemPedido(item);
-    }
+ //   public void adicionarItemAoPedido(int numero, ItemPedido item) {
+  //      pedidoCadastro.adicionarItemPedido(item);
+ //   }
 
 
 }
