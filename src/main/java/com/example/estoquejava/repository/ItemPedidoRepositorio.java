@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public  class ItemPedidoRepositorio implements IItemPedidoRepositorio {
 
     private final ArrayList<ItemPedido> ItemPedidoLista;
+    private static PedidoRepositorio instancia;
 
     public ItemPedidoRepositorio(ItemPedido itemPedido){
         this.ItemPedidoLista = new ArrayList<>();
         this.ItemPedidoLista.add(itemPedido);
     }
+
 
     ///Função para auxiliar as operações de busca e inserção.
     public int getTamanho(){
