@@ -1,6 +1,7 @@
 package com.example.estoquejava.repository.interfaces;
 
 
+import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
@@ -18,7 +19,6 @@ public interface IPedidoRepositorio {
 
     Pedido procurarPedido(int numero) throws PedNaoEncontException;
 
-
-    //adicionarItemAoPedido (int idPedido, ItemPedido item) throws PedNaoEncontException;
+    //void adicionarItemAoPedido (int idPedido, ItemPedido item) throws PedNaoEncontException;
 
 }
