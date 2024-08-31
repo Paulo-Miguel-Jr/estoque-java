@@ -9,22 +9,22 @@ import java.time.LocalDate;
 public class Pedido {
     private int idPedido;
     private LocalDate dataPedido;
-    private ItemCompra[] itensCompra;
+    private ItemPedido[] itensPedido;
     private int quantidadeItens;
     private double valorTotal;
     private StatusPedido status;
 
-    public Pedido(int idPedido, LocalDate dataPedido, ItemCompra[] itensCompra, StatusPedido status) {
+    public Pedido(int idPedido, LocalDate dataPedido, ItemPedido[] itensPedido, StatusPedido status) {
         this.idPedido = idPedido;
         this.dataPedido = dataPedido;
-        this.itensCompra = itensCompra;
-        this.quantidadeItens = itensCompra.length;
+        this.itensPedido = itensPedido;
+        this.quantidadeItens = itensPedido.length;
         this.valorTotal = calcularValorTotal();
         this.status = status;
     }
 
     public Pedido() {
-        this.itensCompra = new ItemCompra[10];
+        this.itensPedido = new ItemPedido[100];
         this.quantidadeItens = 0;
         this.status = StatusPedido.PENDENTE;
     }
@@ -45,13 +45,13 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public ItemCompra[] getItensCompra() {
-        return itensCompra;
+    public ItemPedido[] getItensPedido() {
+        return itensPedido;
     }
 
-    public void setItensCompra(ItemCompra[] itensCompra) {
-        this.itensCompra = itensCompra;
-        this.quantidadeItens = itensCompra.length;
+    public void setItensPedido(ItemPedido[] itensPedido) {
+        this.itensPedido = itensPedido;
+        this.quantidadeItens = itensPedido.length;
         this.valorTotal = calcularValorTotal();
     }
 
@@ -70,16 +70,16 @@ public class Pedido {
     private double calcularValorTotal() {
         double total = 0;
         for (int i = 0; i < quantidadeItens; i++) {
-            if (itensCompra[i] != null) {
-                total += itensCompra[i].getValorTotal();
+            if (itensPedido[i] != null) {
+                total += itensPedido[i].getValorItemPedido();
             }
         }
         return total;
     }
 
-    public void adicionarItemCompra(ItemCompra item) throws LimiteItensAlcancadoException {
-        if (quantidadeItens < itensCompra.length) {
-            itensCompra[quantidadeItens] = item;
+    public void adicionarItemPedido(ItemPedido item) throws LimiteItensAlcancadoException {
+        if (quantidadeItens < itensPedido.length) {
+            itensPedido[quantidadeItens] = item;
             quantidadeItens++;
             this.valorTotal = calcularValorTotal();
         } else {
@@ -95,7 +95,7 @@ public class Pedido {
         sb.append(", dataPedido=").append(dataPedido);
         sb.append(", itensCompra=[");
         for (int i = 0; i < quantidadeItens; i++) {
-            sb.append(itensCompra[i].toString());
+            sb.append(itensPedido[i].toString());
             if (i < quantidadeItens - 1) sb.append(", ");
         }
         sb.append("]");
