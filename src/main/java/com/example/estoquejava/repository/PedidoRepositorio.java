@@ -11,14 +11,14 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
     
-    public PedidoRepositorio(int capacidade) {
-        this.pedidos = new Pedido[capacidade];
+    public PedidoRepositorio() {
+        this.pedidos = new Pedido[];
         proxIdLivre = 0;
     }
 
-    public static PedidoRepositorio getInstance(int capacidade){
+    public static PedidoRepositorio getInstance(){
         if (singletonPedRep == null) {
-            singletonPedRep = new PedidoRepositorio(capacidade);
+            singletonPedRep = new PedidoRepositorio();
         }
         return singletonPedRep;
     }
@@ -93,7 +93,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
         }
     }
 
-    @Override
+
     public void processarVenda(int numero) throws PedNaoEncontException {
         int indice = getIdPedido(numero);
         if (indice == -1) {
