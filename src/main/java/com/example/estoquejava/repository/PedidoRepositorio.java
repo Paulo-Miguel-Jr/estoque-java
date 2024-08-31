@@ -1,7 +1,9 @@
 package com.example.estoquejava.repository;
 
+import com.example.estoquejava.models.ItemCompra;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.enums.StatusPedido;
+import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.interfaces.IPedidoRepositorio;
@@ -12,7 +14,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     private static PedidoRepositorio singletonPedRep;
     
     public PedidoRepositorio() {
-        this.pedidos = new Pedido[];
+        this.pedidos = new Pedido[100];
         proxIdLivre = 0;
     }
 
