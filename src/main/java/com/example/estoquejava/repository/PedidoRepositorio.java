@@ -1,6 +1,7 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.ItemCompra;
+import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
@@ -94,7 +95,6 @@ public class PedidoRepositorio implements IPedidoRepositorio {
             return pedidos[indice];
         }
     }
-
 
     public void processarVenda(int numero) throws PedNaoEncontException {
         int indice = getIdPedido(numero);
