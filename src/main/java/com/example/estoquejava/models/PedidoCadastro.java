@@ -61,12 +61,14 @@ public class PedidoCadastro {
         }
     }
 
-    public void adicionarItemAoPedido(int idPedido, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException, InvalidPedidoException {
-        Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
+    public void adicionarItemAoPedido(int numero, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException, InvalidPedidoException {
+        Pedido pedido = pedidoRepositorio.procurarPedido(numero);
         if (pedido.getStatus() != StatusPedido.PENDENTE) {
             throw new InvalidPedidoException("Somente pedidos pendentes podem ter itens adicionados.");
         }
         pedido.adicionarItemPedido(item);
         pedidoRepositorio.atualizarPedido(pedido);
     }
+
+
 }
