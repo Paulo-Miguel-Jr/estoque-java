@@ -2,6 +2,7 @@ package com.example.estoquejava.models;
 
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.InvalidPedidoException;
+import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.PedidoRepositorio;
@@ -60,5 +61,12 @@ public class PedidoCadastro {
         }
     }
 
-    //public void adicionarItemAoPedido (int idPedido, ItemPedido item) throws PedNaoEncontException {}
+    public void adicionarItemAoPedido(int idPedido, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException, InvalidPedidoException {
+        Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
+        if (pedido.getStatus() != StatusPedido.PENDENTE) {
+            throw new InvalidPedidoException("Somente pedidos pendentes podem ter itens adicionados.");
+        }
+        pedido.adicionarItemPedido(item);
+        pedidoRepositorio.atualizarPedido(pedido);
+    }
 }
