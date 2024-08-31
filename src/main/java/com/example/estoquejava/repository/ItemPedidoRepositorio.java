@@ -10,11 +10,17 @@ public  class ItemPedidoRepositorio implements IItemPedidoRepositorio {
     private final ArrayList<ItemPedido> ItemPedidoLista;
     private static PedidoRepositorio instancia;
 
-    public ItemPedidoRepositorio(ItemPedido itemPedido){
+    public ItemPedidoRepositorio(){
         this.ItemPedidoLista = new ArrayList<>();
-        this.ItemPedidoLista.add(itemPedido);
+        //this.ItemPedidoLista.add(itemPedido);
     }
 
+    public static PedidoRepositorio getInstance() {
+        if (instancia == null) {
+            instancia = new PedidoRepositorio();
+        }
+        return instancia;
+    }
 
     ///Função para auxiliar as operações de busca e inserção.
     public int getTamanho(){
