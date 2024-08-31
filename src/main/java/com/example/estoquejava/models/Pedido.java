@@ -77,6 +77,7 @@ public class Pedido {
         return total;
     }
 
+
     public void adicionarItemPedido(ItemPedido item) throws LimiteItensAlcancadoException {
         if (quantidadeItens < itensPedido.length) {
             itensPedido[quantidadeItens] = item;
