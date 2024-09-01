@@ -1,41 +1,73 @@
 package com.example.estoquejava.models;
 
+import com.example.estoquejava.repository.UsuarioRepositorio;
+import com.example.estoquejava.repository.PedidoRepositorio;
+
 public class Fachada {
 
-    private static Fachada instacia;
+    private static Fachada instancia;
 
     private UsuarioCadastro usuarioCadastro;
     private PedidoCadastro pedidoCadastro;
 
+    //faltava isso aqui
+    private Fachada() {
+        UsuarioRepositorio usuarioRepositorio = UsuarioRepositorio.getInstance();
+        PedidoRepositorio pedidoRepositorio = PedidoRepositorio.getInstance();
 
-
-    public static Fachada getInstacia() {
-        if(instacia == null){
-        instacia = new Fachada();
-        }
-        return instacia;
-
+        this.usuarioCadastro = new UsuarioCadastro(usuarioRepositorio);
+        this.pedidoCadastro = new PedidoCadastro(pedidoRepositorio);
     }
 
-    public void cadastrarUsuario(Usuario usuario){
+    public static Fachada getInstancia() {
+        if (instancia == null) {
+            instancia = new Fachada();
+        }
+        return instancia;
+    }
+
+    //métodos usuario
+
+    public void cadastrarUsuario(Usuario usuario) {
         usuarioCadastro.cadastrarUsuario(usuario);
     }
 
-
-    public void criarPedido(Pedido pedido) {
-        pedidoCadastro.criarPedido(pedido); //perguntar a Paulo pq não está indo adicionarPedido
+    public Usuario buscarUsuarioPorId(int id) {
+        return usuarioCadastro.buscarUsuarioPorId(id);
     }
 
-    public void removerPedido(int numero)  {
+    public Usuario buscarUsuarioPorNome(String nome) {
+        return usuarioCadastro.buscarUsuarioPorNome(nome);
+    }
+
+    public void removerUsuario(int id) {
+        usuarioCadastro.removerUsuario(id);
+    }
+
+    public void atualizarUsuario(Usuario usuario) {
+        usuarioCadastro.atualizarUsuario(usuario);
+    }
+
+    public Usuario[] listarUsuarios() {
+        return usuarioCadastro.listarUsuarios();
+    }
+
+    //métodos para a entidade Pedido
+
+    public void criarPedido(Pedido pedido) {
+        pedidoCadastro.criarPedido(pedido);
+    }
+
+    public void removerPedido(int numero) {
         pedidoCadastro.removerPedido(numero);
     }
 
-    public void atualizarPedido(Pedido pedido)  {
+    public void atualizarPedido(Pedido pedido) {
         pedidoCadastro.atualizarPedido(pedido);
     }
 
-    public Pedido procurarPedido(int numero)  {
-        pedidoCadastro.procurarPedido(numero);
+    public Pedido procurarPedido(int numero) {
+        return pedidoCadastro.procurarPedido(numero);
     }
 
     public void processarVenda(int numero) {
@@ -45,10 +77,4 @@ public class Fachada {
     public void listarPedidos() {
         pedidoCadastro.listarPedido();
     }
-
- //   public void adicionarItemAoPedido(int numero, ItemPedido item) {
-  //      pedidoCadastro.adicionarItemPedido(item);
- //   }
-
-
 }

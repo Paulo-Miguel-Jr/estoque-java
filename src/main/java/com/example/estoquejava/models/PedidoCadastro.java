@@ -36,8 +36,8 @@ public class PedidoCadastro {
         pedidoRepositorio.atualizarPedido(pedido);
     }
 
-    public void procurarPedido(int numero) throws PedNaoEncontException {
-        pedidoRepositorio.procurarPedido(numero);
+    public Pedido procurarPedido(int numero) throws PedNaoEncontException {
+        return pedidoRepositorio.procurarPedido(numero);
     }
 
     public void processarVenda(int numero) throws PedNaoEncontException, InvalidPedidoException {

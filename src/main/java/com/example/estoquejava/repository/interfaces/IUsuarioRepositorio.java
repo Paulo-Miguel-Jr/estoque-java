@@ -7,6 +7,6 @@ public interface IUsuarioRepositorio {
     Usuario buscarUsuarioPorId(int id);
     Usuario buscarUsuarioPorNome(String nome);
     void removerUsuario(int id);
+    void atualizarUsuario(Usuario usuario);
     Usuario[] listarUsuarios();
 }
-
