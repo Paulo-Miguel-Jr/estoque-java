@@ -15,11 +15,11 @@
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="875.0" style="-fx-background-color: white;">
          <children>
-            <PasswordField fx:id="senhaField" layoutX="523.0" layoutY="215.0" prefHeight="24.0" prefWidth="236.0" promptText="Digite sua senha" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2; -fx-border-width: 1;">
+            <PasswordField fx:id="senhaField" layoutX="522.0" layoutY="242.0" prefHeight="24.0" prefWidth="236.0" promptText="Digite sua senha" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2; -fx-border-width: 1;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></PasswordField>
-            <Button fx:id="ok" layoutX="650.0" layoutY="246.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="110.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
+            <Button fx:id="ok" layoutX="650.0" layoutY="272.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="110.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
@@ -32,28 +32,28 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Text layoutX="563.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo " wrappingWidth="173.91912841796875">
+            <Text layoutX="563.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo " wrappingWidth="173.91912841796875">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-            <Text layoutX="558.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acesse sua conta">
+            <Text layoutX="557.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acesse sua conta">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <TextField fx:id="usuarioField" layoutX="523.0" layoutY="171.0" prefHeight="26.0" prefWidth="234.0" promptText="Digite seu usuário" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2;">
+            <TextField fx:id="usuarioField" layoutX="523.0" layoutY="198.0" prefHeight="26.0" prefWidth="234.0" promptText="Digite seu usuário" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2;">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <Label fx:id="statusLabel" layoutX="523.0" layoutY="242.0" prefHeight="26.0" prefWidth="134.0" textFill="RED" />
-            <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="493.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+            <Label fx:id="statusLabel" layoutX="516.0" layoutY="272.0" prefHeight="26.0" prefWidth="134.0" textFill="RED" />
+            <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="493.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/user.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="493.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="493.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/padlock.png" />
                </image>
