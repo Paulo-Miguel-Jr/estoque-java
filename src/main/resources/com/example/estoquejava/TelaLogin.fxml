@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Controle de Vendas" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaLoginController">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="872.0" style="-fx-background-color: white;" text="Controle de Vendas" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaLoginController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="875.0" style="-fx-background-color: white;">
          <children>
-            <PasswordField fx:id="usuarioField" layoutX="225.0" layoutY="175.0" />
-            <PasswordField fx:id="senhaField" layoutX="225.0" layoutY="212.0" />
-            <Label fx:id="usuarioLabel" layoutX="176.0" layoutY="179.0" text="Usuário:" />
-            <Label fx:id="senhaLabel" layoutX="180.0" layoutY="216.0" text="Senha:" />
-            <Button fx:id="ok" layoutX="314.0" layoutY="249.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTela" text="Ok" />
+            <PasswordField fx:id="senhaField" layoutX="523.0" layoutY="215.0" prefHeight="24.0" prefWidth="236.0" promptText="Digite sua senha" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2; -fx-border-width: 1;">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></PasswordField>
+            <Button fx:id="ok" layoutX="615.0" layoutY="256.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTela" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font></Button>
+            <AnchorPane layoutX="-10.0" layoutY="-10.0" prefHeight="607.0" prefWidth="397.0" style="-fx-background-color: #262626;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/estoque-pronto.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Text layoutX="563.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo " wrappingWidth="173.91912841796875">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="558.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acesse sua conta">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <TextField fx:id="usuarioField" layoutX="523.0" layoutY="171.0" prefHeight="26.0" prefWidth="234.0" promptText="Digite seu usuário" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2;">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
          </children></AnchorPane>
   </content>
 </TitledPane>

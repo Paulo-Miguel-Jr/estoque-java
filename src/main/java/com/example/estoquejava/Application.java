@@ -13,9 +13,11 @@ public class Application extends javafx.application.Application {
         //URL resource = Application.class.getResource("TelaLogin.fxml");
 
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("TelaLogin.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 916, 538);
         stage.setTitle("Estoque de produtos");
         stage.setScene(scene);
+        stage.setResizable(false);
+
         stage.show();
     }
 
