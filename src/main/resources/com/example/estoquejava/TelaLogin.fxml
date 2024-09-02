@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -11,14 +12,14 @@
 <?import javafx.scene.text.Text?>
 
 <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="872.0" style="-fx-background-color: white;" text="Controle de Vendas" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaLoginController">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="875.0" style="-fx-background-color: white;">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="875.0" style="-fx-background-color: white;">
          <children>
             <PasswordField fx:id="senhaField" layoutX="523.0" layoutY="215.0" prefHeight="24.0" prefWidth="236.0" promptText="Digite sua senha" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2; -fx-border-width: 1;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></PasswordField>
-            <Button fx:id="ok" layoutX="615.0" layoutY="256.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTela" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
+            <Button fx:id="ok" layoutX="615.0" layoutY="256.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
@@ -46,6 +47,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
+            <Label fx:id="statusLabel" layoutX="523.0" layoutY="310.0" prefHeight="26.0" prefWidth="234.0" textFill="RED" />
          </children></AnchorPane>
-  </content>
+   </content>
 </TitledPane>
