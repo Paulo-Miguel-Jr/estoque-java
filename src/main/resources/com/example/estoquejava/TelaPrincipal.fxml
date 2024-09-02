@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane fx:id="border" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaPrincipalController">
@@ -18,7 +20,14 @@
         </menus>
       </MenuBar>
    </top>
-   <left>
+   <bottom>
       <Button fx:id="voltar" mnemonicParsing="false" text="Voltar" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <TreeTableView fx:id="treeTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TreeTableColumn fx:id="coluna" prefWidth="199.0" text="Produtos" />
+        </columns>
+      </TreeTableView>
    </left>
 </BorderPane>
