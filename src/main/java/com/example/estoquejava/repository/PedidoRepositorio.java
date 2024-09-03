@@ -98,8 +98,8 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     }
 
     @Override
-    public void adicionarItemAoPedido(int idPedido, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException {
-        Pedido pedido = procurarPedido(idPedido);
+    public void adicionarItemAoPedido(int numero, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException {
+        Pedido pedido = procurarPedido(numero);
         if (pedido != null) {
             pedido.adicionarItemPedido(item);
         } else {
