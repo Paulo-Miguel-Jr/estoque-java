@@ -13,9 +13,9 @@
          </children></AnchorPane>
     <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0">
          <children>
-            <Button layoutX="95.0" layoutY="32.0" mnemonicParsing="false" text="Adicionar item" />
-            <Button layoutX="254.0" layoutY="32.0" mnemonicParsing="false" text="Remover item" />
-            <Button layoutX="428.0" layoutY="32.0" mnemonicParsing="false" text="Criar Pedido" />
+            <Button fx:id="adicionarItem" layoutX="95.0" layoutY="32.0" mnemonicParsing="false" text="Adicionar item" />
+            <Button fx:id="removerItem" layoutX="254.0" layoutY="32.0" mnemonicParsing="false" text="Remover item" />
+            <Button fx:id="criarPedido" layoutX="428.0" layoutY="32.0" mnemonicParsing="false" text="Criar Pedido" />
          </children></AnchorPane>
   </items>
 </SplitPane>
