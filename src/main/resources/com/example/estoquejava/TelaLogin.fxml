@@ -19,7 +19,7 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></PasswordField>
-            <Button fx:id="ok" layoutX="650.0" layoutY="272.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="110.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
+            <Button fx:id="ok" layoutX="640.0" layoutY="294.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="118.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
@@ -58,6 +58,11 @@
                   <Image url="@imagens/padlock.png" />
                </image>
             </ImageView>
+            <Button fx:id="BtnCadastrar" layoutX="516.0" layoutY="294.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTelaCadastro" prefHeight="43.0" prefWidth="115.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Registrar-se" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
    </content>
 </TitledPane>

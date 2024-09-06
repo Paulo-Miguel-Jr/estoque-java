@@ -18,6 +18,10 @@ public class TelaLoginController implements Initializable {
     private Button ok;
 
     @FXML
+    private Button BtnCadastrar;
+
+
+    @FXML
     private PasswordField senhaField;
 
     @FXML
@@ -60,5 +64,11 @@ public class TelaLoginController implements Initializable {
     private void irParaTela() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
+    @FXML
+    private void irParaTelaCadastro(ActionEvent event){
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaCadastro.fxml", "TelaCadastro");
     }
 }
