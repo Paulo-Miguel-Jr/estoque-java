@@ -34,7 +34,7 @@
     </ComboBox>
 
     <Button fx:id="btnCadastrar" onAction="#cadastrarUsuario" text="Cadastrar" />
-    <Label fx:id="statusLabel" style="-fx-text-fill: red;" text="" />
+    <Label fx:id="statusLabel" style="-fx-text-fill: green;" text="" />
    <Button fx:id="btnVoltar" onAction="#irParaTelaLogin" text="Voltar" />
 
 </VBox>
