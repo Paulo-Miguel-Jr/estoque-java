@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:id="split" dividerPositions="0.7688442211055276" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaPedidoController">
+  <items>
+    <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="598.0">
+         <children>
+            <Label fx:id="labelPedido" layoutX="276.0" layoutY="26.0" prefHeight="25.0" prefWidth="47.0" text="PEDIDO" />
+         </children></AnchorPane>
+    <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0">
+         <children>
+            <Button fx:id="adicionarItem" layoutX="95.0" layoutY="32.0" mnemonicParsing="false" text="Adicionar item" />
+            <Button fx:id="removerItem" layoutX="254.0" layoutY="32.0" mnemonicParsing="false" text="Remover item" />
+            <Button fx:id="criarPedido" layoutX="428.0" layoutY="32.0" mnemonicParsing="false" text="Criar Pedido" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

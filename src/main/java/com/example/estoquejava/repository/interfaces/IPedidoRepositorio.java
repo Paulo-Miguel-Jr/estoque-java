@@ -8,7 +8,7 @@ import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 
 public interface IPedidoRepositorio {
 
-    //trocar numero por idPedido
+
     void adicionarPedido(Pedido pedido) throws PedidoRepCheioException;//trocar por cadastrar
 
     void removerPedido(int numero) throws PedNaoEncontException;
@@ -19,6 +19,6 @@ public interface IPedidoRepositorio {
 
     Pedido procurarPedido(int numero) throws PedNaoEncontException;
 
-    void adicionarItemAoPedido (int idPedido, ItemPedido item) throws PedNaoEncontException;
+    void adicionarItemAoPedido (int numero, ItemPedido item) throws PedNaoEncontException;
 
 }

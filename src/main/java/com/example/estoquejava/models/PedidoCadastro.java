@@ -66,7 +66,8 @@ public class PedidoCadastro {
         if (pedido.getStatus() != StatusPedido.PENDENTE) {
             throw new InvalidPedidoException("Somente pedidos pendentes podem ter itens adicionados.");
         }
-        pedido.adicionarItemPedido(item);
+        //pedido.adicionarItemPedido(item);
+        pedidoRepositorio.adicionarItemAoPedido(numero,item);
         pedidoRepositorio.atualizarPedido(pedido);
     }
 
