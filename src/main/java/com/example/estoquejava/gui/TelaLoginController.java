@@ -42,7 +42,7 @@ public class TelaLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         BtnLogin.setText("OK");
         usuarioRepositorio = UsuarioRepositorio.getInstance();
-        Usuario admin = new Usuario("admin", "admin123", 1, TipoUsuario.ADMIN);
+        Usuario admin = new Usuario("admin", "admin123", 1);
         try {
             usuarioRepositorio.adicionarUsuario(admin);
         } catch (IllegalArgumentException e) {

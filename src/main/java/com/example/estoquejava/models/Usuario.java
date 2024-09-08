@@ -6,13 +6,12 @@ public class Usuario {
     private String nome;
     private String senha;
     private int id;
-    private TipoUsuario tipo;
+//    private TipoUsuario tipo;
 
-    public Usuario(String nome, String senha, int id, TipoUsuario tipo) {
+    public Usuario(String nome, String senha, int id) {
         setNome(nome);
         setSenha(senha);
         this.id = id;
-        this.tipo = tipo;
     }
 
     public String getNome() {
@@ -43,14 +42,6 @@ public class Usuario {
         this.id = id;
     }
 
-    public TipoUsuario getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo;
-    }
-
     private static void verificarNomeCaracteres(String nome) {
         if (nome.length() < 3 || nome.length() > 50) {
             throw new IllegalArgumentException("O nome deve ter entre 3 e 50 caracteres.");
@@ -71,6 +62,10 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{id=" + id + ", nome='" + nome + "', tipo=" + tipo + "}";
+        return "Usuario{" +
+                "nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

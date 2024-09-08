@@ -1,40 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="478.0" prefWidth="601.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.estoquejava.gui.TelaCadastroController">
-    <padding>
-        <Insets bottom="20" left="20" right="20" top="20" />
-    </padding>
-
-    <Label style="-fx-font-size: 18px;" text="Cadastrar Novo Usuário" />
-
-    <Label text="Nome:" />
-    <TextField fx:id="nomeField" promptText="Nome do Usuário" />
-
-    <Label text="Senha:" />
-    <PasswordField fx:id="senhaField" promptText="Senha do Usuário" />
-
-    <Label text="Tipo de Usuário:" />
-    <ComboBox fx:id="tipoUsuarioComboBox">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="ADMIN" />
-                <String fx:value="COMUM" />
-            </FXCollections>
-        </items>
-    </ComboBox>
-
-    <Button fx:id="btnCadastrar" onAction="#cadastrarUsuario" text="Cadastrar" />
-    <Label fx:id="statusLabel" style="-fx-text-fill: green;" text="" />
-   <Button fx:id="btnVoltar" onAction="#irParaTelaLogin" text="Voltar" />
-
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaCadastroController">
+    <children>
+        <AnchorPane prefHeight="538.0" prefWidth="426.0" style="-fx-background-color: #77D3A4;">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imagens/estoque.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <PasswordField fx:id="senhaField" layoutX="532.0" layoutY="252.0" maxHeight="234.0" minHeight="34.0" minWidth="234.0" prefHeight="34.0" prefWidth="234.0" promptText="Digite sua senha" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2; -fx-border-width: 1;">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </PasswordField>
+        <Text fill="#77d3a4" layoutX="573.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo " wrappingWidth="173.91912841796875">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Text>
+        <Text layoutX="581.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crie sua conta">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+        <TextField fx:id="usuarioField" layoutX="533.0" layoutY="208.0" prefHeight="34.0" prefWidth="234.0" promptText="Digite seu usuário" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2;">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="senhaVisivelField" layoutX="532.0" layoutY="252.0" prefHeight="34.0" prefWidth="236.0" promptText="Digite sua senha" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2;" visible="false">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </TextField>
+        <Button fx:id="BtnCadastrar" layoutX="660.0" layoutY="345.0" minWidth="60.0" mnemonicParsing="false" onAction="#cadastrarUsuario" prefHeight="43.0" prefWidth="115.0" style="-fx-background-color: black; -fx-border-radius: 4;" text="Registrar-se" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="11.0" />
+            </font>
+        </Button>
+        <PasswordField fx:id="senhaFieldConfirm" layoutX="532.0" layoutY="296.0" maxHeight="234.0" minHeight="34.0" minWidth="234.0" prefHeight="34.0" prefWidth="234.0" promptText="Digite sua senha novamente" style="-fx-background-color: white; -fx-border-color: #262626; -fx-border-radius: 2; -fx-border-width: 1;">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </PasswordField>
+        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="503.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@imagens/usuario-de-perfil.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="503.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@imagens/padlock.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="503.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@imagens/padlock.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="BtnVoltar" layoutX="533.0" layoutY="345.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTelaLogin" prefHeight="43.0" prefWidth="115.0" style="-fx-background-color: black; -fx-border-radius: 4;" text="Voltar" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="11.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

@@ -21,20 +21,20 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </PasswordField>
-            <Button fx:id="BtnLogin" layoutX="640.0" layoutY="294.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="118.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
+            <Button fx:id="BtnLogin" layoutX="640.0" layoutY="294.0" minWidth="60.0" mnemonicParsing="false" onAction="#validarLogin" prefHeight="43.0" prefWidth="118.0" style="-fx-background-color: black; -fx-border-radius: 4;" text="Entrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
-            <AnchorPane layoutX="-10.0" layoutY="-10.0" prefHeight="607.0" prefWidth="397.0" style="-fx-background-color: #262626;">
+            <AnchorPane layoutX="-10.0" layoutY="-10.0" prefHeight="607.0" prefWidth="397.0" style="-fx-background-color: #77D3A4;">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagens/estoque-pronto.png" />
+                        <Image url="@imagens/estoque.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <Text layoutX="563.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo " wrappingWidth="173.91912841796875">
+            <Text fill="#77d3a4" layoutX="563.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo " wrappingWidth="173.91912841796875">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -57,7 +57,7 @@
             <Label fx:id="statusLabel" layoutX="516.0" layoutY="272.0" prefHeight="26.0" prefWidth="134.0" textFill="RED" />
             <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="493.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@imagens/user.png" />
+                  <Image url="@imagens/usuario-de-perfil.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="493.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
@@ -65,7 +65,7 @@
                   <Image url="@imagens/padlock.png" />
                </image>
             </ImageView>
-            <Button fx:id="BtnCadastrar" layoutX="516.0" layoutY="294.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTelaCadastro" prefHeight="43.0" prefWidth="115.0" style="-fx-background-color: #262626; -fx-border-radius: 4;" text="Registrar-se" textFill="WHITE">
+            <Button fx:id="BtnCadastrar" layoutX="516.0" layoutY="294.0" minWidth="60.0" mnemonicParsing="false" onAction="#irParaTelaCadastro" prefHeight="43.0" prefWidth="115.0" style="-fx-background-color: black; -fx-border-radius: 4;" text="Registrar-se" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
