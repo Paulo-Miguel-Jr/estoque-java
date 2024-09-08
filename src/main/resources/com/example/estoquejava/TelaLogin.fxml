@@ -25,7 +25,7 @@
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
-            <AnchorPane layoutX="-10.0" layoutY="-10.0" prefHeight="607.0" prefWidth="397.0" style="-fx-background-color: #77D3A4;">
+            <AnchorPane layoutX="-10.0" layoutY="-10.0" prefHeight="607.0" prefWidth="426.0" style="-fx-background-color: #77D3A4;">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
                      <image>
