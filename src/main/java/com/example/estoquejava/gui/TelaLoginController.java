@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class TelaLoginController implements Initializable {
 
     @FXML
-    private Button ok;
+    private Button BtnLogin;
 
     @FXML
     private Button BtnCadastrar;
@@ -28,13 +28,19 @@ public class TelaLoginController implements Initializable {
     private TextField usuarioField;
 
     @FXML
+    private TextField senhaVisivelField;
+
+    @FXML
+    private Button btnMostrarSenha;
+
+    @FXML
     private Label statusLabel;
 
     private UsuarioRepositorio usuarioRepositorio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ok.setText("OK");
+        BtnLogin.setText("OK");
         usuarioRepositorio = UsuarioRepositorio.getInstance();
         Usuario admin = new Usuario("admin", "admin123", 1, TipoUsuario.ADMIN);
         try {
@@ -42,6 +48,7 @@ public class TelaLoginController implements Initializable {
         } catch (IllegalArgumentException e) {
             //vou fazer
         }
+        senhaVisivelField.setVisible(false);
     }
 
     @FXML
@@ -71,4 +78,20 @@ public class TelaLoginController implements Initializable {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaCadastro.fxml", "TelaCadastro");
     }
+
+    @FXML
+    private void alternarSenhaVisibilidade(ActionEvent event) {
+        if (senhaField.isVisible()) {
+            senhaVisivelField.setText(senhaField.getText());
+            senhaVisivelField.setVisible(true);
+            senhaField.setVisible(false);
+            btnMostrarSenha.setText("Mostrar");
+        } else {
+            senhaField.setText(senhaVisivelField.getText());
+            senhaField.setVisible(true);
+            senhaVisivelField.setVisible(false);
+            btnMostrarSenha.setText("Ocultar");
+        }
+    }
+
 }
