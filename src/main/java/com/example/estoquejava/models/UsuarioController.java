@@ -2,11 +2,11 @@ package com.example.estoquejava.models;
 
 import com.example.estoquejava.repository.UsuarioRepositorio;
 
-public class UsuarioCadastro {
+public class UsuarioController {
 
     private UsuarioRepositorio usuarioRepositorio;
 
-    public UsuarioCadastro(UsuarioRepositorio usuarioRepositorio) {
+    public UsuarioController(UsuarioRepositorio usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 

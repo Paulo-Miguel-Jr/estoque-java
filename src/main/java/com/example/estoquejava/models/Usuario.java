@@ -1,12 +1,9 @@
 package com.example.estoquejava.models;
 
-import com.example.estoquejava.models.enums.TipoUsuario;
-
 public class Usuario {
     private String nome;
     private String senha;
     private int id;
-//    private TipoUsuario tipo;
 
     public Usuario(String nome, String senha, int id) {
         setNome(nome);
@@ -23,7 +20,6 @@ public class Usuario {
         verificarNomeCaracteres(nome);
         this.nome = nome;
     }
-    
 
     public String getSenha() {
         return senha;

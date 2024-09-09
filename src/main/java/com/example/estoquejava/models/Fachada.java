@@ -7,16 +7,16 @@ public class Fachada {
 
     private static Fachada instancia;
 
-    private UsuarioCadastro usuarioCadastro;
-    private PedidoCadastro pedidoCadastro;
+    private UsuarioController usuarioCadastro;
+    private PedidoController pedidoCadastro;
 
     //faltava isso aqui
     private Fachada() {
         UsuarioRepositorio usuarioRepositorio = UsuarioRepositorio.getInstance();
         PedidoRepositorio pedidoRepositorio = PedidoRepositorio.getInstance();
 
-        this.usuarioCadastro = new UsuarioCadastro(usuarioRepositorio);
-        this.pedidoCadastro = new PedidoCadastro(pedidoRepositorio);
+        this.usuarioCadastro = new UsuarioController(usuarioRepositorio);
+        this.pedidoCadastro = new PedidoController(pedidoRepositorio);
     }
 
     public static Fachada getInstancia() {

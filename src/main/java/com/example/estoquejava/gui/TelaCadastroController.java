@@ -1,8 +1,12 @@
 package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
+import com.example.estoquejava.models.Usuario;
+import com.example.estoquejava.models.UsuarioController;
+import com.example.estoquejava.repository.UsuarioRepositorio;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -22,14 +26,49 @@ public class TelaCadastroController {
     private PasswordField senhaFieldConfirm;
 
     @FXML
-    private TextField senhaVisivelField;
-
-    @FXML
     private TextField usuarioField;
+
+    private UsuarioController usuarioController;
+
+    //inicializa o controlador com uma instância do UsuarioController
+    public TelaCadastroController() {
+        UsuarioRepositorio repositorio = UsuarioRepositorio.getInstance();
+        usuarioController = new UsuarioController(repositorio);
+    }
 
     @FXML
     void cadastrarUsuario(ActionEvent event) {
+        String usuario = usuarioField.getText();
+        String senha = senhaField.getText();
+        String senhaConfirm = senhaFieldConfirm.getText();
 
+        //valida os campos de senha
+        if (usuario == null || usuario.trim().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "O nome de usuário não pode ser vazio.");
+            return;
+        }
+
+        if (senha == null || senha.length() < 6) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "A senha deve ter pelo menos 6 caracteres.");
+            return;
+        }
+
+        if (!senha.equals(senhaConfirm)) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "As senhas não coincidem.");
+            return;
+        }
+
+        UsuarioRepositorio repositorio = UsuarioRepositorio.getInstance();
+        int idUnico = repositorio.gerarIdUnico();
+        Usuario novoUsuario = new Usuario(usuario, senha, idUnico);
+
+        try {
+            usuarioController.cadastrarUsuario(novoUsuario);
+            showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Usuário cadastrado com sucesso.");
+            irParaTelaPrincipal();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
+        }
     }
 
     @FXML
@@ -38,4 +77,17 @@ public class TelaCadastroController {
         sm.changeScreen("TelaLogin.fxml", "TelaLogin");
     }
 
+    @FXML
+    private void irParaTelaPrincipal() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

@@ -7,10 +7,10 @@ import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.PedidoRepositorio;
 
-public class PedidoCadastro {
+public class PedidoController {
     private PedidoRepositorio pedidoRepositorio;
 
-    public PedidoCadastro(PedidoRepositorio pedidoRepositorio){
+    public PedidoController(PedidoRepositorio pedidoRepositorio){
         this.pedidoRepositorio = PedidoRepositorio.getInstance();
     }
 

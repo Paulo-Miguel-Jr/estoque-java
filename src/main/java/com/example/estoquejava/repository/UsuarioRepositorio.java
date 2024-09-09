@@ -3,21 +3,21 @@ package com.example.estoquejava.repository;
 import com.example.estoquejava.models.Usuario;
 import com.example.estoquejava.repository.interfaces.IUsuarioRepositorio;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UsuarioRepositorio implements IUsuarioRepositorio {
     private static final int MAX_USUARIOS = 100;
-
     private static UsuarioRepositorio singletonUsuRep;
-    private Usuario[] usuarios;
-    private int count;
-
-
+    private Map<Integer, Usuario> usuarios; // Armazenar usuários por ID
+    private int nextId;
 
     public UsuarioRepositorio() {
-        usuarios = new Usuario[MAX_USUARIOS];
-        count = 0;
+        usuarios = new HashMap<>();
+        nextId = 2; //começa com o ID 2 e aumenta
     }
 
-    public static UsuarioRepositorio getInstance(){
+    public static UsuarioRepositorio getInstance() {
         if (singletonUsuRep == null) {
             singletonUsuRep = new UsuarioRepositorio();
         }
@@ -27,24 +27,19 @@ public class UsuarioRepositorio implements IUsuarioRepositorio {
     @Override
     public void adicionarUsuario(Usuario usuario) {
         validarUsuario(usuario);
-        usuarios[count++] = usuario;
+        usuarios.put(usuario.getId(), usuario);
     }
 
     @Override
     public Usuario buscarUsuarioPorId(int id) {
-        for (int i = 0; i < count; i++) {
-            if (usuarios[i].getId() == id) {
-                return usuarios[i];
-            }
-        }
-        return null;
+        return usuarios.get(id);
     }
 
     @Override
     public Usuario buscarUsuarioPorNome(String nome) {
-        for (int i = 0; i < count; i++) {
-            if (usuarios[i].getNome().equalsIgnoreCase(nome)) {
-                return usuarios[i];
+        for (Usuario usuario : usuarios.values()) {
+            if (usuario.getNome().equalsIgnoreCase(nome)) {
+                return usuario;
             }
         }
         return null;
@@ -52,41 +47,41 @@ public class UsuarioRepositorio implements IUsuarioRepositorio {
 
     @Override
     public void removerUsuario(int id) {
-        for (int i = 0; i < count; i++) {
-            if (usuarios[i].getId() == id) {
-                for (int j = i; j < count - 1; j++) {
-                    usuarios[j] = usuarios[j + 1];
-                }
-                usuarios[--count] = null;
-                return;
-            }
+        if (usuarios.remove(id) != null) {
+            //id removido com sucesso
+        } else {
+            throw new IllegalArgumentException("Usuário com o ID especificado não encontrado.");
         }
-        throw new IllegalArgumentException("Usuário com o ID especificado não encontrado.");
     }
 
     @Override
     public void atualizarUsuario(Usuario usuario) {
-        for (int i = 0; i < count; i++) {
-            if (usuarios[i].getId() == usuario.getId()) {
-                usuarios[i] = usuario;
-                return;
-            }
+        if (usuarios.containsKey(usuario.getId())) {
+            usuarios.put(usuario.getId(), usuario);
+        } else {
+            throw new IllegalArgumentException("Usuário com o ID especificado não encontrado.");
         }
-        throw new IllegalArgumentException("Usuário com o ID especificado não encontrado.");
     }
 
     @Override
     public Usuario[] listarUsuarios() {
-        Usuario[] resultado = new Usuario[count];
-        System.arraycopy(usuarios, 0, resultado, 0, count);
-        return resultado;
+        return usuarios.values().toArray(new Usuario[0]);
+    }
+
+    @Override
+    public int gerarIdUnico() {
+        int id;
+        do {
+            id = nextId++;
+        } while (usuarios.containsKey(id)); //Garante que o ID não esteja em uso
+        return id;
     }
 
     private void validarUsuario(Usuario usuario) {
-        if (count >= MAX_USUARIOS) {
+        if (usuarios.size() >= MAX_USUARIOS) {
             throw new IllegalStateException("Número máximo de usuários atingido.");
         }
-        if (buscarUsuarioPorId(usuario.getId()) != null) {
+        if (usuarios.containsKey(usuario.getId())) {
             throw new IllegalArgumentException("Usuário com o mesmo ID já existe.");
         }
         if (buscarUsuarioPorNome(usuario.getNome()) != null) {
