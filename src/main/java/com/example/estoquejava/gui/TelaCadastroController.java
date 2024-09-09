@@ -41,8 +41,23 @@ public class TelaCadastroController {
         String usuario = usuarioField.getText();
         String senha = senhaField.getText();
         String senhaConfirm = senhaFieldConfirm.getText();
+        validarSenha(usuario, senha, senhaConfirm);
+    }
 
-        //valida os campos de senha
+
+    @FXML
+    private void irParaTelaLogin(ActionEvent event) {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaLogin.fxml", "TelaLogin");
+    }
+
+    @FXML
+    private void irParaTelaPrincipal() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
+    private void validarSenha(String usuario, String senha, String senhaConfirm) {
         if (usuario == null || usuario.trim().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erro", "O nome de usuário não pode ser vazio.");
             return;
@@ -69,18 +84,6 @@ public class TelaCadastroController {
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
         }
-    }
-
-    @FXML
-    private void irParaTelaLogin(ActionEvent event) {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaLogin.fxml", "TelaLogin");
-    }
-
-    @FXML
-    private void irParaTelaPrincipal() {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
