@@ -46,7 +46,7 @@ public class TelaCadastroController {
 
 
     @FXML
-    private void irParaTelaLogin(ActionEvent event) {
+    private void irParaTelaLogin() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaLogin.fxml", "TelaLogin");
     }
@@ -80,7 +80,7 @@ public class TelaCadastroController {
         try {
             usuarioController.cadastrarUsuario(novoUsuario);
             showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Usuário cadastrado com sucesso.");
-            irParaTelaPrincipal();
+            irParaTelaLogin();
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
         }

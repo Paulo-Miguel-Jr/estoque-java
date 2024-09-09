@@ -12,7 +12,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     private Pedido[] pedidos;
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
-    private PedidoRepositorio itemPedidoRepositorio;
+    private ItemPedidoRepositorio itemPedidoRepositorio;
     
     public PedidoRepositorio() {
         this.pedidos = new Pedido[100];

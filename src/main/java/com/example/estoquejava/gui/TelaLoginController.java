@@ -40,7 +40,7 @@ public class TelaLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        BtnLogin.setText("OK");
+        BtnLogin.setText("Entrar");
         usuarioRepositorio = UsuarioRepositorio.getInstance();
         Usuario admin = new Usuario("admin", "admin123", 1);
         try {
