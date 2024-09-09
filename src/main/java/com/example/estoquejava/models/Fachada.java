@@ -13,11 +13,9 @@ public class Fachada {
 
     //faltava isso aqui
     private Fachada() {
-        UsuarioRepositorio usuarioRepositorio = UsuarioRepositorio.getInstance();
-        PedidoRepositorio pedidoRepositorio = PedidoRepositorio.getInstance();
 
-        this.usuarioController = new UsuarioController(usuarioRepositorio);
-        this.pedidoController = new PedidoController(pedidoRepositorio);
+        this.usuarioController = new UsuarioController();
+        this.pedidoController = new PedidoController();
     }
 
     public static Fachada getInstancia() {

@@ -10,7 +10,7 @@ import com.example.estoquejava.repository.PedidoRepositorio;
 public class PedidoController {
     private PedidoRepositorio pedidoRepositorio;
 
-    public PedidoController(PedidoRepositorio pedidoRepositorio){
+    public PedidoController(){
         this.pedidoRepositorio = PedidoRepositorio.getInstance();
     }
 

@@ -55,17 +55,27 @@ public class TelaLoginController implements Initializable {
     private void validarLogin(ActionEvent event) {
         String nomeUsuario = usuarioField.getText();
         String senha = senhaField.getText();
+        try {
+            Usuario usuario = usuarioRepositorio.buscarUsuarioPorNome(nomeUsuario);
+            System.out.println("buscou o nome");
 
-        Usuario usuario = usuarioRepositorio.buscarUsuarioPorNome(nomeUsuario);
+            if (usuario == null) {
+                statusLabel.setText("Usuário não encontrado.");
+                System.out.println("n achou usuario");
+            } else if (!usuario.getSenha().equals(senha)) {
+                statusLabel.setText("Senha incorreta.");
+                System.out.println("senha errada");
+            } else {
+                irParaTela();
+                System.out.println("Entrou");
 
-        if (usuario == null) {
-            statusLabel.setText("Usuário não encontrado.");
-        } else if (!usuario.getSenha().equals(senha)) {
-            statusLabel.setText("Senha incorreta.");
-        } else {
-            statusLabel.setText("Login realizado com sucesso!");
-            irParaTela();
+            }
+
+    } catch (Exception e) {
+        showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
+            System.out.println("paro aqui4");
         }
+
     }
 
     private void irParaTela() {
@@ -92,6 +102,14 @@ public class TelaLoginController implements Initializable {
             senhaVisivelField.setVisible(false);
             btnMostrarSenha.setText("Ocultar");
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

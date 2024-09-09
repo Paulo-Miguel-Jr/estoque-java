@@ -6,9 +6,11 @@ public class UsuarioController {
 
     private UsuarioRepositorio usuarioRepositorio;
 
-    public UsuarioController(UsuarioRepositorio usuarioRepositorio) {
-        this.usuarioRepositorio = usuarioRepositorio;
+    public UsuarioController() {
+        this.usuarioRepositorio = UsuarioRepositorio.getInstance();
     }
+
+
 
     public void cadastrarUsuario(Usuario usuario) {
         if (usuario == null) {

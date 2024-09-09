@@ -33,7 +33,7 @@ public class TelaCadastroController {
     //inicializa o controlador com uma instância do UsuarioController
     public TelaCadastroController() {
         UsuarioRepositorio repositorio = UsuarioRepositorio.getInstance();
-        usuarioController = new UsuarioController(repositorio);
+        usuarioController = new UsuarioController();
     }
 
     @FXML
