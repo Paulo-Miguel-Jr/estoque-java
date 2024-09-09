@@ -3,139 +3,156 @@ package com.example.estoquejava.repository;
 import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.repository.interfaces.IItemPedidoRepositorio;
 
-import java.util.ArrayList;
-
 public  class ItemPedidoRepositorio implements IItemPedidoRepositorio {
 
-    private final ArrayList<ItemPedido> ItemPedidoLista;
-    private static PedidoRepositorio instancia;
+    private ItemPedido[] Itens;
+    private int tamanho;
+    private int contador;
+    private static ItemPedidoRepositorio singletonPedRep;
 
-    public ItemPedidoRepositorio(){
-        this.ItemPedidoLista = new ArrayList<>();
-        //this.ItemPedidoLista.add(itemPedido);
+    public ItemPedidoRepositorio (){
+        this.Itens = new ItemPedido[10];
+        this.tamanho = 10;
+        this.contador = 0;
     }
 
-    public static PedidoRepositorio getInstance() {
-        if (instancia == null) {
-            instancia = new PedidoRepositorio();
+    public static ItemPedidoRepositorio getInstance(){
+        if (singletonPedRep == null) {
+            singletonPedRep = new ItemPedidoRepositorio();
         }
-        return instancia;
+        return singletonPedRep;
     }
 
-    ///Função para auxiliar as operações de busca e inserção.
-    public int getTamanho(){
-        return (this.ItemPedidoLista.size());
+
+    private void AumentarLista(){
+        ItemPedido[] aux = new ItemPedido[this.tamanho+10];
+
+        for(int i = 0; i < tamanho; i++) {
+           aux[i] = this.Itens[i];
+        }
+
+        this.Itens = aux;
+        this.tamanho += 10;
     }
 
-    ///Função de inserir Itens Pedidos na lista.
-    public void AdicionarItemPedido(ItemPedido item){
-        int a = 0;
-        this.ItemPedidoLista.add(item);
 
-        ///Mantêm a lista ordenada por ID de forma crescente.
-        for(int i = 0; i < getTamanho(); i++){
-            if(item.getIdProduto() >= ItemPedidoLista.get(i).getIdProduto()){
+    private void DiminuirLista(){
+        ItemPedido[] aux = new ItemPedido[tamanho-10];
 
-                a = i;
-                i = getTamanho();
+        for(int i = 0; i < this.tamanho; i++){
+            aux[i] = this.Itens[i];
+        }
+
+        this.Itens = aux;
+        this.tamanho -= 10;
+    }
+
+
+    public void InserirItemPedido(ItemPedido item){
+        if(!(contador<tamanho)){
+            AumentarLista();
+        }
+
+        contador++;
+        Itens[contador] = item;
+
+    }
+
+
+    public void RemoverItemPedido(int id, int quantidade){
+
+        for(int i = 0; i <= contador; i++){
+            if(this.Itens[i].getIdProduto() == id && this.Itens[i].getQuantidade() == quantidade){
+                this.Itens[i] = this.Itens[contador];
+                contador--;
+                i = contador+1;
+            }
+
+            if(i == contador){
+                throw new IllegalArgumentException("Item não existe na lista");
             }
         }
 
-        ///Mantêm os elementos com o mesmo ID ordenados por ordem crescente de quantidade de produtos.
-        if(item.getIdProduto() == ItemPedidoLista.get(a).getIdProduto()){
-            for (int i = a; i < getTamanho(); i++){
-                if(ItemPedidoLista.get(i).getQuantidade() >= item.getQuantidade()){
-                    a = i;
-                    i = getTamanho();
-                }
+        if (tamanho - contador >= 20){
+            DiminuirLista();
+        }
+
+    }
+
+
+    public ItemPedido BuscarItemPedido(int id, int quantidade){
+
+        VerificarItemPedido(id);
+
+        for(int i = 0; i <= contador; i++){
+            if(this.Itens[i].getIdProduto() == id
+            && this.Itens[i].getQuantidade() == quantidade){
+                return this.Itens[i];
+            }
+        }
+        throw new IllegalArgumentException("Este Item não existe na lista.");
+    }
+
+    public int VerificarItemPedido(int id){
+        for(int i = 0; i <= contador; i++){
+            if(this.Itens[i].getIdProduto() == id){
+                return 1;
             }
         }
 
-        ///Posiciona o Item que se deseja inserir no lugar correto.
-        for(int i = getTamanho()-1; i > a; i--){
-            this.ItemPedidoLista.set(i, ItemPedidoLista.get(i-1));
-        }
-
-        ItemPedidoLista.set(a, item);
+        throw new IllegalArgumentException("Este Item não existe na lista");
     }
 
-    ///Remove itens da lista.
-    public void RemoverItemPedido(ItemPedido item){
-        ItemPedidoLista.remove(item);
-    }
+    public void ModificarItemPedido(int id, int quantidade, int modificacao){
 
-    ///Função auxiliar para a operação de busca.
-    public int buscaBinaria(ItemPedido item, int inicio, int fim){
-        int aux = (inicio + fim)/2;
-        int resultado = -1;
+        VerificarItemPedido(id);
 
-        if(aux == fim){
-            if(ItemPedidoLista.get(aux).getIdProduto() == item.getIdProduto()){
-                resultado = aux;
-                return resultado;
-            }
-            else{
-                return resultado;
+        for(int a = 0; a <= contador; a++){
+            if(this.Itens[a].getIdProduto() == id
+                    && this.Itens[a].getQuantidade() == quantidade){
+                this.Itens[a].setQuantidade(modificacao);
             }
         }
-        if(aux == inicio){
-            if(ItemPedidoLista.get(aux).getIdProduto() == item.getIdProduto()){
-                return resultado;
+
+    }
+
+    public int getQuantItensPedidos(int id){
+
+        VerificarItemPedido(id);
+
+        int aux = 0;
+
+        for(int i = 0; i <= contador; i++){
+            if(this.Itens[i].getIdProduto() == id){
+                aux++;
             }
         }
-        if(ItemPedidoLista.get(aux).getIdProduto() < item.getIdProduto()){
-            resultado = buscaBinaria(item, inicio, aux);
-        }
 
-        if(ItemPedidoLista.get(aux).getIdProduto() > item.getIdProduto()){
-            resultado = buscaBinaria(item, aux, fim);
-        }
-
-        if(ItemPedidoLista.get(aux).getIdProduto() == item.getIdProduto() &&
-                ItemPedidoLista.get(aux).getQuantidade() == item.getQuantidade()){
-            resultado = aux;
-        }
-
-        return resultado;
-
+        return aux;
     }
 
-    ///Para facilitar a busca de um item na lista no resto do código fiz desse jeito.
-    public int getItemPedido(ItemPedido item){
+    public int getQuantProdutosVendidos(int id){
 
-        ///Atribui os valores que serão necessários para a busca
-        int inicio = 0;
-        int fim = getTamanho()-1;
-        int aux = fim/2;
-        int resultado = -1;
+        VerificarItemPedido(id);
 
-        ///Onde de fato a busca é realizada.
-        if(ItemPedidoLista.get(aux).getIdProduto() < item.getIdProduto()){
-            resultado = buscaBinaria(item, inicio, aux);
+        int aux = 0;
+        for(int i = 0; i <= contador; i++){
+            if(this.Itens[i].getIdProduto() == id){
+                aux += this.Itens[i].getQuantidade();
+            }
         }
 
-        if(ItemPedidoLista.get(aux).getIdProduto() > item.getIdProduto()){
-            resultado = buscaBinaria(item, aux, fim);
-        }
-
-        if(ItemPedidoLista.get(aux).getIdProduto() == item.getIdProduto() &&
-                ItemPedidoLista.get(aux).getQuantidade() == item.getQuantidade()){
-            resultado = aux;
-        }
-
-        return resultado;
-
+        return aux;
     }
 
+    public ItemPedido[] ListarItensPedidos(){
+        ItemPedido[] aux = new ItemPedido[contador+1];
 
-    @Override
-    public String toString(){
-        String retornar = "";
-
-        for(int i = 0; i < getTamanho(); i++){
-            retornar += ItemPedidoLista.get(i).toString();
+        for(int i = 0; i <= contador; i++){
+            aux[i] = Itens[i];
         }
 
-        return retornar;
+        return aux;
     }
+
 }

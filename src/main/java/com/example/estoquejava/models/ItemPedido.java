@@ -32,6 +32,10 @@ public class ItemPedido {
         return this.produto.getId();
     }
 
+    public void setQuantidade(int modificacao){
+        this.quantidade = modificacao;
+    }
+
     @Override
     public String toString(){
         return ("Nome do produto: " + this.getNomeProduto() +
