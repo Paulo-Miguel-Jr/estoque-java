@@ -2,11 +2,11 @@ package com.example.estoquejava.models;
 
 import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
-public class ItemPedidoCadastro {
+public class ItemPedidoController {
 
     private ItemPedidoRepositorio Itens;
 
-    public ItemPedidoCadastro(){
+    public ItemPedidoController(){
         this.Itens = new ItemPedidoRepositorio();
     }
 
