@@ -5,16 +5,19 @@ import com.example.estoquejava.models.ItemPedido;
 
 public interface IItemPedidoRepositorio {
 
-    int getTamanho();
+    void InserirItemPedido(ItemPedido item);
 
-    void AdicionarItemPedido(ItemPedido item);
+    void RemoverItemPedido(int id, int quantidade);
 
-    void RemoverItemPedido(ItemPedido item);
+    void ModificarItemPedido(int id, int quantidade, int modificacao);
 
-    int buscaBinaria(ItemPedido item, int inicio, int fim);
+    int getQuantItensPedidos(int id);
 
-    int getItemPedido(ItemPedido item);
+    int getQuantProdutosVendidos(int id);
 
-    String toString();
+    ItemPedido BuscarItemPedido(int id, int quantidade);
+
+    ItemPedido[] ListarItensPedidos();
+
 }
 
