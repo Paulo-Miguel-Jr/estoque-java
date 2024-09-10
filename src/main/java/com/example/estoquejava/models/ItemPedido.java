@@ -2,8 +2,11 @@ package com.example.estoquejava.models;
 
 public class ItemPedido {
 
+    public static final int ITENS = 100;
+
     private Produto produto;
     private int quantidade;
+    private int idItem;
 
     public ItemPedido(Produto produto, int quantidade) {
         this.produto = produto;
@@ -18,6 +21,14 @@ public class ItemPedido {
 
     public Produto getProduto() {
         return produto;
+    }
+
+    public int getIdItem() {
+        return idItem;
+    }
+
+    public void setIdItem(int idItem) {
+        this.idItem = idItem;
     }
 
     public int getQuantidade(){
