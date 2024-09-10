@@ -1,10 +1,12 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.ScreenManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -14,6 +16,9 @@ public class TelaPedidoController implements Initializable {
 
     @FXML
     private SplitPane split;
+
+    @FXML
+    private ImageView image;
 
     @FXML
     private AnchorPane anchor1;
@@ -28,7 +33,7 @@ public class TelaPedidoController implements Initializable {
     private Button adicionarItem;
 
     @FXML
-    private Button removeritem;
+    private Button cancelarPedido;
 
     @FXML
     private Button criarPedido;
@@ -38,4 +43,10 @@ public class TelaPedidoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    private void irParaTelaPrincipal() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
 }
