@@ -7,6 +7,9 @@ import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 import java.time.LocalDate;
 
 public class Pedido {
+
+    public static final int LIMITE_ITENS = 100;
+
     private int idPedido;
     private LocalDate dataPedido;
     private ItemPedido[] itensPedido;
@@ -24,7 +27,7 @@ public class Pedido {
     }
 
     public Pedido() {
-        this.itensPedido = new ItemPedido[100];
+        this.itensPedido = new ItemPedido[LIMITE_ITENS];
         this.quantidadeItens = 0;
         this.status = StatusPedido.PENDENTE;
     }
@@ -88,21 +91,25 @@ public class Pedido {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("PedidoFornecedor{");
-        sb.append("numero=").append(idPedido);
-        sb.append(", dataPedido=").append(dataPedido);
-        sb.append(", itensCompra=[");
-        for (int i = 0; i < quantidadeItens; i++) {
-            sb.append(itensPedido[i].toString());
-            if (i < quantidadeItens - 1) sb.append(", ");
-        }
-        sb.append("]");
-        sb.append(", valorTotal=").append(valorTotal);
-        sb.append(", status=").append(status);
-        sb.append('}');
-        return sb.toString();
-    }
+   @Override
+   public String toString() {
+       StringBuilder sb = new StringBuilder();
+       sb.append(String.format("PedidoFornecedor{numero=%d, dataPedido=%s, status=%s\n", idPedido, dataPedido, status));
+       sb.append("\nItens do Pedido:\n");
+
+       if (quantidadeItens == 0) {
+           sb.append("Nenhum item no pedido.\n");
+       } else {
+           for (int i = 0; i < quantidadeItens; i++) {
+               sb.append(String.format("%d. —----------------------- \n", i + 1));
+               sb.append(itensPedido[i].toString());
+               sb.append("\n—----------------------- \n");
+           }
+       }
+
+       sb.append(String.format("\nValor Total do Pedido: %.2f\n", valorTotal));
+       sb.append('}');
+       return sb.toString();
+   }
+
 }
