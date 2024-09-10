@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UsuarioRepositorio implements IUsuarioRepositorio, Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final int serialVersionUID = 1;
     private static final int MAX_USUARIOS = 100;
     private static UsuarioRepositorio singletonUsuRep;
     private Map<Integer, Usuario> usuarios; // armazenar usuários por ID
