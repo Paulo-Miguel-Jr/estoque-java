@@ -1,5 +1,6 @@
 package com.example.estoquejava.models;
 
+import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
 
@@ -80,6 +81,9 @@ public class Fachada {
 
     public void adicionarItemAoPedido(int idPedido, ItemPedido item) {pedidoController.adicionarItemAoPedido(idPedido, item );}
 
+    public void cancelarPedido(int idPedido) {
+        pedidoController.setStatus(StatusPedido.CANCELADO);
+    }
 
 
     //métodos ItemPedido===========================================================
