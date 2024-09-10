@@ -7,29 +7,44 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="split" dividerPositions="0.7688442211055276" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaPedidoController">
+<SplitPane fx:id="split" dividerPositions="0.8391959798994975" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaPedidoController">
   <items>
     <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="295.0" prefWidth="598.0">
          <children>
-            <Label fx:id="labelPedido" layoutX="14.0" layoutY="7.0" prefHeight="66.0" prefWidth="441.0" text="Carrinho de Compras">
+            <Label fx:id="labelCarrinho" layoutX="42.0" layoutY="12.0" prefHeight="66.0" prefWidth="441.0" text="Carrinho de Compras">
                <font>
-                  <Font size="45.0" />
+                  <Font name="Arial Narrow" size="45.0" />
                </font></Label>
-            <ScrollPane layoutX="42.0" layoutY="82.0" prefHeight="200.0" prefWidth="514.0">
+            <ScrollPane fx:id="scrollPane" layoutX="42.0" layoutY="82.0" prefHeight="200.0" prefWidth="514.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane fx:id="anchorInScroll" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableView" prefHeight="200.0" prefWidth="499.0">
+                          <columns>
+                            <TableColumn fx:id="colunaItem" prefWidth="181.0" text="ITEM" />
+                            <TableColumn fx:id="colunaPreco" prefWidth="110.0" text="PREÇO" />
+                              <TableColumn fx:id="colunaQuantidade" prefWidth="114.0" text="QUANTIDADE" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
               </content>
             </ScrollPane>
-            <ImageView fx:id="image" fitHeight="66.0" fitWidth="113.0" layoutX="455.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="76.0" fitWidth="74.0" layoutX="479.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="labelTotal" layoutX="422.0" layoutY="292.0" text="TOTAL" />
+            <Label fx:id="labelValorTotal" layoutX="483.0" layoutY="292.0" />
          </children></AnchorPane>
     <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0">
          <children>
-            <Button fx:id="adicionarItem" layoutX="237.0" layoutY="26.0" mnemonicParsing="false" text="Adicionar item">
+            <Button fx:id="adicionarItem" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#adicionarItem" text="Adicionar item">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></Button>
-            <Button fx:id="removerItem" layoutX="7.0" layoutY="2.0" mnemonicParsing="false" text="Remover item" />
-            <Button fx:id="criarPedido" layoutX="426.0" layoutY="26.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" text="Finalizar Pedido">
+            <Button fx:id="cancelarPedido" layoutX="40.0" layoutY="16.0" mnemonicParsing="false" onAction="#cancelarPedido" text="Cancelar Pedido">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="criarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" text="Finalizar Pedido">
                <font>
                   <Font size="16.0" />
                </font></Button>
