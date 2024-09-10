@@ -97,8 +97,8 @@ public class UsuarioRepositorio implements IUsuarioRepositorio, Serializable {
 
     //salva o estado do repositório em um arquivo
     private void save() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            oos.writeObject(this);
+        try (ObjectOutputStream salvarArquivo = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+            salvarArquivo.writeObject(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,8 +108,8 @@ public class UsuarioRepositorio implements IUsuarioRepositorio, Serializable {
     private void load() {
         File file = new File(FILE_NAME);
         if (file.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                UsuarioRepositorio loadedRepo = (UsuarioRepositorio) ois.readObject();
+            try (ObjectInputStream carregarArquivo = new ObjectInputStream(new FileInputStream(file))) {
+                UsuarioRepositorio loadedRepo = (UsuarioRepositorio) carregarArquivo.readObject();
                 this.usuarios = loadedRepo.usuarios;
                 this.nextId = loadedRepo.nextId;
             } catch (IOException | ClassNotFoundException e) {
