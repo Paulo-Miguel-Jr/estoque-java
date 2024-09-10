@@ -70,7 +70,7 @@ public class Pedido {
         this.status = status;
     }
 
-    private double calcularValorTotal() {
+    public double calcularValorTotal() {
         double total = 0;
         for (int i = 0; i < quantidadeItens; i++) {
             if (itensPedido[i] != null) {
