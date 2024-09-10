@@ -11,9 +11,8 @@ public class Fachada {
     private PedidoController pedidoController;
     private ItemPedidoController itemPedidoController;
 
-    //faltava isso aqui
-    private Fachada() {
 
+    private Fachada() {
         this.usuarioController = new UsuarioController();
         this.pedidoController = new PedidoController();
     }
@@ -25,7 +24,7 @@ public class Fachada {
         return instancia;
     }
 
-    //métodos usuario
+    //métodos usuario===========================================================
 
     public void cadastrarUsuario(Usuario usuario) {
         usuarioController.cadastrarUsuario(usuario);
@@ -51,35 +50,39 @@ public class Fachada {
         return usuarioController.listarUsuarios();
     }
 
-    //métodos para a entidade Pedido
+
+
+    //métodos para a entidade Pedido===========================================================
 
     public void criarPedido(Pedido pedido) {
         pedidoController.criarPedido(pedido);
     }
 
-    public void removerPedido(int numero) {
-        pedidoController.removerPedido(numero);
+    public void removerPedido(int idPedido) {
+        pedidoController.removerPedido(idPedido);
     }
 
     public void atualizarPedido(Pedido pedido) {
         pedidoController.atualizarPedido(pedido);
     }
 
-    public Pedido procurarPedido(int numero) {
-        return pedidoController.procurarPedido(numero);
+    public Pedido procurarPedido(int idPedido) {
+        return pedidoController.procurarPedido(idPedido);
     }
 
-    public void processarVenda(int numero) {
-        pedidoController.processarVenda(numero);
+    public void processarVenda(int idPedido) {
+        pedidoController.processarVenda(idPedido);
     }
 
     public void listarPedidos() {
         pedidoController.listarPedido();
     }
 
-    public void adicionarItemAoPedido(int numero, ItemPedido item) {pedidoController.adicionarItemAoPedido(numero, item );}
+    public void adicionarItemAoPedido(int idPedido, ItemPedido item) {pedidoController.adicionarItemAoPedido(idPedido, item );}
 
-    //métodos ItemPedido
+
+
+    //métodos ItemPedido===========================================================
 
     public void criarItemPedido(ItemPedido item){itemPedidoController.inserirItemPedido(item);}
 
