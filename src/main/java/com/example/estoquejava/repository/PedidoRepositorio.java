@@ -27,14 +27,15 @@ public class PedidoRepositorio implements IPedidoRepositorio {
         return singletonPedRep;
     }
 
-    private int getIdPedido(int numero) {
+    public int getIdPedido(int idPedido) {
         for (int i = 0; i < proxIdLivre; i++) {
-            if (pedidos[i].getIdPedido() == numero) {
+            if (pedidos[i].getIdPedido() == idPedido) {
                 return i;
             }
         }
         return -1;
     }
+
 
     @Override
     public void adicionarPedido(Pedido pedido) throws PedidoRepCheioException {
@@ -47,8 +48,8 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     }
 
     @Override
-    public void removerPedido(int numero) throws PedNaoEncontException {
-        int indice = getIdPedido(numero);
+    public void removerPedido(int idPedido) throws PedNaoEncontException {
+        int indice = getIdPedido(idPedido);
         if (indice == -1) {
             throw new PedNaoEncontException("Pedido não encontrado.");
         } else {
@@ -88,8 +89,8 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     }
 
     @Override
-    public Pedido procurarPedido(int numero) throws PedNaoEncontException {
-        int indice = getIdPedido(numero);
+    public Pedido procurarPedido(int idPedido) throws PedNaoEncontException {
+        int indice = getIdPedido(idPedido);
         if (indice == -1) {
             throw new PedNaoEncontException("Pedido não encontrado.");
         } else {
@@ -98,18 +99,39 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     }
 
     @Override
-    public void adicionarItemAoPedido(int numero, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException {
-        Pedido pedido = procurarPedido(numero);
-        if (pedido != null) {
-            pedido.adicionarItemPedido(item);
-        } else {
+    public void adicionarItemAoPedido(int idPedido, ItemPedido novoItem) throws PedNaoEncontException, LimiteItensAlcancadoException {
+        Pedido pedido = procurarPedido(idPedido);
+        if (pedido == null) {
             throw new PedNaoEncontException("Pedido não encontrado.");
         }
+
+        // Verifica se o limite de itens foi alcançado
+        if (pedido.getItensPedido().length >= Pedido.LIMITE_ITENS) {
+            throw new LimiteItensAlcancadoException("Não é possível adicionar mais itens. Limite de itens alcançado.");
+        }
+
+        // Cria um novo array com tamanho incrementado
+        ItemPedido[] itensAtualizados = new ItemPedido[pedido.getItensPedido().length + 1];
+
+        // Copia os itens antigos para o novo array
+        System.arraycopy(pedido.getItensPedido(), 0, itensAtualizados, 0, pedido.getItensPedido().length);
+
+        // Adiciona o novo item no final do array
+        itensAtualizados[pedido.getItensPedido().length] = novoItem;
+
+        pedido.setItensPedido(itensAtualizados);
     }
 
+    //    if (pedido != null) {
+//            pedido.adicionarItemPedido(item);
+    //      } else {
+    //           throw new PedNaoEncontException("Pedido não encontrado.");
+    //       }
+//}
 
-    public void processarVenda(int numero) throws PedNaoEncontException {
-        int indice = getIdPedido(numero);
+
+    public void processarVenda(int idPedido) throws PedNaoEncontException {
+        int indice = getIdPedido(idPedido);
         if (indice == -1) {
             throw new PedNaoEncontException("Pedido não encontrado.");
         } else {
