@@ -9,6 +9,7 @@ import com.example.estoquejava.repository.PedidoRepositorio;
 
 public class PedidoController {
     private PedidoRepositorio pedidoRepositorio;
+    private StatusPedido status;
 
     public PedidoController(){
         this.pedidoRepositorio = PedidoRepositorio.getInstance();
@@ -52,6 +53,16 @@ public class PedidoController {
         pedidoRepositorio.listarPedidos();
     }
 
+    public void cancelarPedido(int idPedido) throws PedNaoEncontException {
+        Pedido pedido = procurarPedido(idPedido);
+        if (pedido != null) {
+            pedido.setStatus(StatusPedido.CANCELADO);
+
+        } else {
+            throw new PedNaoEncontException("Pedido não encontrado com o número: " + idPedido);
+        }
+    }
+
     private void validarPedido(Pedido pedido) throws InvalidPedidoException {
         if (pedido.getDataPedido() == null) {
             throw new InvalidPedidoException("A data do pedido não pode ser nula.");
@@ -70,6 +81,15 @@ public class PedidoController {
         pedidoRepositorio.adicionarItemAoPedido(idPedido,item);
         pedidoRepositorio.atualizarPedido(pedido);
     }
+
+    public void setStatus(StatusPedido statusPedido) {
+        if (statusPedido != null) {
+            this.status = statusPedido;
+        } else {
+            throw new IllegalArgumentException("O status não pode ser nulo.");
+        }
+    }
+
 
 
 }
