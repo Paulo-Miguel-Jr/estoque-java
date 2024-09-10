@@ -22,6 +22,5 @@ public interface IPedidoRepositorio {
 
     void processarVenda(int idPedido) throws PedNaoEncontException;
 
-    //void processarVenda(int numero) throws PedNaoEncontException;
 
 }
