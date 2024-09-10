@@ -16,6 +16,10 @@ public class ItemPedido {
         return this.produto.getNome();
     }
 
+    public Produto getProduto() {
+        return produto;
+    }
+
     public int getQuantidade(){
         return this.quantidade;
     }
@@ -23,6 +27,7 @@ public class ItemPedido {
     public double getValorProduto(){
         return this.produto.getPreco();
     }
+
 
     public double getValorItemPedido(){
         return (this.produto.getPreco() * this.quantidade);
@@ -37,13 +42,21 @@ public class ItemPedido {
     }
 
     @Override
-    public String toString(){
-        return ("Nome do produto: " + this.getNomeProduto() +
-                "\nId do produto: " + this.getIdProduto() +
-                "\nQuantidade de produtos: " + this.getQuantidade() +
-                "\nValor do pedido: " + this.getValorItemPedido() +
-                "\nValor do produto\n\n" + this.getValorProduto());
+    public String toString() {
+        return String.format(
+                "Nome do produto: %s\n" +
+                        "Id do produto: %d\n" +
+                        "Quantidade de produtos: %d\n" +
+                        "Valor do pedido: %.1f\n" +
+                        "Valor do produto: %.1f",
+                this.getNomeProduto(),
+                this.getIdProduto(),
+                this.getQuantidade(),
+                this.getValorItemPedido(),
+                this.getValorProduto()
+        );
     }
+
 
 
 }
