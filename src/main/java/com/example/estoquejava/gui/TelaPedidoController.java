@@ -3,9 +3,7 @@ package com.example.estoquejava.gui;
 import com.example.estoquejava.ScreenManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,28 +13,52 @@ import java.util.ResourceBundle;
 public class TelaPedidoController implements Initializable {
 
     @FXML
-    private SplitPane split;
+    private Button adicionarItem;
 
     @FXML
     private ImageView image;
 
     @FXML
-    private AnchorPane anchor1;
+    private Label labelTotal;
+
+    @FXML
+    private Button criarPedido;
+
+    @FXML
+    private TableColumn<?, ?> colunaItem;
+
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private TableColumn<?, ?> colunaPreco;
 
     @FXML
     private AnchorPane anchor2;
 
     @FXML
-    private Label labelPedido;
+    private AnchorPane anchor1;
 
     @FXML
-    private Button adicionarItem;
+    private TableView<?> tableView;
+
+    @FXML
+    private Label labelValorTotal;
+
+    @FXML
+    private TableColumn<?, ?> colunaQuantidade;
+
+    @FXML
+    private SplitPane split;
 
     @FXML
     private Button cancelarPedido;
 
     @FXML
-    private Button criarPedido;
+    private AnchorPane anchorInScroll;
+
+    @FXML
+    private Label labelCarrinho;
 
 
     @Override
