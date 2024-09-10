@@ -2,6 +2,7 @@ package com.example.estoquejava;
 
 import com.example.estoquejava.gui.TelaCadastroController;
 import com.example.estoquejava.gui.TelaLoginController;
+import com.example.estoquejava.gui.TelaPedidoController;
 import com.example.estoquejava.gui.TelaPrincipalController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,13 +14,16 @@ public class ScreenManager {
     private Scene telaLogin;
     private Scene telaPrincipal;
     private Scene telaCadastro;
+    private Scene telaPedido;
 
     private TelaLoginController telaLoginController;
 
     private TelaCadastroController telaCadastroController;
 
-
     private TelaPrincipalController telaPrincipalController;
+
+    private TelaPedidoController telaPedidoController;
+
 
     public ScreenManager(){
         this.screenLoader();
@@ -48,13 +52,17 @@ public class ScreenManager {
     public Scene getTelaLogin(){
         return telaLogin;
     }
-
     public Scene getTelaPrincipal(){
         return telaPrincipal;
     }
     public Scene getTelaCadastro() {
         return telaCadastro;
     }
+    public Scene getTelaPedido() {
+        return telaPedido;
+    }
+
+
 
     //Getters dos Controllers
     public TelaLoginController getTelaLoginController(){
@@ -67,6 +75,10 @@ public class ScreenManager {
 
     public TelaCadastroController getTelaCadastroController() {
         return telaCadastroController;
+    }
+
+    public TelaPedidoController getTelaPedidoController() {
+        return telaPedidoController;
     }
 
     private void screenLoader(){
@@ -83,6 +95,10 @@ public class ScreenManager {
             this.telaCadastro = new Scene(TelaCadastroPane.load());
             this.telaCadastroController = TelaCadastroPane.getController();
 
+            FXMLLoader TelaPedidoPane = new FXMLLoader(getClass().getResource("TelaPedido.fxml"));
+            this.telaPedido = new Scene(TelaPedidoPane.load());
+            this.telaPedidoController = TelaPedidoPane.getController();
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -97,6 +113,7 @@ public class ScreenManager {
             case "TelaLogin.fxml" -> stg.setScene(telaLogin);
             case "TelaPrincipal.fxml" -> stg.setScene(telaPrincipal);
             case "TelaCadastro.fxml" -> stg.setScene(telaCadastro);
+            case "TelaPedido.fxml" -> stg.setScene(telaPedido);
         }
         stg.setTitle(titleScreen);
 
