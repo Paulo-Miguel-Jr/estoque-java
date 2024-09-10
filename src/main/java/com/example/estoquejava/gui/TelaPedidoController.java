@@ -1,6 +1,12 @@
 package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
+import com.example.estoquejava.models.ItemPedido;
+import com.example.estoquejava.models.Pedido;
+import com.example.estoquejava.repository.PedidoRepositorio;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -25,13 +31,19 @@ public class TelaPedidoController implements Initializable {
     private Button criarPedido;
 
     @FXML
-    private TableColumn<?, ?> colunaItem;
+    private TableView<ItemPedido> tableView;
+
+    @FXML
+    private TableColumn<ItemPedido, String> colunaItem;
+
+    @FXML
+    private TableColumn<ItemPedido, Double> colunaPreco;
+
+    @FXML
+    private TableColumn<ItemPedido, Integer> colunaQuantidade;
 
     @FXML
     private ScrollPane scrollPane;
-
-    @FXML
-    private TableColumn<?, ?> colunaPreco;
 
     @FXML
     private AnchorPane anchor2;
@@ -39,14 +51,9 @@ public class TelaPedidoController implements Initializable {
     @FXML
     private AnchorPane anchor1;
 
-    @FXML
-    private TableView<?> tableView;
 
     @FXML
     private Label labelValorTotal;
-
-    @FXML
-    private TableColumn<?, ?> colunaQuantidade;
 
     @FXML
     private SplitPane split;
@@ -61,6 +68,11 @@ public class TelaPedidoController implements Initializable {
     private Label labelCarrinho;
 
 
+    private ObservableList<ItemPedido> listaItens = FXCollections.observableArrayList();
+
+    private Pedido pedidoAtual;
+    private PedidoRepositorio pedidoRepositorio;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -69,6 +81,26 @@ public class TelaPedidoController implements Initializable {
     private void irParaTelaPrincipal() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
+    @FXML
+    public void adicionarItem() {
+        irParaTelaPrincipal();
+    }
+
+    public void cancelarPedido() {
+        tableView.getItems().clear();
+        labelValorTotal.setText("R$ 0.00");
+        atualizarTotal();
+    }
+
+    private void atualizarTotal() {
+        if (pedidoAtual != null) {
+            double total = pedidoAtual.calcularValorTotal();
+            labelValorTotal.setText("R$ " + String.format("%.2f", total));
+        } else {
+            labelValorTotal.setText("R$ 0.00");
+        }
     }
 
 }
