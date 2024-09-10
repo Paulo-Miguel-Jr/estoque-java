@@ -19,12 +19,12 @@ public class PedidoController {
         pedidoRepositorio.adicionarPedido(pedido);
     }
 
-    public void removerPedido(int numero) throws PedNaoEncontException, InvalidPedidoException {
-        Pedido pedido = pedidoRepositorio.procurarPedido(numero);
+    public void removerPedido(int idPedido) throws PedNaoEncontException, InvalidPedidoException {
+        Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
         if (pedido.getStatus() == StatusPedido.PROCESSADO || pedido.getStatus() == StatusPedido.CANCELADO) {
             throw new InvalidPedidoException("Não é possível remover um pedido que já foi processado ou cancelado.");
         }
-        pedidoRepositorio.removerPedido(numero);
+        pedidoRepositorio.removerPedido(idPedido);
     }
 
     public void atualizarPedido(Pedido pedido) throws PedNaoEncontException, InvalidPedidoException {
@@ -36,16 +36,16 @@ public class PedidoController {
         pedidoRepositorio.atualizarPedido(pedido);
     }
 
-    public Pedido procurarPedido(int numero) throws PedNaoEncontException {
-        return pedidoRepositorio.procurarPedido(numero);
+    public Pedido procurarPedido(int idPedido) throws PedNaoEncontException {
+        return pedidoRepositorio.procurarPedido(idPedido);
     }
 
-    public void processarVenda(int numero) throws PedNaoEncontException, InvalidPedidoException {
-        Pedido pedido = pedidoRepositorio.procurarPedido(numero);
+    public void processarVenda(int idPedido) throws PedNaoEncontException, InvalidPedidoException {
+        Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
         if (pedido.getStatus() != StatusPedido.PENDENTE) {
             throw new InvalidPedidoException("O pedido deve estar pendente para ser processado.");
         }
-        pedidoRepositorio.processarVenda(numero);
+        pedidoRepositorio.processarVenda(idPedido);
     }
 
     public void listarPedido() {
@@ -61,13 +61,13 @@ public class PedidoController {
         }
     }
 
-    public void adicionarItemAoPedido(int numero, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException, InvalidPedidoException {
-        Pedido pedido = pedidoRepositorio.procurarPedido(numero);
+    public void adicionarItemAoPedido(int idPedido, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException, InvalidPedidoException {
+        Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
         if (pedido.getStatus() != StatusPedido.PENDENTE) {
             throw new InvalidPedidoException("Somente pedidos pendentes podem ter itens adicionados.");
         }
         //pedido.adicionarItemPedido(item);
-        pedidoRepositorio.adicionarItemAoPedido(numero,item);
+        pedidoRepositorio.adicionarItemAoPedido(idPedido,item);
         pedidoRepositorio.atualizarPedido(pedido);
     }
 
