@@ -55,13 +55,15 @@ public class PedidoController {
 
     public void cancelarPedido(int idPedido) throws PedNaoEncontException {
         Pedido pedido = procurarPedido(idPedido);
-        if (pedido != null) {
-            pedido.setStatus(StatusPedido.CANCELADO);
+        if (pedido != null && pedido.getStatus() == StatusPedido.PENDENTE) {
+           // if (pedido.getStatus() == StatusPedido.PENDENTE)
+              pedido.setStatus(StatusPedido.CANCELADO);
 
         } else {
             throw new PedNaoEncontException("Pedido não encontrado com o número: " + idPedido);
         }
     }
+
 
     private void validarPedido(Pedido pedido) throws InvalidPedidoException {
         if (pedido.getDataPedido() == null) {
