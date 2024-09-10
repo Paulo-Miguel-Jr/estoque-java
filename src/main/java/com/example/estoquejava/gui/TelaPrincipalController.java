@@ -1,7 +1,9 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.ScreenManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -62,4 +64,10 @@ public class TelaPrincipalController implements Initializable {
 
         treeTableView.setRoot(root);
     }
+
+    private void irParaTelaPedido(ActionEvent event){
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPedido.fxml", "TelaPedido");
+    }
+
 }
