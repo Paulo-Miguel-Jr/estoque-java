@@ -4,6 +4,7 @@ import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.Usuario;
 import com.example.estoquejava.models.UsuarioController;
 import com.example.estoquejava.repository.UsuarioRepositorio;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -30,11 +31,15 @@ public class TelaCadastroController {
 
     private UsuarioController usuarioController;
 
-    //inicializa o controlador com uma instância do UsuarioController
+
     public TelaCadastroController() {
         UsuarioRepositorio repositorio = UsuarioRepositorio.getInstance();
         usuarioController = new UsuarioController();
+        Platform.runLater(() -> { //serve pra que a aplicação comece sem foco nos componentes
+            usuarioField.requestFocus();
+        });
     }
+
 
     @FXML
     void cadastrarUsuario(ActionEvent event) {
@@ -42,6 +47,8 @@ public class TelaCadastroController {
         String senha = senhaField.getText();
         String senhaConfirm = senhaFieldConfirm.getText();
         validarSenha(usuario, senha, senhaConfirm);
+
+
     }
 
 
