@@ -88,18 +88,18 @@ public class Fachada {
 
     //métodos ItemPedido===========================================================
 
-    public void criarItemPedido(ItemPedido item){itemPedidoController.inserirItemPedido(item);}
+   // public void criarItemPedido(ItemPedido item){itemPedidoController.inserirItemPedido(item);}
 
-    public void deletarItemPedido(ItemPedido item){itemPedidoController.removerItemPedido(item);}
+ //   public void deletarItemPedido(ItemPedido item){itemPedidoController.removerItemPedido(item);}
 
-    public void atualizarItemPedido(ItemPedido item, int modificacao){itemPedidoController.alterarItemPedido(item, modificacao);}
+  //  public void atualizarItemPedido(ItemPedido item, int modificacao){itemPedidoController.alterarItemPedido(item, modificacao);}
 
-    public ItemPedido procurarItemPedido(int id, int quantidade){return itemPedidoController.buscarItemPedido(id, quantidade);}
+  //  public ItemPedido procurarItemPedido(int id, int quantidade){return itemPedidoController.buscarItemPedido(id, quantidade);}
 
-    public int getQuantItensVendidosPorId(int id){return itemPedidoController.getQuantItensPorId(id);}
+ //   public int getQuantItensVendidosPorId(int id){return itemPedidoController.getQuantItensPorId(id);}
 
-    public int getQuantProdutosVendidosPorId(int id){return itemPedidoController.getQuantProdutosPorId(id);}
+ //   public int getQuantProdutosVendidosPorId(int id){return itemPedidoController.getQuantProdutosPorId(id);}
 
-    public ItemPedido[] getListaItensPedidos(){return itemPedidoController.getListaItemPedido();}
+  //  public ItemPedido[] getListaItensPedidos(){return itemPedidoController.getListaItemPedido();}
 
 }
