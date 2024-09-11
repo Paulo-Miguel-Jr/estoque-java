@@ -7,15 +7,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="split" dividerPositions="0.8391959798994975" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaPedidoController">
+<SplitPane fx:id="split" dividerPositions="0.821608040201005" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaPedidoController">
   <items>
-    <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="295.0" prefWidth="598.0">
+    <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="320.0" prefWidth="598.0" style="-fx-background-color: #77D3A4;">
          <children>
-            <Label fx:id="labelCarrinho" layoutX="79.0" layoutY="12.0" prefHeight="66.0" prefWidth="441.0" text="Carrinho de Compras">
+            <Label fx:id="labelCarrinho" layoutX="52.0" layoutY="12.0" prefHeight="66.0" prefWidth="441.0" text="Carrinho de Compras">
                <font>
-                  <Font name="Arial Narrow" size="45.0" />
+                  <Font name="System Bold" size="40.0" />
                </font></Label>
-            <ScrollPane fx:id="scrollPane" layoutX="42.0" layoutY="82.0" prefHeight="200.0" prefWidth="514.0">
+            <ScrollPane fx:id="scrollPane" layoutX="43.0" layoutY="83.0" prefHeight="200.0" prefWidth="514.0">
               <content>
                 <AnchorPane fx:id="anchorInScroll" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -30,25 +30,29 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <ImageView fx:id="image" fitHeight="76.0" fitWidth="79.0" layoutX="445.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image" fitHeight="76.0" fitWidth="79.0" layoutX="455.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/carrinho.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelTotal" layoutX="422.0" layoutY="292.0" text="TOTAL" />
+            <Label fx:id="labelTotal" layoutX="422.0" layoutY="292.0" text="TOTAL">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
             <Label fx:id="labelValorTotal" layoutX="483.0" layoutY="292.0" />
          </children></AnchorPane>
-    <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0">
+    <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0" style="-fx-background-color: white;">
          <children>
-            <Button fx:id="adicionarItem" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#adicionarItem" text="Adicionar item">
+            <Button fx:id="adicionarItem" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#adicionarItem" style="-fx-background-color: #000000;" text="Adicionar item" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="cancelarPedido" layoutX="40.0" layoutY="16.0" mnemonicParsing="false" onAction="#cancelarPedido" text="Cancelar Pedido">
+            <Button fx:id="cancelarPedido" layoutX="40.0" layoutY="16.0" mnemonicParsing="false" onAction="#cancelarPedido" style="-fx-background-color: #000000;" text="Cancelar Pedido" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="criarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" text="Finalizar Pedido">
+            <Button fx:id="criarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #000000;" text="Finalizar Pedido" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font></Button>
