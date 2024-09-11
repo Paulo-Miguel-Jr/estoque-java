@@ -10,8 +10,6 @@ import com.example.estoquejava.repository.interfaces.IPedidoRepositorio;
 
 import java.io.*;
 
-import static com.example.estoquejava.repository.UsuarioRepositorio.FILE_NAME;
-
 public class PedidoRepositorio implements IPedidoRepositorio {
     private Pedido[] pedidos;
     private int proxIdLivre;
