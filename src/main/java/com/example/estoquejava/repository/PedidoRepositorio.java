@@ -8,11 +8,21 @@ import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.interfaces.IPedidoRepositorio;
 
+import java.io.*;
+
+import static com.example.estoquejava.repository.UsuarioRepositorio.FILE_NAME;
+
 public class PedidoRepositorio implements IPedidoRepositorio {
     private Pedido[] pedidos;
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
     private ItemPedidoRepositorio itemPedidoRepositorio;
+
+
+    private static final long serialVersionUID = 1234567890123456789L;
+
+
+
     
     public PedidoRepositorio() {
         this.pedidos = new Pedido[100];
@@ -22,12 +32,64 @@ public class PedidoRepositorio implements IPedidoRepositorio {
 
     public static PedidoRepositorio getInstance(){
         if (singletonPedRep == null) {
-            singletonPedRep = new PedidoRepositorio();
+          //  singletonPedRep = new PedidoRepositorio();
+            singletonPedRep = lerDoArquivo();
         }
         return singletonPedRep;
     }
 
-    public int getIdPedido(int idPedido) {
+
+    private static PedidoRepositorio lerDoArquivo() {
+        PedidoRepositorio instanciaLocal = null;
+
+        File in = new File("produtos.dat");
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
+            fis = new FileInputStream(in);
+            ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            instanciaLocal = (PedidoRepositorio) o;
+        } catch (Exception e) {
+            instanciaLocal = new PedidoRepositorio();
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {/* Silent exception */
+                }
+            }
+        }
+
+        return instanciaLocal;
+    }
+
+    public void salvarArquivo() {
+        if (singletonPedRep == null) {
+            return;
+        }
+        File out = new File("pedidos.dat");
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(out);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(getInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    /* Silent */}
+            }
+        }
+    }
+
+
+        public int getIdPedido(int idPedido) {
         for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i].getIdPedido() == idPedido) {
                 return i;
@@ -146,3 +208,5 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     }
 
 }
+
+
