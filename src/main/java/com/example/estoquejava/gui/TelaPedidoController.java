@@ -146,7 +146,7 @@ public class TelaPedidoController implements Initializable {
                 sucesso.setContentText("O pedido foi cancelado com sucesso.");
                 sucesso.show();
 
-                irParaTelaLogin();
+                irParaTelaPrincipal();
 
             } catch (Exception e) {
                 Alert erro = new Alert(Alert.AlertType.ERROR);

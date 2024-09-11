@@ -57,14 +57,11 @@ public class TelaLoginController implements Initializable {
     private void validarLogin(ActionEvent event) {
         String nomeUsuario = usuarioField.getText();
         String senha;
-
         if (senhaField.isVisible()) {
             senha = senhaField.getText();
         } else {
             senha = senhaVisivelField.getText();
         }
-
-
         try {
             Usuario usuario = usuarioRepositorio.buscarUsuarioPorNome(nomeUsuario);
 
@@ -85,8 +82,6 @@ public class TelaLoginController implements Initializable {
             System.out.println("Erro no login");
         }
     }
-
-
 
     private void irParaTela() {
         ScreenManager sm = ScreenManager.getInstance();

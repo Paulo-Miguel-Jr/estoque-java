@@ -43,7 +43,6 @@ public class TelaPrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        irCarrinho.setText("Avancar");
     }
 
     @FXML
