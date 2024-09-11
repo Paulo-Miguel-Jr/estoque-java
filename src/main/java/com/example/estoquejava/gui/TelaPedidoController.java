@@ -88,15 +88,53 @@ public class TelaPedidoController implements Initializable {
 
     }
 
+    @FXML
     private void irParaTelaPrincipal() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
 
+    @FXML
     private void irParaTelaLogin() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaLogin.fxml", "TelaLogin");
     }
+
+    @FXML
+    private void irParaTelaFinal() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaFinal.fxml", "TelaFinal");
+    }
+
+    @FXML
+    public void finalizarPedido() {
+        try {
+            Pedido novoPedido = new Pedido();
+
+            pedidoRepositorio.adicionarPedido(novoPedido);
+
+
+            tableView.getItems().clear();
+            labelValorTotal.setText("R$ 0.00");
+
+
+            irParaTelaFinal();
+
+            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+            sucesso.setTitle("Pedido Finalizado");
+            sucesso.setHeaderText(null);
+            sucesso.setContentText("O pedido foi finalizado com sucesso.");
+            sucesso.show();
+
+        } catch (Exception e) {
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("Erro");
+            erro.setHeaderText(null);
+            erro.setContentText("Erro: " + e.getMessage());
+            erro.show();
+        }
+    }
+
 
     @FXML
     public void adicionarItem() {
