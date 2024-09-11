@@ -1,13 +1,13 @@
 package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
+import com.example.estoquejava.models.Produto;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 
@@ -20,52 +20,34 @@ public class TelaPrincipalController implements Initializable {
     private BorderPane border;
 
     @FXML
-    private TreeTableColumn<String, String> coluna;
+    private Button buttonAdcProd;
 
     @FXML
-    private MenuBar menuBar;
+    private Button buttonRmvProd;
 
     @FXML
-    private MenuItem telaPrincipal;
+    private TableColumn<Produto, String> colunaPreco;
 
     @FXML
-    private TreeTableView<String> treeTableView;
+    private TableColumn<Produto, String> colunaProduto;
 
     @FXML
-    private Button voltar;
+    private TableColumn<Produto, String> colunaQuantidade;
 
+    @FXML
+    private Button irCarrinho;
 
-    TreeItem<String> root = new TreeItem<>("Produtos");
-    TreeItem<String> item1_1 = new TreeItem<>("Peito de Frango 1kg");
-    TreeItem<String> item1_2 = new TreeItem<>("Sobrecoxas de Frango 1kg");
-    TreeItem<String> parent_1 = new TreeItem<>("Carnes");
-
-    TreeItem<String> item2_1 = new TreeItem<>("Peito de Frango 1kg");
-    TreeItem<String> item2_2 = new TreeItem<>("Sobrecoxas de Frango 1kg");
-    TreeItem<String> parent_2 = new TreeItem<>("Frios");
-
-
-
+    @FXML
+    private TableView<Produto> tabela;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        parent_1.getChildren().setAll(item1_1, item1_2);
-        parent_2.getChildren().setAll(item2_1, item2_2);
-
-        root.getChildren().setAll(parent_1, parent_2);
-
-        coluna.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<String, String> param) {
-                return new SimpleStringProperty(param.getValue().getValue());
-            }
-        });
-
-        treeTableView.setRoot(root);
+        irCarrinho.setText("Avancar");
     }
 
-    private void irParaTelaPedido(ActionEvent event){
+    @FXML
+    private void irParaTela(ActionEvent event) {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPedido.fxml", "TelaPedido");
     }

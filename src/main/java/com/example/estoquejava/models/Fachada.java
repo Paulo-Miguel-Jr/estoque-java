@@ -3,6 +3,7 @@ package com.example.estoquejava.models;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
+import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
 public class Fachada {
 
@@ -88,18 +89,20 @@ public class Fachada {
 
     //métodos ItemPedido===========================================================
 
-   // public void criarItemPedido(ItemPedido item){itemPedidoController.inserirItemPedido(item);}
+    public void adicionarItemPedido(ItemPedido item){
+        itemPedidoController.adicionarItemPedido(item);
+    };
 
- //   public void deletarItemPedido(ItemPedido item){itemPedidoController.removerItemPedido(item);}
+    public void removerItemPedido(int idItem){
+        itemPedidoController.removerItemPedido(idItem);
+    }
 
-  //  public void atualizarItemPedido(ItemPedido item, int modificacao){itemPedidoController.alterarItemPedido(item, modificacao);}
+    public ItemPedido buscarItemPedido(int idItem){
+        return itemPedidoController.buscarItemPedido(idItem);
+    }
 
-  //  public ItemPedido procurarItemPedido(int id, int quantidade){return itemPedidoController.buscarItemPedido(id, quantidade);}
-
- //   public int getQuantItensVendidosPorId(int id){return itemPedidoController.getQuantItensPorId(id);}
-
- //   public int getQuantProdutosVendidosPorId(int id){return itemPedidoController.getQuantProdutosPorId(id);}
-
-  //  public ItemPedido[] getListaItensPedidos(){return itemPedidoController.getListaItemPedido();}
+    public void listarItensPedido(){
+        itemPedidoController.listarItensPedido();
+    }
 
 }

@@ -3,17 +3,30 @@ package com.example.estoquejava.repository;
 import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.repository.interfaces.IProdutoRepositorio;
 
-public class ProdutoRepositorio implements IProdutoRepositorio {
+import java.io.*;
+
+public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Produto[] produtos;
     private int contador;
     private String[] historicoAlteracoes;
     private int contadorHistorico;
+    private static ProdutoRepositorio instance;
+
 
     public ProdutoRepositorio(int capacidade) {
         produtos = new Produto[capacidade];
         contador = 0;
         historicoAlteracoes = new String[capacidade * 2];
         contadorHistorico = 0;
+    }
+
+    public static ProdutoRepositorio getInstance(){
+        if (instance == null) {
+            instance = lerDoArquivo();
+        }
+        return instance;
     }
 
     //validação de dados
@@ -132,15 +145,56 @@ public class ProdutoRepositorio implements IProdutoRepositorio {
         }
     }
 
-    @Override
-    public void salvarParaArquivo(String caminhoArquivo) {
-        //implementação do método de serialização
+    private static ProdutoRepositorio lerDoArquivo() {
+        ProdutoRepositorio instanciaLocal = null;
+
+        File in = new File("produtos.dat");
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
+            fis = new FileInputStream(in);
+            ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            instanciaLocal = (ProdutoRepositorio) o;
+        } catch (Exception e) {
+            instanciaLocal = new ProdutoRepositorio(100);
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {/* Silent exception */
+                }
+            }
+        }
+
+        return instanciaLocal;
     }
 
-    @Override
-    public void carregarDeArquivo(String caminhoArquivo) {
-        //implementação do método de desserialização
+
+    public void salvarArquivo() {
+        if (instance == null) {
+            return;
+        }
+        File out = new File("produtos.dat");
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(out);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(instance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    /* Silent */}
+            }
+        }
     }
+
 
     @Override
     public int getQuantidadeProdutos() {

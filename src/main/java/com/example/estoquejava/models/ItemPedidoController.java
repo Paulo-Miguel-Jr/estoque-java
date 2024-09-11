@@ -4,37 +4,50 @@ import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
 public class ItemPedidoController {
 
-    private ItemPedidoRepositorio Itens;
+    private ItemPedidoRepositorio itens;
 
     public ItemPedidoController(){
-        this.Itens = new ItemPedidoRepositorio();
+        this.itens = new ItemPedidoRepositorio();
     }
 
-    public void adicionarItem(ItemPedido item){
-        Itens.adicionarItem(item);
+    public void adicionarItemPedido(ItemPedido item){
+        if(item != null) {
+            itens.adicionarItemPedido(item);
+        }
+        else{
+            throw new IllegalArgumentException("ItemPedido não pode ser vazio");
+        }
     }
 
-  //  public void removerItemPedido(ItemPedido item){
- //       Itens.RemoverItemPedido(item.getIdProduto(), item.getQuantidade());
- //   }
+    public void removerItemPedido(int idItem){
+        if(idItem <= 0){
+            itens.removerItemPedido(idItem);
+        }
+        else{
+            throw new IllegalArgumentException("ID deve ser positivo. ");
+        }
+    }
 
- //   public void alterarItemPedido(ItemPedido item, int modificacao){
- //       Itens.ModificarItemPedido(item.getIdProduto(), item.getQuantidade(), modificacao);
- //   }
+    public ItemPedido buscarItemPedido(int idItem){
+        if(idItem <=0){
+            throw new IllegalArgumentException("ID deve ser positivo. ");
+        }
 
-   // public ItemPedido buscarItemPedido(int id, int quantidade){
-   //     return Itens.BuscarItemPedido(id, quantidade);
- //   }
+        else{
+            return itens.buscarItemPedido(idItem);
+        }
+    }
 
- //   public int getQuantItensPorId(int id){
-  //      return Itens.getQuantItensPedidos(id);
- //   }
+    public void listarItensPedido(){
+        itens.listarItensPedidos();
+    }
 
- //   public int getQuantProdutosPorId(int id){
-  //      return Itens.getQuantProdutosVendidos(id);
-  //  }
-
-   // public ItemPedido[] getListaItemPedido(){
-   //     return Itens.ListarItensPedidos();
-   // }
+    public void modificarItemPedido(ItemPedido item, ItemPedido modificacao){
+        if(item != null && modificacao != null){
+            itens.modificarItemPedido(item, modificacao);
+        }
+        else{
+            throw new IllegalArgumentException("Os elementos de entrada devem estar preenchidos. ");
+        }
+    }
 }
