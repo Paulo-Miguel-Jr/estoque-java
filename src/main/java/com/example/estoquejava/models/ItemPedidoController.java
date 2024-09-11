@@ -42,12 +42,13 @@ public class ItemPedidoController {
         itens.listarItensPedidos();
     }
 
-    public void modificarItemPedido(ItemPedido item, ItemPedido modificacao){
-        if(item != null && modificacao != null){
-            itens.modificarItemPedido(item, modificacao);
-        }
-        else{
-            throw new IllegalArgumentException("Os elementos de entrada devem estar preenchidos. ");
-        }
-    }
+   // public void modificarItemPedido(ItemPedido item, ItemPedido modificacao){
+   //     if(item != null && modificacao != null){
+  //          itens.modificarItemPedido(item, modificacao);
+ //       }
+     //   else{
+ //           throw new IllegalArgumentException("Os elementos de entrada devem estar preenchidos. ");
+       // }
+  //  }
+
 }
