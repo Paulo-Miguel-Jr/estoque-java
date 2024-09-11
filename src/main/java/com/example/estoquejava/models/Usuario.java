@@ -1,6 +1,10 @@
 package com.example.estoquejava.models;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L; // Identificador de versão para serialização
+
     private String nome;
     private String senha;
     private int id;

@@ -2,8 +2,8 @@ package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.Usuario;
-import com.example.estoquejava.models.enums.TipoUsuario;
 import com.example.estoquejava.repository.UsuarioRepositorio;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,7 +40,6 @@ public class TelaLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        BtnLogin.setText("Entrar");
         usuarioRepositorio = UsuarioRepositorio.getInstance();
         Usuario admin = new Usuario("admin", "admin123", 1);
         try {
@@ -49,34 +48,45 @@ public class TelaLoginController implements Initializable {
             //vou fazer
         }
         senhaVisivelField.setVisible(false);
+        Platform.runLater(() -> { //serve pra que a aplicação comece sem foco nos componentes
+            statusLabel.requestFocus();
+        });
     }
 
     @FXML
     private void validarLogin(ActionEvent event) {
         String nomeUsuario = usuarioField.getText();
-        String senha = senhaField.getText();
+        String senha;
+
+        if (senhaField.isVisible()) {
+            senha = senhaField.getText();
+        } else {
+            senha = senhaVisivelField.getText();
+        }
+
+
         try {
             Usuario usuario = usuarioRepositorio.buscarUsuarioPorNome(nomeUsuario);
-            System.out.println("buscou o nome");
 
             if (usuario == null) {
                 statusLabel.setText("Usuário não encontrado.");
-                System.out.println("n achou usuario");
-            } else if (!usuario.getSenha().equals(senha)) {
-                statusLabel.setText("Senha incorreta.");
-                System.out.println("senha errada");
             } else {
-                irParaTela();
-                System.out.println("Entrou");
 
+                if (!usuario.getSenha().equals(senha)) { //comparar apenas com a senha do campo
+                    statusLabel.setText("Senha incorreta.");
+
+                } else {
+                    irParaTela();
+
+                }
             }
-
-    } catch (Exception e) {
-        showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
-            System.out.println("paro aqui4");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
+            System.out.println("Erro no login");
         }
-
     }
+
+
 
     private void irParaTela() {
         ScreenManager sm = ScreenManager.getInstance();
@@ -103,6 +113,7 @@ public class TelaLoginController implements Initializable {
             btnMostrarSenha.setText("Ocultar");
         }
     }
+
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
