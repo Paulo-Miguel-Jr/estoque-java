@@ -52,7 +52,7 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="finalizarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #000000;" text="Finalizar Pedido" textFill="WHITE">
+            <Button fx:id="finalizarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" onAction="#finalizarPedido" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #000000;" text="Finalizar Pedido" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font></Button>
