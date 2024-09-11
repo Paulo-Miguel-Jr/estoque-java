@@ -12,6 +12,7 @@ import com.example.estoquejava.repository.PedidoRepositorio;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -108,31 +109,7 @@ public class TelaPedidoController implements Initializable {
 
     @FXML
     public void finalizarPedido() {
-        try {
-            Pedido novoPedido = new Pedido();
-
-            pedidoRepositorio.adicionarPedido(novoPedido);
-
-
-            tableView.getItems().clear();
-            labelValorTotal.setText("R$ 0.00");
-
-
             irParaTelaFinal();
-
-            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
-            sucesso.setTitle("Pedido Finalizado");
-            sucesso.setHeaderText(null);
-            sucesso.setContentText("O pedido foi finalizado com sucesso.");
-            sucesso.show();
-
-        } catch (Exception e) {
-            Alert erro = new Alert(Alert.AlertType.ERROR);
-            erro.setTitle("Erro");
-            erro.setHeaderText(null);
-            erro.setContentText("Erro: " + e.getMessage());
-            erro.show();
-        }
     }
 
 
