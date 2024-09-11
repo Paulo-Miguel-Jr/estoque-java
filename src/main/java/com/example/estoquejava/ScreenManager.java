@@ -1,12 +1,10 @@
 package com.example.estoquejava;
 
-import com.example.estoquejava.gui.TelaCadastroController;
-import com.example.estoquejava.gui.TelaLoginController;
-import com.example.estoquejava.gui.TelaPedidoController;
-import com.example.estoquejava.gui.TelaPrincipalController;
+import com.example.estoquejava.gui.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 public class ScreenManager {
     private static ScreenManager instance;
     private static Stage stg;
@@ -15,6 +13,7 @@ public class ScreenManager {
     private Scene telaPrincipal;
     private Scene telaCadastro;
     private Scene telaPedido;
+    private Scene telaFinal;
 
     private TelaLoginController telaLoginController;
 
@@ -23,6 +22,8 @@ public class ScreenManager {
     private TelaPrincipalController telaPrincipalController;
 
     private TelaPedidoController telaPedidoController;
+
+    private TelaFinalController telaFinalController;
 
 
     public ScreenManager(){
@@ -61,6 +62,9 @@ public class ScreenManager {
     public Scene getTelaPedido() {
         return telaPedido;
     }
+    public Scene getTelaFinal() {
+        return telaFinal;
+    }
 
 
 
@@ -81,6 +85,10 @@ public class ScreenManager {
         return telaPedidoController;
     }
 
+    public TelaFinalController getTelaFinalController() {
+        return telaFinalController;
+    }
+
     private void screenLoader(){
         try {
             FXMLLoader TelaLoginPane = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
@@ -99,6 +107,10 @@ public class ScreenManager {
             this.telaPedido = new Scene(TelaPedidoPane.load());
             this.telaPedidoController = TelaPedidoPane.getController();
 
+            FXMLLoader TelaFinalPane = new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
+            this.telaFinal = new Scene(TelaFinalPane.load());
+            this.telaFinalController = TelaFinalPane.getController();
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -114,6 +126,7 @@ public class ScreenManager {
             case "TelaPrincipal.fxml" -> stg.setScene(telaPrincipal);
             case "TelaCadastro.fxml" -> stg.setScene(telaCadastro);
             case "TelaPedido.fxml" -> stg.setScene(telaPedido);
+            case "TelaFinal.fxml" -> stg.setScene(telaFinal);
         }
         stg.setTitle(titleScreen);
 
