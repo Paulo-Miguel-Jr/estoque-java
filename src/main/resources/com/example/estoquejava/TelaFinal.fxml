@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #77D3A4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaFinalController">
+   <children>
+      <Button fx:id="buttonVer" layoutX="257.0" layoutY="268.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="VER PEDIDO">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="buttonOutroPedido" layoutX="223.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="INICIAR OUTRO PEDIDO">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="buttonCancelar" layoutX="239.0" layoutY="352.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="CANCELAR PEDIDO">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="226.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/estoque-pronto.png" />
+         </image></ImageView>
+      <Label fx:id="labelFinalizado" layoutX="153.0" layoutY="178.0" text="PEDIDO FINALIZADO">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Label>
+      <Label fx:id="labelValorFinalizado" layoutX="292.0" layoutY="215.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
