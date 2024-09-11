@@ -15,7 +15,7 @@
                <font>
                   <Font name="System Bold" size="40.0" />
                </font></Label>
-            <ScrollPane fx:id="scrollPane" layoutX="43.0" layoutY="83.0" prefHeight="200.0" prefWidth="514.0">
+            <ScrollPane fx:id="scrollPane" layoutX="42.0" layoutY="83.0" prefHeight="200.0" prefWidth="514.0">
               <content>
                 <AnchorPane fx:id="anchorInScroll" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -52,7 +52,7 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="criarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #000000;" text="Finalizar Pedido" textFill="WHITE">
+            <Button fx:id="finalizarPedido" layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #000000;" text="Finalizar Pedido" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font></Button>
