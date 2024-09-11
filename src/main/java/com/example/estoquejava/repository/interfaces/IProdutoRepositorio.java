@@ -14,7 +14,5 @@ public interface IProdutoRepositorio {
     void notificarProdutosEmBaixa();
     void gerarRelatorioProdutosEmBaixa();
     void listarHistoricoAlteracoes();
-    void salvarParaArquivo(String caminhoArquivo);
-    void carregarDeArquivo(String caminhoArquivo);
     int getQuantidadeProdutos();
 }
