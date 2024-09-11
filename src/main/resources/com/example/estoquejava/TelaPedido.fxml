@@ -11,7 +11,7 @@
   <items>
     <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="295.0" prefWidth="598.0">
          <children>
-            <Label fx:id="labelCarrinho" layoutX="42.0" layoutY="12.0" prefHeight="66.0" prefWidth="441.0" text="Carrinho de Compras">
+            <Label fx:id="labelCarrinho" layoutX="79.0" layoutY="12.0" prefHeight="66.0" prefWidth="441.0" text="Carrinho de Compras">
                <font>
                   <Font name="Arial Narrow" size="45.0" />
                </font></Label>
@@ -30,7 +30,11 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <ImageView fx:id="image" fitHeight="76.0" fitWidth="74.0" layoutX="479.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="76.0" fitWidth="79.0" layoutX="445.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/carrinho.png" />
+               </image>
+            </ImageView>
             <Label fx:id="labelTotal" layoutX="422.0" layoutY="292.0" text="TOTAL" />
             <Label fx:id="labelValorTotal" layoutX="483.0" layoutY="292.0" />
          </children></AnchorPane>
