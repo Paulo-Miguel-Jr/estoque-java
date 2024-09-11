@@ -1,5 +1,8 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.ScreenManager;
+import com.example.estoquejava.models.PedidoController;
+import com.example.estoquejava.repository.PedidoRepositorio;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,6 +35,17 @@ public class TelaFinalController implements Initializable {
     @FXML
     private Label labelFinalizado;
 
+
+    @FXML
+    private void irParaTelaPrincipal() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
+    @FXML
+    public void iniciarOutroPedido() {
+        irParaTelaPrincipal();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
