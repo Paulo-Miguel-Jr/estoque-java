@@ -30,13 +30,13 @@ public class TelaPrincipalController implements Initializable {
     private Button buttonRmvProd;
 
     @FXML
-    private TableColumn<Produto, Double> colunaPreco;
+    private TableColumn<Produto, String> colunaPreco;
 
     @FXML
     private TableColumn<Produto, String> colunaProduto;
 
     @FXML
-    private TableColumn<Produto, Double> colunaQuantidade;
+    private TableColumn<Produto, String> colunaQuantidade;
 
     @FXML
     private Button irCarrinho;
@@ -61,14 +61,21 @@ public class TelaPrincipalController implements Initializable {
     }
 
     public void carregarTableViewProduto() {
-        //colunaProduto.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        //colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-        //colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        //Essa da baixo que esta funcionando pelo menos o nome.
+        colunaPreco.setCellValueFactory(new PropertyValueFactory<Produto, String>("preco"));
+        colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colunaProduto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
+        colunaPreco.setCellValueFactory(cellData -> {
+            String preco = String.format("%.2f", cellData.getValue().getPreco());
+            return new SimpleStringProperty(preco);
+        });
+        colunaQuantidade.setCellValueFactory(cellData -> {
+            String quantidade = String.format("%.2f", cellData.getValue().getQuantidade());
+            return new SimpleStringProperty(quantidade);
+        });
+
+        //colunaProduto.setCellValueFactory(new PropertyValueFactory<>("nome"));
         //colunaPreco.setCellValueFactory(cellData -> new PropertyValueFactory<Produto, Double>(cellData.getValue().getPreco()));
         //colunaQuantidade.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQuantidade()));
-
 
 
         //teste sem arquivo, apagar depois.
