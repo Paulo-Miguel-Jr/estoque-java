@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -86,8 +87,12 @@ public class TelaPedidoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colunaItem.setCellValueFactory(new PropertyValueFactory<>("item"));
+        colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colunaPreco.setCellValueFactory(new PropertyValueFactory<>("total"));
 
     }
+
 
     @FXML
     private void irParaTelaPrincipal() {
@@ -95,11 +100,6 @@ public class TelaPedidoController implements Initializable {
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
 
-    @FXML
-    private void irParaTelaLogin() {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaLogin.fxml", "TelaLogin");
-    }
 
     @FXML
     private void irParaTelaFinal() {
@@ -159,12 +159,5 @@ public class TelaPedidoController implements Initializable {
     }
 
 
-    private void atualizarTotal() {
-        double total = 0.0;
-        for (ItemPedido item : tableView.getItems()) {
-            total = item.getValorItemPedido();
-        }
-        labelValorTotal.setText("R$ " + String.format("%.2f", total));
-    }
 
 }
