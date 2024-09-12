@@ -128,7 +128,7 @@ public class TelaPrincipalController implements Initializable {
     }
 
     private void adicionarProdutoCarrinho(Produto produto) {
-        ItemPedido novoItemPedido = new ItemPedido(produto);
+        ItemPedido novoItemPedido = new ItemPedido(produto, ItemPedido.ITENS);
 
     }
 
