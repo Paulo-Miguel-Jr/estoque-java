@@ -1,6 +1,7 @@
 package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
+import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Produto;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -30,6 +31,9 @@ public class TelaPrincipalController implements Initializable {
     private Button buttonRmvProd;
 
     @FXML
+    private ComboBox<String> comboBox;
+
+    @FXML
     private TableColumn<Produto, String> colunaPreco;
 
     @FXML
@@ -37,6 +41,9 @@ public class TelaPrincipalController implements Initializable {
 
     @FXML
     private TableColumn<Produto, String> colunaQuantidade;
+
+    @FXML
+    private Button buttonAdcCart;
 
     @FXML
     private Button irCarrinho;
@@ -48,22 +55,49 @@ public class TelaPrincipalController implements Initializable {
 
     private ObservableList<Produto> observableListProduto = FXCollections.observableArrayList();
 
-    public ObservableList<Produto> getPersonData() {
+    public ObservableList<Produto> getProdutoData() {
         return observableListProduto;
     }
+
+    private List<ItemPedido> listItemPedido = new ArrayList<>();
+
+    private ObservableList<ItemPedido> observableListItemPedido = FXCollections.observableArrayList();
+
+    public ObservableList<ItemPedido> getItemPedidoData() {
+        return observableListItemPedido;
+    }
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         carregarTableViewProduto();
 
+        tabela.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        // Limpar a ComboBox
+                        comboBox.getItems().clear();
+                        // Preenche a ComboBox com números de 1 até a quantidade do produto selecionado
+                        for (int i = 1; i <= newValue.getQuantidade(); i++) {
+                            comboBox.getItems().add(String.valueOf(i));
+                        }
+                        // Selecionar o primeiro valor da ComboBox como padrão
+                        comboBox.getSelectionModel().selectFirst();
+                    }
+
+                });
+
+
 
     }
 
+    // Carrega os dados para a tabela de produtos
     public void carregarTableViewProduto() {
         colunaPreco.setCellValueFactory(new PropertyValueFactory<Produto, String>("preco"));
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colunaProduto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
+        //converte valores de preco e quantidade pra String
         colunaPreco.setCellValueFactory(cellData -> {
             String preco = String.format("%.2f", cellData.getValue().getPreco());
             return new SimpleStringProperty(preco);
@@ -92,6 +126,16 @@ public class TelaPrincipalController implements Initializable {
         tabela.setItems(observableListProduto);
 
     }
+
+    public void selecionarItemTabela(Produto produto) {
+        System.out.println("Produto Selecionado: " + produto.getNome());
+    }
+
+    private void adicionarProdutoCarrinho(Produto produto) {
+        ItemPedido novoItemPedido = new ItemPedido(produto, ItemPedido.ITENS);
+
+    }
+
 
     /*
     private void adicionarProduto() {
