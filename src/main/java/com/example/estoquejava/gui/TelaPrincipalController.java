@@ -43,6 +43,9 @@ public class TelaPrincipalController implements Initializable {
     private TableColumn<Produto, String> colunaQuantidade;
 
     @FXML
+    private Button buttonAdcCart;
+
+    @FXML
     private Button irCarrinho;
 
     @FXML
@@ -94,6 +97,7 @@ public class TelaPrincipalController implements Initializable {
         colunaPreco.setCellValueFactory(new PropertyValueFactory<Produto, String>("preco"));
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colunaProduto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
+        //converte valores de preco e quantidade pra String
         colunaPreco.setCellValueFactory(cellData -> {
             String preco = String.format("%.2f", cellData.getValue().getPreco());
             return new SimpleStringProperty(preco);
