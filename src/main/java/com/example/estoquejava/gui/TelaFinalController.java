@@ -44,6 +44,7 @@ public class TelaFinalController implements Initializable {
     @FXML
     private Label labelFinalizado;
 
+
     @FXML
     private ListView<String> listViewItensPedido;
 
@@ -56,7 +57,7 @@ public class TelaFinalController implements Initializable {
         double valorTotal = pedidoFinalizado.calcularValorTotal();
         labelValorFinalizado.setText(String.format("%.2f", valorTotal));
     }
-    
+
     @FXML
     public void irParaTelaPrincipal() {
         ScreenManager sm = ScreenManager.getInstance();

@@ -75,6 +75,10 @@ public class TelaPedidoController implements Initializable {
     @FXML
     private Label labelCarrinho;
 
+    @FXML
+    private Button buttonVerFinal;
+
+
 
     private ObservableList<ItemPedido> listaItens = FXCollections.observableArrayList();
 
@@ -104,6 +108,12 @@ public class TelaPedidoController implements Initializable {
     public void irParaTelaPrincipal() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+    }
+
+    @FXML
+    public void verFinal() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaFinal.fxml", "TelaFinal");
     }
 
 

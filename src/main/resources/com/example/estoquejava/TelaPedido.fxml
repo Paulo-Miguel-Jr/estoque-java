@@ -41,6 +41,7 @@
                </font>
             </Label>
             <Label fx:id="labelValorTotal" layoutX="483.0" layoutY="292.0" onDragDetected="#setarLabel" />
+            <Button fx:id="buttonVerFinal" layoutX="42.0" layoutY="288.0" mnemonicParsing="false" onAction="#verFinal" text="Button" />
          </children></AnchorPane>
     <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0" style="-fx-background-color: white;">
          <children>
