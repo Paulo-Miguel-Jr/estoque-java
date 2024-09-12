@@ -109,7 +109,50 @@ public class TelaPedidoController implements Initializable {
 
     @FXML
     public void finalizarPedido() {
+        if (pedidoAtual == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nenhum Pedido para Finalizar");
+            alert.setHeaderText(null);
+            alert.setContentText("Nenhum pedido foi iniciado ou está pendente para finalizar.");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            pedidoController.processarVenda(pedidoAtual.getIdPedido());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Pedido Finalizado");
+            alert.setHeaderText(null);
+            alert.setContentText("O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
+            alert.showAndWait();
+
+
+            pedidoAtual.setStatus(StatusPedido.PROCESSADO);
+            pedidoRepositorio.atualizarPedido(pedidoAtual);
+
             irParaTelaFinal();
+
+        } catch (PedNaoEncontException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Pedido Não Encontrado");
+            alert.setHeaderText(null);
+            alert.setContentText("Pedido não encontrado com o ID fornecido.");
+            alert.showAndWait();
+        } catch (InvalidPedidoException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Pedido Não Pode Ser Finalizado");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Erro ao finalizar pedido: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
 
 

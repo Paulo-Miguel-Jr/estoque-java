@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #77D3A4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaFinalController">
    <children>
-      <Button fx:id="buttonVer" layoutX="257.0" layoutY="268.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="VER PEDIDO">
+      <Button fx:id="buttonVer" layoutX="257.0" layoutY="268.0" mnemonicParsing="false" onAction="#verPedido" style="-fx-background-color: #ffffff;" text="VER PEDIDO">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -16,7 +16,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="buttonCancelar" layoutX="239.0" layoutY="352.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="CANCELAR PEDIDO">
+      <Button fx:id="buttonCancelar" layoutX="239.0" layoutY="352.0" mnemonicParsing="false" onAction="#cancelarPedidoFinalizado" style="-fx-background-color: #ffffff;" text="CANCELAR PEDIDO">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
