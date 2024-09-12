@@ -52,7 +52,13 @@ public class TelaFinalController implements Initializable {
 
 
     @FXML
-    private void irParaTelaPrincipal() {
+    public void setarLabel() {
+        double valorTotal = pedidoFinalizado.calcularValorTotal();
+        labelValorFinalizado.setText(String.format("%.2f", valorTotal));
+    }
+    
+    @FXML
+    public void irParaTelaPrincipal() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }

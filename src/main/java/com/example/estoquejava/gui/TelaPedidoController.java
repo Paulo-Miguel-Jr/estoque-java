@@ -93,16 +93,22 @@ public class TelaPedidoController implements Initializable {
 
     }
 
+    @FXML
+    public void setarLabel() {
+        double valorTotal = pedidoAtual.calcularValorTotal();
+        labelValorTotal.setText(String.format("%.2f", valorTotal));
+    }
+
 
     @FXML
-    private void irParaTelaPrincipal() {
+    public void irParaTelaPrincipal() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
 
 
     @FXML
-    private void irParaTelaFinal() {
+    public void irParaTelaFinal() {
         ScreenManager sm = ScreenManager.getInstance();
         sm.changeScreen("TelaFinal.fxml", "TelaFinal");
     }
@@ -171,7 +177,7 @@ public class TelaPedidoController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                // Simula o cancelamento do pedido, mesmo que ainda não tenha sido criado
+                // Simula o cancelamento do pedido
                 if (pedidoAtual != null) {
                     pedidoAtual.setStatus(StatusPedido.CANCELADO);
                     pedidoRepositorio.atualizarPedido(pedidoAtual);

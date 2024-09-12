@@ -40,7 +40,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="labelValorTotal" layoutX="483.0" layoutY="292.0" />
+            <Label fx:id="labelValorTotal" layoutX="483.0" layoutY="292.0" onDragDetected="#setarLabel" />
          </children></AnchorPane>
     <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="598.0" style="-fx-background-color: white;">
          <children>
