@@ -19,12 +19,18 @@ public class ItemPedido implements Serializable {
 
     ///Propositalmente não tem nenhuma função de set pois vai gerar problema no repositório.
 
-    public String getNomeProduto(){
-        return this.produto.getNome();
-    }
+
 
     public Produto getProduto() {
         return produto;
+    }
+
+    public double getPrecoProduto() {
+        return produto.getPreco();
+    }
+
+    public String getNomeProduto(){
+        return this.produto.getNome();
     }
 
     public int getIdItem() {
@@ -38,6 +44,7 @@ public class ItemPedido implements Serializable {
     public int getQuantidade(){
         return this.quantidade;
     }
+
 
     public double getValorProduto(){
         return this.produto.getPreco();
