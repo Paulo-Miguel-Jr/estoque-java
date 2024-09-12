@@ -1,6 +1,10 @@
 package com.example.estoquejava.models;
 
-public class ItemPedido {
+import java.io.Serializable;
+
+public class ItemPedido implements Serializable {
+
+    private static final long serialVersionUID = 3l;
 
     public static final int ITENS = 100;
 

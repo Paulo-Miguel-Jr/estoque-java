@@ -10,7 +10,7 @@ import com.example.estoquejava.repository.interfaces.IPedidoRepositorio;
 
 import java.io.*;
 
-public class PedidoRepositorio implements IPedidoRepositorio {
+public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     private Pedido[] pedidos;
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
@@ -20,8 +20,6 @@ public class PedidoRepositorio implements IPedidoRepositorio {
     private static final long serialVersionUID = 1234567890123456789L;
 
 
-
-    
     public PedidoRepositorio() {
         this.pedidos = new Pedido[100];
         proxIdLivre = 0;
@@ -102,6 +100,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
         if (proxIdLivre < pedidos.length) {
             pedidos[proxIdLivre] = pedido;
             proxIdLivre++;
+            salvarArquivo();
         } else {
             throw new PedidoRepCheioException("Repositório cheio. Não é possível adicionar mais pedidos.");
         }
@@ -120,6 +119,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
             // Limpa o último elemento, que foi movido para frente
             pedidos[proxIdLivre - 1] = null;
             proxIdLivre--;
+            salvarArquivo();
         }
     }
    //else {
@@ -136,6 +136,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
             throw new PedNaoEncontException("Pedido não encontrado.");
         } else {
             pedidos[indice] = pedido;
+            salvarArquivo();
         }
     }
 
@@ -165,12 +166,10 @@ public class PedidoRepositorio implements IPedidoRepositorio {
             throw new PedNaoEncontException("Pedido não encontrado.");
         }
 
-        // Verifica se o limite de itens foi alcançado
         if (pedido.getItensPedido().length >= Pedido.LIMITE_ITENS) {
             throw new LimiteItensAlcancadoException("Não é possível adicionar mais itens. Limite de itens alcançado.");
         }
 
-        // Cria um novo array com tamanho incrementado
         ItemPedido[] itensAtualizados = new ItemPedido[pedido.getItensPedido().length + 1];
 
         // Copia os itens antigos para o novo array
@@ -180,6 +179,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
         itensAtualizados[pedido.getItensPedido().length] = novoItem;
 
         pedido.setItensPedido(itensAtualizados);
+        salvarArquivo();
     }
 
     //    if (pedido != null) {
@@ -198,6 +198,7 @@ public class PedidoRepositorio implements IPedidoRepositorio {
             Pedido pedido = pedidos[indice];
             if (pedido.getStatus() == StatusPedido.PENDENTE) {
                 pedido.setStatus(StatusPedido.PROCESSADO);
+                salvarArquivo();
             } else {
                 System.out.println("O pedido já foi processado ou cancelado.");
             }

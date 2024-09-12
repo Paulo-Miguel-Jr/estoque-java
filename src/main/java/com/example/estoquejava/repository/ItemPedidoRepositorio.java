@@ -8,7 +8,9 @@ import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.interfaces.IItemPedidoRepositorio;
 
-public  class ItemPedidoRepositorio implements IItemPedidoRepositorio {
+import java.io.Serializable;
+
+public  class ItemPedidoRepositorio implements IItemPedidoRepositorio, Serializable {
 
     private ItemPedido[] itemPedido;
     private int proximo;

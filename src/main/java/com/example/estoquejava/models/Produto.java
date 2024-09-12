@@ -1,8 +1,12 @@
 package com.example.estoquejava.models;
 
 
+import java.io.Serializable;
 
-public class Produto {
+public class Produto implements Serializable {
+
+    private static final long serialVersionUID = 2L;
+
     private String nome;
     private int id;
     private double preco;

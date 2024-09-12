@@ -4,9 +4,12 @@ import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Pedido {
+public class Pedido implements Serializable {
+
+    private static final long serialVersionUID = 12345012345L;
 
     public static final int LIMITE_ITENS = 100;
 
