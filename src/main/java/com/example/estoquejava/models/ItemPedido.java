@@ -4,32 +4,38 @@ import java.io.Serializable;
 
 public class ItemPedido implements Serializable {
 
-    private static final long serialVersionUID = 3l;
+    private static final long serialVersionUID = 3L;
 
     public static final int ITENS = 100;
 
     private Produto produto;
-    private int quantidade;
+    private double quantidade;
     private int idItem;
 
-    public ItemPedido(Produto produto, int quantidade) {
+    public ItemPedido(Produto produto, double quantidade) {
+        if (produto == null) {
+            throw new IllegalArgumentException("Produto não pode ser nulo.");
+        }
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
+        }
         this.produto = produto;
         this.quantidade = quantidade;
     }
 
-    ///Propositalmente não tem nenhuma função de set pois vai gerar problema no repositório.
-
-
-
     public Produto getProduto() {
         return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public double getPrecoProduto() {
         return produto.getPreco();
     }
 
-    public String getNomeProduto(){
+    public String getNomeProduto() {
         return this.produto.getNome();
     }
 
@@ -41,26 +47,27 @@ public class ItemPedido implements Serializable {
         this.idItem = idItem;
     }
 
-    public int getQuantidade(){
+    public double getQuantidade() {
         return this.quantidade;
     }
 
+    public void setQuantidade(double quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
+        }
+        this.quantidade = quantidade;
+    }
 
-    public double getValorProduto(){
+    public double getValorProduto() {
         return this.produto.getPreco();
     }
 
-
-    public double getValorItemPedido(){
-        return (this.produto.getPreco() * this.quantidade);
+    public double getValorItemPedido() {
+        return this.produto.getPreco() * this.quantidade;
     }
 
-    public int getIdProduto(){
+    public int getIdProduto() {
         return this.produto.getId();
-    }
-
-    public void setQuantidade(int modificacao){
-        this.quantidade = modificacao;
     }
 
     @Override
@@ -68,9 +75,9 @@ public class ItemPedido implements Serializable {
         return String.format(
                 "Nome do produto: %s\n" +
                         "Id do produto: %d\n" +
-                        "Quantidade de produtos: %d\n" +
-                        "Valor do pedido: %.1f\n" +
-                        "Valor do produto: %.1f",
+                        "Quantidade de produtos: %.2f\n" +
+                        "Valor do pedido: %.2f\n" +
+                        "Valor do produto: %.2f",
                 this.getNomeProduto(),
                 this.getIdProduto(),
                 this.getQuantidade(),
@@ -78,7 +85,4 @@ public class ItemPedido implements Serializable {
                 this.getValorProduto()
         );
     }
-
-
-
 }
