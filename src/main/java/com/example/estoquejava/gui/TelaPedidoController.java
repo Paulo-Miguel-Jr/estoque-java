@@ -12,6 +12,7 @@ import com.example.estoquejava.repository.ItemPedidoRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -96,7 +97,13 @@ public class TelaPedidoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colunaItem.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNomeProduto()) );
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        colunaPreco.setCellValueFactory(new PropertyValueFactory("preco"));
+        colunaPreco.setCellValueFactory(cellData -> {
+            String preco = String.format("%.2f", cellData.getValue().getPrecoProduto());
+            return (ObservableValue<Double>) new  PropertyValueFactory(preco);
+        });
+
+
 
         listaItens =  FXCollections.observableArrayList();
         Produto produtoExemplo = new Produto("Produto 4", 162, 10.00, 10, "quilo", 1);
