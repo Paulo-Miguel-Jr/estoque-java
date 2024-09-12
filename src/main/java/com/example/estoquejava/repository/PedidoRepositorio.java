@@ -38,7 +38,7 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     private static PedidoRepositorio lerDoArquivo() {
         PedidoRepositorio instanciaLocal = null;
 
-        File in = new File("produtos.dat");
+        File in = new File("pedidos.dat");
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
