@@ -4,12 +4,14 @@ import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.PedidoController;
+import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.InvalidPedidoException;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.repository.ItemPedidoRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
 
 import java.net.URL;
 import java.util.Optional;
@@ -80,7 +83,7 @@ public class TelaPedidoController implements Initializable {
 
 
 
-    private ObservableList<ItemPedido> listaItens = FXCollections.observableArrayList();
+    private ObservableList<ItemPedido> listaItens;// = FXCollections.observableArrayList();
 
     private Pedido pedidoAtual;
 
@@ -91,10 +94,15 @@ public class TelaPedidoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colunaItem.setCellValueFactory(new PropertyValueFactory<>("item"));
+        colunaItem.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNomeProduto()) );
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colunaPreco.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
+        listaItens =  FXCollections.observableArrayList();
+        Produto produtoExemplo = new Produto("Produto 4", 162, 10.00, 10, "quilo", 1);
+        new ItemPedido(produtoExemplo, 5);
+
+        listaItens.add(itemPedido);
     }
 
     @FXML
