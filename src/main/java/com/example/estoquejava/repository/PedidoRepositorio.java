@@ -16,9 +16,7 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     private static PedidoRepositorio singletonPedRep;
     private ItemPedidoRepositorio itemPedidoRepositorio;
 
-
     private static final long serialVersionUID = 1234567890123456789L;
-
 
     public PedidoRepositorio() {
         this.pedidos = new Pedido[100];

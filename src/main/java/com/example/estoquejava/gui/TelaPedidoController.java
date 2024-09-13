@@ -140,6 +140,7 @@ public class TelaPedidoController implements Initializable {
 
     @FXML
     public void adicionarItem() {
+        mudarTela("TelaPrincipal.fxml");
     }
 
     @FXML
