@@ -4,25 +4,17 @@ import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.PedidoController;
-import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.models.enums.StatusPedido;
-import com.example.estoquejava.models.exceptions.InvalidPedidoException;
-import com.example.estoquejava.models.exceptions.PedNaoEncontException;
-import com.example.estoquejava.repository.ItemPedidoRepositorio;
-import com.example.estoquejava.repository.PedidoRepositorio;
-import javafx.beans.Observable;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-
 
 import java.net.URL;
 import java.util.Optional;
@@ -31,16 +23,13 @@ import java.util.ResourceBundle;
 public class TelaPedidoController implements Initializable {
 
     @FXML
-    private Button adicionarItem;
+    private Button adicionarItem, criarPedido, cancelarPedido, buttonVerFinal;
 
     @FXML
     private ImageView image;
 
     @FXML
-    private Label labelTotal;
-
-    @FXML
-    private Button criarPedido;
+    private Label labelTotal, labelValorTotal, labelCarrinho;
 
     @FXML
     private TableView<ItemPedido> tableView;
@@ -49,147 +38,108 @@ public class TelaPedidoController implements Initializable {
     private TableColumn<ItemPedido, String> colunaItem;
 
     @FXML
-    private TableColumn<ItemPedido, Double> colunaPreco;
+    private TableColumn<ItemPedido, String> colunaPreco;
 
     @FXML
-    private TableColumn<ItemPedido, Integer> colunaQuantidade;
+    private TableColumn<ItemPedido, String> colunaQuantidade;
 
     @FXML
     private ScrollPane scrollPane;
 
     @FXML
-    private AnchorPane anchor2;
-
-    @FXML
-    private AnchorPane anchor1;
-
-
-    @FXML
-    private Label labelValorTotal;
+    private AnchorPane anchor1, anchor2, anchorInScroll;
 
     @FXML
     private SplitPane split;
 
-    @FXML
-    private Button cancelarPedido;
-
-    @FXML
-    private AnchorPane anchorInScroll;
-
-    @FXML
-    private Label labelCarrinho;
-
-    @FXML
-    private Button buttonVerFinal;
-
-
-
-    private ObservableList<ItemPedido> listaItens;// = FXCollections.observableArrayList();
-
+    private ObservableList<ItemPedido> listaItens;
     private Pedido pedidoAtual;
-
-    private ItemPedido itemPedido;
-    private ItemPedidoRepositorio itemPedidoRepositorio;
-    private PedidoRepositorio pedidoRepositorio;
     private PedidoController pedidoController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colunaItem.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNomeProduto()) );
-        colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colunaPreco.setCellValueFactory(new PropertyValueFactory("preco"));
-        colunaPreco.setCellValueFactory(cellData -> {
-            String preco = String.format("%.2f", cellData.getValue().getPrecoProduto());
-            return (ObservableValue<Double>) new  PropertyValueFactory(preco);
+        configurarColunas();
+        listaItens = FXCollections.observableArrayList();
+        pedidoController = new PedidoController();
+    }
+
+    private void configurarColunas() {
+
+        colunaItem.setCellValueFactory(cellData -> {
+            ItemPedido item = cellData.getValue();
+            if (item != null) {
+                return new SimpleStringProperty(item.getNomeProduto());
+            } else {
+                return new SimpleStringProperty("");
+            }
         });
 
+        colunaQuantidade.setCellValueFactory(cellData -> {
+            ItemPedido item = cellData.getValue();
+            if (item != null) {
+                return new SimpleStringProperty(String.valueOf(item.getQuantidade()));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });
+
+        colunaPreco.setCellValueFactory(cellData -> {
+            ItemPedido item = cellData.getValue();
+            if (item != null) {
+                return new SimpleStringProperty(String.format("%.2f", item.getPrecoProduto()));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });
+
+    }
 
 
-        listaItens =  FXCollections.observableArrayList();
-        Produto produtoExemplo = new Produto("Produto 4", 162, 10.00, 10, "quilo", 1);
-        new ItemPedido(produtoExemplo, 5);
+    public void setPedidoAtual(Pedido pedido) {
+        this.pedidoAtual = pedido;
+        atualizarInterfaceComPedido(pedido);
+    }
 
-        listaItens.add(itemPedido);
+    private void atualizarInterfaceComPedido(Pedido pedido) {
+        tableView.setItems(FXCollections.observableArrayList(pedido.getItens()));
+        setarLabel();
     }
 
     @FXML
     public void setarLabel() {
-        double valorTotal = pedidoAtual.calcularValorTotal();
-        labelValorTotal.setText(String.format("%.2f", valorTotal));
-    }
-
-
-    @FXML
-    public void irParaTelaPrincipal() {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
+        if (pedidoAtual != null) {
+            double valorTotal = pedidoAtual.calcularValorTotal();
+            labelValorTotal.setText(String.format("R$ %.2f", valorTotal));
+        } else {
+            labelValorTotal.setText("R$ 0.00");
+        }
     }
 
     @FXML
     public void verFinal() {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaFinal.fxml", "TelaFinal");
-    }
-
-
-    @FXML
-    public void irParaTelaFinal() {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaFinal.fxml", "TelaFinal");
+        mudarTela("TelaFinal.fxml");
     }
 
     @FXML
     public void finalizarPedido() {
         if (pedidoAtual == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nenhum Pedido para Finalizar");
-            alert.setHeaderText(null);
-            alert.setContentText("Nenhum pedido foi iniciado ou está pendente para finalizar.");
-            alert.showAndWait();
+            mostrarAlerta(Alert.AlertType.WARNING, "Nenhum Pedido para Finalizar", "Nenhum pedido foi iniciado ou está pendente para finalizar.");
             return;
         }
 
         try {
             pedidoController.processarVenda(pedidoAtual.getIdPedido());
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Pedido Finalizado");
-            alert.setHeaderText(null);
-            alert.setContentText("O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
-            alert.showAndWait();
-
-
             pedidoAtual.setStatus(StatusPedido.PROCESSADO);
-            pedidoRepositorio.atualizarPedido(pedidoAtual);
-
-            irParaTelaFinal();
-
-        } catch (PedNaoEncontException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Pedido Não Encontrado");
-            alert.setHeaderText(null);
-            alert.setContentText("Pedido não encontrado com o ID fornecido.");
-            alert.showAndWait();
-        } catch (InvalidPedidoException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Pedido Não Pode Ser Finalizado");
-            alert.setHeaderText(null);
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            pedidoController.atualizarPedido(pedidoAtual);
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Finalizado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
+            verFinal();
         } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Erro ao finalizar pedido: " + e.getMessage());
-            alert.showAndWait();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro ao Finalizar Pedido", "Erro ao finalizar pedido: " + e.getMessage());
         }
     }
 
-
     @FXML
     public void adicionarItem() {
-        irParaTelaPrincipal();
     }
 
     @FXML
@@ -201,37 +151,28 @@ public class TelaPedidoController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                // Simula o cancelamento do pedido
-                if (pedidoAtual != null) {
-                    pedidoAtual.setStatus(StatusPedido.CANCELADO);
-                    pedidoRepositorio.atualizarPedido(pedidoAtual);
-                }
-
-
-                tableView.getItems().clear();
-                labelValorTotal.setText("R$ 0.00");
-
-                pedidoAtual = null;
-
-                Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
-                sucesso.setTitle("Cancelamento bem-sucedido");
-                sucesso.setHeaderText(null);
-                sucesso.setContentText("O pedido foi cancelado com sucesso.");
-                sucesso.show();
-
-                irParaTelaPrincipal();
-
-            } catch (Exception e) {
-                Alert erro = new Alert(Alert.AlertType.ERROR);
-                erro.setTitle("Erro");
-                erro.setHeaderText(null);
-                erro.setContentText("Erro: " + e.getMessage());
-                erro.show();
-            }
+            cancelarPedidoConfirmado();
         }
     }
 
+    private void cancelarPedidoConfirmado() {
+        tableView.getItems().clear();
+        labelValorTotal.setText("R$ 0.00");
+        pedidoAtual = null;
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Cancelamento Bem-Sucedido", "O pedido foi cancelado com sucesso.");
+        mudarTela("TelaPrincipal.fxml");
+    }
 
+    private void mudarTela(String telaFXML) {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen(telaFXML, telaFXML.replace(".fxml", ""));
+    }
 
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String conteudo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(conteudo);
+        alert.showAndWait();
+    }
 }

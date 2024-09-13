@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ItemPedido implements Serializable {
 
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 65464L;
 
     public static final int ITENS = 100;
 
@@ -12,15 +12,12 @@ public class ItemPedido implements Serializable {
     private double quantidade;
     private int idItem;
 
-    public ItemPedido(Produto produto, double quantidade) {
+    public ItemPedido(Produto produto) {
         if (produto == null) {
             throw new IllegalArgumentException("Produto não pode ser nulo.");
         }
-        if (quantidade <= 0) {
-            throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
-        }
         this.produto = produto;
-        this.quantidade = quantidade;
+        this.quantidade = 0; // Inicializa quantidade com valor padrão
     }
 
     public Produto getProduto() {
@@ -32,11 +29,17 @@ public class ItemPedido implements Serializable {
     }
 
     public double getPrecoProduto() {
-        return produto.getPreco();
+        if (produto != null) {
+            return produto.getPreco();
+        }
+        return 0.0;
     }
 
     public String getNomeProduto() {
-        return this.produto.getNome();
+        if (produto != null) {
+            return this.produto.getNome();
+        }
+        return "Nome não disponível";
     }
 
     public int getIdItem() {
@@ -59,15 +62,18 @@ public class ItemPedido implements Serializable {
     }
 
     public double getValorProduto() {
-        return this.produto.getPreco();
+        return getPrecoProduto();
     }
 
     public double getValorItemPedido() {
-        return this.produto.getPreco() * this.quantidade;
+        return getPrecoProduto() * this.quantidade;
     }
 
     public int getIdProduto() {
-        return this.produto.getId();
+        if (produto != null) {
+            return this.produto.getId();
+        }
+        return -1; //valor padrão se o produto for nulo
     }
 
     @Override

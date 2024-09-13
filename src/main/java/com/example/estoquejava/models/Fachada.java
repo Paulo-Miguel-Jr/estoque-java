@@ -1,6 +1,7 @@
 package com.example.estoquejava.models;
 
 import com.example.estoquejava.models.enums.StatusPedido;
+import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
 import com.example.estoquejava.repository.ItemPedidoRepositorio;
@@ -11,6 +12,8 @@ public class Fachada {
 
     private UsuarioController usuarioController;
     private PedidoController pedidoController;
+
+    private PedidoRepositorio pedidoRepositorio;
     private ItemPedidoController itemPedidoController;
 
 
@@ -77,13 +80,19 @@ public class Fachada {
     }
 
     public void listarPedidos() {
-        pedidoController.listarPedido();
+        pedidoRepositorio.listarPedidos();
     }
 
     public void adicionarItemAoPedido(int idPedido, ItemPedido item) {pedidoController.adicionarItemAoPedido(idPedido, item );}
 
-    public void cancelarPedido(int idPedido) {
-        pedidoController.setStatus(StatusPedido.CANCELADO);
+    public void cancelarPedido(int idPedido) throws PedNaoEncontException {
+        Pedido pedido = procurarPedido(idPedido);
+        if (pedido != null && pedido.getStatus() == StatusPedido.PENDENTE) {
+            pedido.setStatus(StatusPedido.CANCELADO);
+
+        } else {
+            throw new PedNaoEncontException("Pedido não encontrado com o número: " + idPedido);
+        }
     }
 
 

@@ -3,7 +3,6 @@ package com.example.estoquejava.models;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -51,9 +50,6 @@ public class Pedido implements Serializable {
         this.dataPedido = dataPedido;
     }
 
-    public ItemPedido[] getItensPedido() {
-        return itensPedido;
-    }
 
     public void setItensPedido(ItemPedido[] itensPedido) {
         this.itensPedido = itensPedido;
@@ -83,36 +79,42 @@ public class Pedido implements Serializable {
         return total;
     }
 
-
     public void adicionarItemPedido(ItemPedido item) throws LimiteItensAlcancadoException {
         if (quantidadeItens < itensPedido.length) {
             itensPedido[quantidadeItens] = item;
             quantidadeItens++;
             this.valorTotal = calcularValorTotal();
         } else {
-           throw new LimiteItensAlcancadoException("Não é possível adicionar mais itens. Limite de itens alcançado.");
+            throw new LimiteItensAlcancadoException("Não é possível adicionar mais itens. Limite de itens alcançado.");
         }
     }
 
-   @Override
-   public String toString() {
-       StringBuilder sb = new StringBuilder();
-       sb.append(String.format("PedidoFornecedor{numero=%d, dataPedido=%s, status=%s\n", idPedido, dataPedido, status));
-       sb.append("\nItens do Pedido:\n");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Pedido{numero=%d, dataPedido=%s, status=%s\n", idPedido, dataPedido, status));
+        sb.append("\nItens do Pedido:\n");
 
-       if (quantidadeItens == 0) {
-           sb.append("Nenhum item no pedido.\n");
-       } else {
-           for (int i = 0; i < quantidadeItens; i++) {
-               sb.append(String.format("%d. —----------------------- \n", i + 1));
-               sb.append(itensPedido[i].toString());
-               sb.append("\n—----------------------- \n");
-           }
-       }
+        if (quantidadeItens == 0) {
+            sb.append("Nenhum item no pedido.\n");
+        } else {
+            for (int i = 0; i < quantidadeItens; i++) {
+                sb.append(String.format("%d. —----------------------- \n", i + 1));
+                sb.append(itensPedido[i].toString());
+                sb.append("\n—----------------------- \n");
+            }
+        }
 
-       sb.append(String.format("\nValor Total do Pedido: %.2f\n", valorTotal));
-       sb.append('}');
-       return sb.toString();
-   }
+        sb.append(String.format("\nValor Total do Pedido: %.2f\n", valorTotal));
+        sb.append('}');
+        return sb.toString();
+    }
 
+    public ItemPedido[] getItens() {
+        return itensPedido;
+    }
+
+    public ItemPedido[] getItensPedido() {
+        return itensPedido;
+    }
 }

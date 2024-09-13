@@ -55,11 +55,11 @@ public class Main {
             Produto produto4 = new Produto("Produto 4", 162, 10.00, 10, "quilo", 1);
 
             // Cria itens de pedido
-            ItemPedido item1 = new ItemPedido(produto1, 2);
-            ItemPedido item2 = new ItemPedido(produto2, 1);
+            ItemPedido item1 = new ItemPedido(produto1);
+            ItemPedido item2 = new ItemPedido(produto2);
 
-            ItemPedido item3 = new ItemPedido(produto3, 2);
-            ItemPedido item4 = new ItemPedido(produto4, 1);
+            ItemPedido item3 = new ItemPedido(produto3);
+            ItemPedido item4 = new ItemPedido(produto4);
 
 
             // Adiciona itens ao pedido1
