@@ -2,6 +2,7 @@ package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.ItemPedido;
+import com.example.estoquejava.models.ItemPedidoController;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.PedidoController;
 import com.example.estoquejava.models.enums.StatusPedido;
@@ -9,6 +10,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,7 +25,7 @@ import java.util.ResourceBundle;
 public class TelaPedidoController implements Initializable {
 
     @FXML
-    private Button adicionarItem, criarPedido, cancelarPedido, buttonVerFinal;
+    private Button adicionarItem, criarPedido, cancelarPedido, buttonRemover;
 
     @FXML
     private ImageView image;
@@ -52,6 +54,7 @@ public class TelaPedidoController implements Initializable {
     @FXML
     private SplitPane split;
 
+    private ItemPedidoController itemPedidoController;
     private ObservableList<ItemPedido> listaItens;
     private Pedido pedidoAtual;
     private PedidoController pedidoController;
@@ -143,7 +146,25 @@ public class TelaPedidoController implements Initializable {
         mudarTela("TelaPrincipal.fxml");
     }
 
+
     @FXML
+    private void removerItemPedido(ActionEvent event) {
+        ItemPedido itemSelecionado = tableView.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            pedidoAtual.removerItemPedido(itemSelecionado);
+            tableView.setItems(FXCollections.observableArrayList(pedidoAtual.getItens()));
+            setarLabel();
+
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Item Removido", "O item foi removido com sucesso." );
+
+        } else {
+            mostrarAlerta(Alert.AlertType.WARNING, "Nenhum Item Selecionado","Por favor, selecione um item para remover.");
+        }
+    }
+
+
+      @FXML
     public void cancelarPedido() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar Cancelamento");
@@ -154,7 +175,7 @@ public class TelaPedidoController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             cancelarPedidoConfirmado();
         }
-    }
+   }
 
     private void cancelarPedidoConfirmado() {
         tableView.getItems().clear();
@@ -176,4 +197,6 @@ public class TelaPedidoController implements Initializable {
         alert.setContentText(conteudo);
         alert.showAndWait();
     }
+
+
 }

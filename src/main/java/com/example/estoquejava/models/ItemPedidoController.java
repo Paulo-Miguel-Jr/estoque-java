@@ -18,9 +18,9 @@ public class ItemPedidoController {
         }
     }
 
-    public void removerItemPedido(int idItem) {
-        if (idItem > 0) {
-            itens.removerItemPedido(idItem);
+    public void removerItemPedido(ItemPedido itemPedido) {
+        if (itemPedido != null) {
+            itens.removerItemPedido(itemPedido);
         } else {
             throw new IllegalArgumentException("ID deve ser positivo.");
         }

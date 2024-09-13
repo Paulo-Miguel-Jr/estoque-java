@@ -7,7 +7,7 @@ public interface IItemPedidoRepositorio {
 
     void adicionarItemPedido(ItemPedido novoItemPedido);
 
-    void removerItemPedido(int idItem);
+    void removerItemPedido(ItemPedido itemPedido);
 
     ItemPedido buscarItemPedido(int idItem);
 

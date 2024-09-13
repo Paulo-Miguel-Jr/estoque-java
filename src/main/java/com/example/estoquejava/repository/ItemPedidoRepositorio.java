@@ -99,10 +99,12 @@ public  class ItemPedidoRepositorio implements IItemPedidoRepositorio, Serializa
         }
     }
 
-    public void removerItemPedido(int idItem) throws ItemPedNaoEncontException {
-        int indice = getIdItemPedido(idItem);
+
+    public void removerItemPedido(ItemPedido itemParaRemover) throws ItemPedNaoEncontException {
+        int indice = getIdItemPedido(itemParaRemover.getIdItem());
+
         if (indice == -1) {
-            throw new PedNaoEncontException("Pedido não encontrado.");
+            throw new ItemPedNaoEncontException("Item de pedido não encontrado.");
         } else {
             // Move todos os elementos após o índice para uma posição anterior
             for (int i = indice; i < proximo - 1; i++) {
@@ -113,6 +115,7 @@ public  class ItemPedidoRepositorio implements IItemPedidoRepositorio, Serializa
             proximo--;
         }
     }
+
 
     public ItemPedido buscarItemPedido(int idItem) throws ItemPedNaoEncontException {
         int indice = getIdItemPedido(idItem);

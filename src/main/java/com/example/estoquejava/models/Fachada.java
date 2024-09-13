@@ -102,8 +102,8 @@ public class Fachada {
         itemPedidoController.adicionarItemPedido(item);
     };
 
-    public void removerItemPedido(int idItem){
-        itemPedidoController.removerItemPedido(idItem);
+    public void removerItemPedido(ItemPedido itemPedido){
+        itemPedidoController.removerItemPedido(itemPedido);
     }
 
     public ItemPedido buscarItemPedido(int idItem){
