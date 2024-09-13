@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class ScreenManager {
     private static ScreenManager instance;
-    private static Stage stg;
+    private static Stage stage;
 
     private Scene telaLogin;
     private Scene telaPrincipal;
@@ -16,64 +16,55 @@ public class ScreenManager {
     private Scene telaFinal;
 
     private TelaLoginController telaLoginController;
-
     private TelaCadastroController telaCadastroController;
-
     private TelaPrincipalController telaPrincipalController;
-
     private TelaPedidoController telaPedidoController;
-
     private TelaFinalController telaFinalController;
 
-
-    public ScreenManager(){
+    private ScreenManager() {
         this.screenLoader();
     }
 
-    //Singleton para uma única instancia das telas.
-    public static ScreenManager getInstance(){
-        if(instance == null){
+    public static ScreenManager getInstance() {
+        if (instance == null) {
             instance = new ScreenManager();
         }
         return instance;
     }
 
-
-
-    //Getter e setter do Stage
-    public static Stage getStg(){
-        return stg;
+    public static Stage getStg() {
+        return stage;
     }
 
-    public static void setStg(Stage stg){
-        ScreenManager.stg = stg;
+    public static void setStg(Stage stage) {
+        ScreenManager.stage = stage;
     }
 
-    //Getters das Scenes
-    public Scene getTelaLogin(){
+    public Scene getTelaLogin() {
         return telaLogin;
     }
-    public Scene getTelaPrincipal(){
+
+    public Scene getTelaPrincipal() {
         return telaPrincipal;
     }
+
     public Scene getTelaCadastro() {
         return telaCadastro;
     }
+
     public Scene getTelaPedido() {
         return telaPedido;
     }
+
     public Scene getTelaFinal() {
         return telaFinal;
     }
 
-
-
-    //Getters dos Controllers
-    public TelaLoginController getTelaLoginController(){
+    public TelaLoginController getTelaLoginController() {
         return telaLoginController;
     }
 
-    public TelaPrincipalController getTelaPrincipalController(){
+    public TelaPrincipalController getTelaPrincipalController() {
         return telaPrincipalController;
     }
 
@@ -89,53 +80,48 @@ public class ScreenManager {
         return telaFinalController;
     }
 
-    private void screenLoader(){
+    private void screenLoader() {
         try {
-            FXMLLoader TelaLoginPane = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
-            this.telaLogin = new Scene(TelaLoginPane.load());
-            this.telaLoginController = TelaLoginPane.getController();
+            FXMLLoader loader;
 
-            FXMLLoader TelaPrincipalPane = new FXMLLoader(getClass().getResource("TelaPrincipal.fxml"));
-            this.telaPrincipal = new Scene(TelaPrincipalPane.load());
-            this.telaPrincipalController = TelaPrincipalPane.getController();
+            loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+            this.telaLogin = new Scene(loader.load());
+            this.telaLoginController = loader.getController();
 
-            FXMLLoader TelaCadastroPane = new FXMLLoader(getClass().getResource("TelaCadastro.fxml"));
-            this.telaCadastro = new Scene(TelaCadastroPane.load());
-            this.telaCadastroController = TelaCadastroPane.getController();
+            loader = new FXMLLoader(getClass().getResource("TelaPrincipal.fxml"));
+            this.telaPrincipal = new Scene(loader.load());
+            this.telaPrincipalController = loader.getController();
 
-            FXMLLoader TelaPedidoPane = new FXMLLoader(getClass().getResource("TelaPedido.fxml"));
-            this.telaPedido = new Scene(TelaPedidoPane.load());
-            this.telaPedidoController = TelaPedidoPane.getController();
+            loader = new FXMLLoader(getClass().getResource("TelaCadastro.fxml"));
+            this.telaCadastro = new Scene(loader.load());
+            this.telaCadastroController = loader.getController();
 
-            FXMLLoader TelaFinalPane = new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
-            this.telaFinal = new Scene(TelaFinalPane.load());
-            this.telaFinalController = TelaFinalPane.getController();
+            loader = new FXMLLoader(getClass().getResource("TelaPedido.fxml"));
+            this.telaPedido = new Scene(loader.load());
+            this.telaPedidoController = loader.getController();
 
+            loader = new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
+            this.telaFinal = new Scene(loader.load());
+            this.telaFinalController = loader.getController();
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void changeScreen(String fileNameFxml, String titleScreen){
-        boolean max = stg.isMaximized();
-        if(max) stg.setMaximized(false);
+    public void changeScreen(String fileNameFxml, String titleScreen) {
+        boolean max = stage.isMaximized();
+        if (max) stage.setMaximized(false);
 
-        switch (fileNameFxml){
-            case "TelaLogin.fxml" -> stg.setScene(telaLogin);
-            case "TelaPrincipal.fxml" -> stg.setScene(telaPrincipal);
-            case "TelaCadastro.fxml" -> stg.setScene(telaCadastro);
-            case "TelaPedido.fxml" -> stg.setScene(telaPedido);
-            case "TelaFinal.fxml" -> stg.setScene(telaFinal);
+        switch (fileNameFxml) {
+            case "TelaLogin.fxml" -> stage.setScene(telaLogin);
+            case "TelaPrincipal.fxml" -> stage.setScene(telaPrincipal);
+            case "TelaCadastro.fxml" -> stage.setScene(telaCadastro);
+            case "TelaPedido.fxml" -> stage.setScene(telaPedido);
+            case "TelaFinal.fxml" -> stage.setScene(telaFinal);
         }
-        stg.setTitle(titleScreen);
+        stage.setTitle(titleScreen);
 
-        if(max) stg.setMaximized(true);
-
+        if (max) stage.setMaximized(true);
     }
-
-
-
-
-
 }

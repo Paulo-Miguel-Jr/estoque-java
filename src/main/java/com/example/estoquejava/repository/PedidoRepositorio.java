@@ -94,6 +94,11 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
         return -1;
     }
 
+    public int gerarNovoId() {
+
+        return proxIdLivre + 1;
+    }
+
 
     @Override
     public void adicionarPedido(Pedido pedido) throws PedidoRepCheioException {
@@ -150,14 +155,15 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     }
 
     @Override
-    public Pedido procurarPedido(int idPedido) throws PedNaoEncontException {
-        int indice = getIdPedido(idPedido);
-        if (indice == -1) {
-            throw new PedNaoEncontException("Pedido não encontrado.");
-        } else {
-            return pedidos[indice];
+    public Pedido procurarPedido(int idPedido) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getIdPedido() == idPedido) {
+                return pedido;
+            }
         }
+        return null;
     }
+
 
     @Override
     public void adicionarItemAoPedido(int idPedido, ItemPedido novoItem) throws PedNaoEncontException, LimiteItensAlcancadoException {

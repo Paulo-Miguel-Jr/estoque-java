@@ -29,10 +29,10 @@ public class TestePedido {
                 Produto produto3 = new Produto("Produto 3", 160, 25.00, 10, "quilo", 1);
                 Produto produto4 = new Produto("Produto 4", 162, 10.00, 10, "quilo", 1);
 
-                ItemPedido item1 = new ItemPedido(produto1, 2);
-                ItemPedido item2 = new ItemPedido(produto2, 1);
-                ItemPedido item3 = new ItemPedido(produto3, 2);
-                ItemPedido item4 = new ItemPedido(produto4, 1);
+                ItemPedido item1 = new ItemPedido(produto1);
+                ItemPedido item2 = new ItemPedido(produto2);
+                ItemPedido item3 = new ItemPedido(produto3);
+                ItemPedido item4 = new ItemPedido(produto4);
 
                 pedidoRepositorio.adicionarItemAoPedido(1, item1);
                 pedidoRepositorio.adicionarItemAoPedido(1, item2);
