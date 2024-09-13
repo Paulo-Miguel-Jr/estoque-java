@@ -125,7 +125,6 @@ public class TelaPedidoController implements Initializable {
 
     @FXML
     public void adicionarItem() {
-        // No need to change screens here; this should be handled in TelaPrincipalController
     }
 
     @FXML

@@ -58,7 +58,7 @@ public class TelaPrincipalController implements Initializable {
 
         pedidoController = new PedidoController();
         itemPedidoController = new ItemPedidoController();
-        pedidoAtual = new Pedido(); // Criar um novo pedido ou carregar um existente
+        pedidoAtual = new Pedido(); //cria novo ou adiciona existente
     }
 
     private void configurarColunas() {
@@ -81,11 +81,11 @@ public class TelaPrincipalController implements Initializable {
         if (produtoSelecionado != null) {
             ItemPedido itemPedido = new ItemPedido(produtoSelecionado);
             itemPedido.setQuantidade(Double.parseDouble(comboBox.getSelectionModel().getSelectedItem()));
-            pedidoAtual.adicionarItemPedido(itemPedido); // Adiciona o item ao pedido
+            pedidoAtual.adicionarItemPedido(itemPedido); //adiciona o item ao pedido
 
-            itemPedidoController.adicionarItemPedido(itemPedido); // Adiciona o item no repositório
+            itemPedidoController.adicionarItemPedido(itemPedido); //adiciona o item no repositório
 
-            pedidoController.criarPedido(pedidoAtual); // Atualize o pedido no sistema
+            pedidoController.criarPedido(pedidoAtual); //atualizar o pedido no sistema
             ScreenManager sm = ScreenManager.getInstance();
             TelaPedidoController telaPedidoController = sm.getTelaPedidoController();
             telaPedidoController.setPedidoAtual(pedidoAtual);
