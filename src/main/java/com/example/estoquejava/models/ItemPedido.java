@@ -73,7 +73,7 @@ public class ItemPedido implements Serializable {
         if (produto != null) {
             return this.produto.getId();
         }
-        return -1; // Valor padrão se o produto for nulo
+        return -1; //valor padrão se o produto for nulo
     }
 
     @Override

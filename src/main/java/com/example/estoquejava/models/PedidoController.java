@@ -16,7 +16,7 @@ public class PedidoController {
 
     public int criarPedido(Pedido pedido) throws InvalidPedidoException {
         validarPedido(pedido);
-        int novoId = gerarIdPedido(); // Método para gerar um novo ID único
+        int novoId = gerarIdPedido();
         pedido.setIdPedido(novoId);
         pedidoRepositorio.adicionarPedido(pedido);
         return novoId;
@@ -87,8 +87,6 @@ public class PedidoController {
     }
 
     private int gerarIdPedido() {
-        // Implementar a lógica para gerar um ID único para o pedido
-        // Pode ser uma simples contagem ou uma estratégia mais sofisticada
-        return pedidoRepositorio.gerarNovoId(); // Método fictício no repositório para gerar um ID
+        return pedidoRepositorio.gerarNovoId();
     }
 }
