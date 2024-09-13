@@ -80,6 +80,11 @@ public class Pedido implements Serializable {
         return total;
     }
 
+    public void limparItens() {
+        this.itensPedido = new ItemPedido[itensPedido.length]; // Recria o array, efetivamente "limpando" os itens
+        this.quantidadeItens = 0;
+    }
+
     public void adicionarItemPedido(ItemPedido item) throws LimiteItensAlcancadoException {
         if (quantidadeItens < itensPedido.length) {
             itensPedido[quantidadeItens] = item;

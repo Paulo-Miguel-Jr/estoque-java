@@ -61,13 +61,11 @@ public class PedidoController {
         pedidoRepositorio.processarVenda(idPedido);
     }
 
-    public void cancelarPedido(int idPedido) throws PedNaoEncontException {
-        Pedido pedido = procurarPedido(idPedido);
-        if (pedido.getStatus() == StatusPedido.PENDENTE) {
+    public void cancelarPedido(Pedido pedido) {
+        if (pedido != null) {
             pedido.setStatus(StatusPedido.CANCELADO);
-            pedidoRepositorio.atualizarPedido(pedido);
-        } else {
-            throw new InvalidPedidoException("Somente pedidos pendentes podem ser cancelados.");
+            pedido.limparItens(); // Remove todos os itens do pedido
+            atualizarPedido(pedido);  // Atualiza o pedido no repositório
         }
     }
 

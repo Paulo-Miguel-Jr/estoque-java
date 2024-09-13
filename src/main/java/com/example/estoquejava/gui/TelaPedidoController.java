@@ -153,18 +153,19 @@ public class TelaPedidoController implements Initializable {
 
         if (itemSelecionado != null) {
             pedidoAtual.removerItemPedido(itemSelecionado);
+
+            pedidoController.atualizarPedido(pedidoAtual);
+
             tableView.setItems(FXCollections.observableArrayList(pedidoAtual.getItens()));
             setarLabel();
 
-            mostrarAlerta(Alert.AlertType.INFORMATION, "Item Removido", "O item foi removido com sucesso." );
-
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Item Removido", "O item foi removido com sucesso.");
         } else {
-            mostrarAlerta(Alert.AlertType.WARNING, "Nenhum Item Selecionado","Por favor, selecione um item para remover.");
+            mostrarAlerta(Alert.AlertType.WARNING, "Nenhum Item Selecionado", "Por favor, selecione um item para remover.");
         }
     }
 
-
-      @FXML
+    @FXML
     public void cancelarPedido() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar Cancelamento");
@@ -172,9 +173,17 @@ public class TelaPedidoController implements Initializable {
         alert.setContentText("O pedido será cancelado e a tela será resetada.");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            cancelarPedidoConfirmado();
-        }
+          if (result.isPresent() && result.get() == ButtonType.OK) {
+              pedidoAtual.setStatus(StatusPedido.CANCELADO);
+              pedidoAtual.limparItens();
+
+              pedidoController.atualizarPedido(pedidoAtual); // Atualiza o repositório de pedidos (ou o controlador, se necessário)
+
+              tableView.setItems(FXCollections.observableArrayList());
+              labelValorTotal.setText("R$ 0.00");
+
+              pedidoAtual = null;
+          }
    }
 
     private void cancelarPedidoConfirmado() {
