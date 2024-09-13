@@ -5,6 +5,7 @@ import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.PedidoController;
 import com.example.estoquejava.models.enums.StatusPedido;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,10 +38,10 @@ public class TelaPedidoController implements Initializable {
     private TableColumn<ItemPedido, String> colunaItem;
 
     @FXML
-    private TableColumn<ItemPedido, Double> colunaPreco;
+    private TableColumn<ItemPedido, String> colunaPreco;
 
     @FXML
-    private TableColumn<ItemPedido, Integer> colunaQuantidade;
+    private TableColumn<ItemPedido, String> colunaQuantidade;
 
     @FXML
     private ScrollPane scrollPane;
@@ -73,12 +74,26 @@ public class TelaPedidoController implements Initializable {
             }
         });
 
+        colunaQuantidade.setCellValueFactory(cellData -> {
+            ItemPedido item = cellData.getValue();
+            if (item != null) {
+                return new SimpleStringProperty(String.valueOf(item.getQuantidade()));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });
 
-
-        colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        colunaPreco.setCellValueFactory(cellData -> {
+            ItemPedido item = cellData.getValue();
+            if (item != null) {
+                return new SimpleStringProperty(String.format("%.2f", item.getPrecoProduto()));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });
 
     }
+
 
     public void setPedidoAtual(Pedido pedido) {
         this.pedidoAtual = pedido;
