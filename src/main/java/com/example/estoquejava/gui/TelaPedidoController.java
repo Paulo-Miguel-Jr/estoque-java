@@ -67,7 +67,6 @@ public class TelaPedidoController implements Initializable {
     }
 
     private void configurarColunas() {
-
         colunaItem.setCellValueFactory(cellData -> {
             ItemPedido item = cellData.getValue();
             if (item != null) {

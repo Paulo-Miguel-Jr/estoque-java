@@ -87,4 +87,5 @@ public class Produto implements Serializable {
                 ", estoqueMinimo=" + estoqueMinimo +
                 '}';
     }
+
 }

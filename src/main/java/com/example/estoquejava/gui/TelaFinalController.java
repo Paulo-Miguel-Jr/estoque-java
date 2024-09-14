@@ -22,32 +22,30 @@ import java.util.stream.Collectors;
 
 public class TelaFinalController implements Initializable {
     @FXML
-    private Button buttonVer;
+    private Button buttonVer, buttonCancelar, buttonOutroPedido;;
 
     @FXML
     private ImageView image;
 
     @FXML
-    private Label labelValorFinalizado;
-
-    @FXML
-    private Button buttonCancelar;
+    private Label labelValorFinalizado, labelFinalizado;
 
     @FXML
     private AnchorPane anchor;
-
-    @FXML
-    private Button buttonOutroPedido;
-
-    @FXML
-    private Label labelFinalizado;
-
 
     @FXML
     private ListView<String> listViewItensPedido;
 
     private PedidoController pedidoController;
     private Pedido pedidoFinalizado;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        pedidoController = new PedidoController();
+        if (pedidoFinalizado != null) {
+            setarLabel();
+        }
+    }
 
 
     @FXML
@@ -69,6 +67,7 @@ public class TelaFinalController implements Initializable {
 
     @FXML
     public void verPedido() {
+
         if (pedidoFinalizado == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nenhum Pedido Finalizado");
@@ -152,8 +151,4 @@ public class TelaFinalController implements Initializable {
         alert.showAndWait();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }
