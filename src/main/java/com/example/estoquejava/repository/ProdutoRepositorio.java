@@ -42,17 +42,32 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         return true;
     }
 
+    // Checar se o produto já existe no repositório (por nome ou ID)
+    private boolean produtoDuplicado(Produto produto) {
+        for (int i = 0; i < contador; i++) {
+            if (produtos[i].getNome().equalsIgnoreCase(produto.getNome()) || produtos[i].getId() == produto.getId()) {
+                return true; // Produto duplicado
+            }
+        }
+        return false;
+    }
+
     @Override
     public void adicionarProduto(Produto produto) {
-        if (contador < produtos.length) {
-            if (validarProduto(produto)) {
+        if (contador >= produtos.length) {
+            System.out.println("Repositório cheio, não é possível adicionar mais produtos.");
+            return;
+        }
+
+        if (validarProduto(produto)) {
+            if (!produtoDuplicado(produto)) {
                 produtos[contador++] = produto;
                 adicionarHistorico("Produto adicionado: " + produto.getNome());
             } else {
-                System.out.println("Produto inválido. Não foi possível adicionar.");
+                System.out.println("Produto duplicado. Não foi possível adicionar.");
             }
         } else {
-            System.out.println("Repositório cheio, não é possível adicionar mais produtos.");
+            System.out.println("Produto inválido. Não foi possível adicionar.");
         }
     }
 
