@@ -12,7 +12,7 @@ public interface IProdutoRepositorio {
 
     void atualizarPrecos(double percentual);
     void notificarProdutosEmBaixa();
-    void gerarRelatorioProdutosEmBaixa();
+    String gerarRelatorioProdutosEmBaixa();
     void listarHistoricoAlteracoes();
     int getQuantidadeProdutos();
 }

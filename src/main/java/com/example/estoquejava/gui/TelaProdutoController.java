@@ -4,10 +4,7 @@ import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.repository.ProdutoRepositorio;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.*;
 import java.net.URL;
@@ -51,6 +48,15 @@ public class TelaProdutoController implements Initializable {
     @FXML
     private Label unidadeLabel;
 
+    @FXML
+    private TextArea listaProdutosTextArea;
+
+    @FXML
+    private Button listarProdutosButton;
+
+    @FXML
+    private Button gerarRelatorioButton;
+
     private ProdutoRepositorio produtoRepositorio;
 
     public TelaProdutoController() {
@@ -61,6 +67,7 @@ public class TelaProdutoController implements Initializable {
     @FXML
     public void initialize() {
         adicionarButton.setOnAction(event -> adicionarProduto());
+        listarProdutosButton.setOnAction(event -> listarTodosProdutos());
     }
 
     private void adicionarProduto() {
@@ -98,6 +105,31 @@ public class TelaProdutoController implements Initializable {
         quantidadeTextField.clear();
         unidadeDeMedidaTextField.clear();
         estoqueMinimoTextField.clear();
+    }
+
+    private void listarTodosProdutos() {
+        Produto[] produtos = produtoRepositorio.listarTodos();  //Pega todos os produtos do repositório
+        if (produtos.length == 0) {
+            listaProdutosTextArea.setText("Nenhum produto cadastrado.");
+        } else {
+            StringBuilder builder = new StringBuilder();
+            for (Produto produto : produtos) {
+                builder.append("ID: ").append(produto.getId())
+                        .append(", Nome: ").append(produto.getNome())
+                        .append(", Preço: ").append(produto.getPreco())
+                        .append(", Quantidade: ").append(produto.getQuantidade())
+                        .append(", Unidade: ").append(produto.getUnidadeDeMedida())
+                        .append(", Estoque Mínimo: ").append(produto.getEstoqueMinimo())
+                        .append("\n");
+            }
+            listaProdutosTextArea.setText(builder.toString());  //Exibe os produtos na TextArea
+        }
+    }
+
+    //Gerar o relatório de produtos em baixa e exibir no TextArea
+    private void gerarRelatorioProdutosEmBaixa() {
+        String relatorio = produtoRepositorio.gerarRelatorioProdutosEmBaixa();
+        listaProdutosTextArea.setText(relatorio);
     }
 
     private void exibirAlerta(String titulo, String mensagem, Alert.AlertType tipo) {

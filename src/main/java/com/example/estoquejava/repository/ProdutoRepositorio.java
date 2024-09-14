@@ -135,13 +135,26 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
     }
 
     @Override
-    public void gerarRelatorioProdutosEmBaixa() {
-        System.out.println("Relatório de Produtos em Baixa Quantidade:");
-        for (int i = 0; i < contador; i++) {
-            if (produtos[i].getQuantidade() < produtos[i].getEstoqueMinimo()) {
-                System.out.println(produtos[i]);
+    public String gerarRelatorioProdutosEmBaixa() {
+        StringBuilder relatorio = new StringBuilder();
+        relatorio.append("Relatório de Produtos em Baixa Quantidade:\n");
+
+        for (Produto produto : listarTodos()) {
+            if (produto.getQuantidade() < produto.getEstoqueMinimo()) {
+                relatorio.append("ID: ").append(produto.getId())
+                        .append(", Nome: ").append(produto.getNome())
+                        .append(", Quantidade: ").append(produto.getQuantidade())
+                        .append(", Estoque Mínimo: ").append(produto.getEstoqueMinimo())
+                        .append("\n");
             }
         }
+
+        // Verifica se nenhum produto está em baixa quantidade
+        if (relatorio.length() == "Relatório de Produtos em Baixa Quantidade:\n".length()) {
+            return "Todos os produtos estão com estoque adequado.";
+        }
+
+        return relatorio.toString();
     }
 
     @Override
