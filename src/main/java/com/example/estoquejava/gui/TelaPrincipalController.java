@@ -24,6 +24,9 @@ public class TelaPrincipalController implements Initializable {
     private BorderPane border;
 
     @FXML
+    private Label labelQuantidade;
+
+    @FXML
     private Button buttonAdcProd, buttonRmvProd, buttonAdcCart, irCarrinho;
 
     @FXML
@@ -99,5 +102,11 @@ public class TelaPrincipalController implements Initializable {
         TelaPedidoController telaPedidoController = sm.getTelaPedidoController();
         telaPedidoController.setPedidoAtual(pedidoAtual);
         sm.changeScreen("TelaPedido.fxml", "TelaPedido");
+    }
+
+    @FXML
+    private void irParaTelaProduto(ActionEvent event) {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaProduto.fxml", "TelaProduto");
     }
 }
