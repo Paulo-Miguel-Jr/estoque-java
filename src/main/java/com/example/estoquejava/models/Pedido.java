@@ -70,6 +70,14 @@ public class Pedido implements Serializable {
         this.status = status;
     }
 
+    public ItemPedido[] getItens() {
+        return itensPedido;
+    }
+
+    public ItemPedido[] getItensPedido() {
+        return itensPedido;
+    }
+
     public double calcularValorTotal() {
         double total = 0;
         for (int i = 0; i < quantidadeItens; i++) {
@@ -81,7 +89,7 @@ public class Pedido implements Serializable {
     }
 
     public void limparItens() {
-        this.itensPedido = new ItemPedido[itensPedido.length]; // Recria o array, efetivamente "limpando" os itens
+        this.itensPedido = new ItemPedido[itensPedido.length];
         this.quantidadeItens = 0;
     }
 
@@ -140,11 +148,4 @@ public class Pedido implements Serializable {
         return sb.toString();
     }
 
-    public ItemPedido[] getItens() {
-        return itensPedido;
-    }
-
-    public ItemPedido[] getItensPedido() {
-        return itensPedido;
-    }
 }

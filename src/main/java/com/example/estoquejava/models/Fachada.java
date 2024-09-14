@@ -12,6 +12,7 @@ public class Fachada {
 
     private UsuarioController usuarioController;
     private PedidoController pedidoController;
+    private ProdutoController produtoController;
 
     private PedidoRepositorio pedidoRepositorio;
     private ItemPedidoController itemPedidoController;
@@ -114,4 +115,45 @@ public class Fachada {
         itemPedidoController.listarItensPedido();
     }
 
+
+    //métodos Produto===========================================================
+
+    public void adicionarProduto(Produto produto) {
+        produtoController.adicionarProduto(produto);
+    }
+
+    public Produto obterProdutoPorId(int id) {
+        return produtoController.obterProdutoPorId(id);
+    }
+
+    public Produto[] listarTodos() {
+        return produtoController.listarTodos();
+    }
+
+    public boolean removerProdutoPorId(int id) {
+        return produtoController.removerProdutoPorId(id);
+    }
+
+    public Produto[] buscarProdutosPorNome(String nome) {
+        buscarProdutosPorNome(nome);
+        return produtoController.buscarProdutosPorNome(nome);
+    }
+
+    public void atualizarPrecos(double percentual) {
+        produtoController.atualizarPrecos(percentual);
+    }
+
+    public void notificarProdutosEmBaixa() {
+        produtoController.notificarProdutosEmBaixa();
+    }
+
+    public void gerarRelatorioProdutosEmBaixa() {
+        produtoController.gerarRelatorioProdutosEmBaixa();
+    }
+
+    public void listarHistoricoAlteracoes() {
+        produtoController.listarHistoricoAlteracoes();
+    }
+    
 }
+

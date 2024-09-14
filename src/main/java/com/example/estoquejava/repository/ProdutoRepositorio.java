@@ -30,7 +30,7 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
     }
 
     //validação de dados
-    private boolean validarProduto(Produto produto) {
+    public boolean validarProduto(Produto produto) {
         if (produto.getNome() == null || produto.getNome().isEmpty()) {
             System.out.println("Nome do produto é obrigatório.");
             return false;
@@ -223,6 +223,9 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         }
     }
 
+    public int gerarNovoId() {
+        return contador + 1;
+    }
 
     @Override
     public int getQuantidadeProdutos() {

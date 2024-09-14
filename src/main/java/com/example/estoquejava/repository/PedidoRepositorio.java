@@ -93,7 +93,6 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     }
 
     public int gerarNovoId() {
-
         return proxIdLivre + 1;
     }
 
@@ -125,11 +124,6 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
             salvarArquivo();
         }
     }
-   //else {
-    //            pedidos[indice] = pedidos[proxIdLivre - 1];
-    //            pedidos[proxIdLivre - 1] = null;
-    //            proxIdLivre--;
-    //        }
 
 
     @Override
@@ -185,14 +179,6 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
         pedido.setItensPedido(itensAtualizados);
         salvarArquivo();
     }
-
-    //    if (pedido != null) {
-//            pedido.adicionarItemPedido(item);
-    //      } else {
-    //           throw new PedNaoEncontException("Pedido não encontrado.");
-    //       }
-//}
-
 
     public void processarVenda(int idPedido) throws PedNaoEncontException {
         int indice = getIdPedido(idPedido);
