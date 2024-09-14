@@ -35,10 +35,12 @@ public class ProdutoController {
     }
 
     public boolean removerProdutoPorId(int id) {
+        obterProdutoPorId(id);
         return produtoRepositorio.removerProdutoPorId(id);
     }
 
     public Produto[] buscarProdutosPorNome(String nome) {
+        buscarProdutosPorNome(nome);
         return produtoRepositorio.buscarProdutosPorNome(nome);
     }
 
