@@ -57,6 +57,7 @@ public class TelaLoginController implements Initializable {
     private void validarLogin(ActionEvent event) {
         String nomeUsuario = usuarioField.getText();
         String senha;
+
         if (senhaField.isVisible()) {
             senha = senhaField.getText();
         } else {
@@ -68,13 +69,14 @@ public class TelaLoginController implements Initializable {
             if (usuario == null) {
                 statusLabel.setText("Usuário não encontrado.");
             } else {
-
-                if (!usuario.getSenha().equals(senha)) { //comparar apenas com a senha do campo
+                if (!usuario.getSenha().equals(senha)) {
                     statusLabel.setText("Senha incorreta.");
-
                 } else {
-                    irParaTela();
-
+                    if ("admin".equals(nomeUsuario) && "admin123".equals(senha)) {
+                        irParaTelaAdmin();
+                    } else {
+                        irParaTela();
+                    }
                 }
             }
         } catch (Exception e) {
@@ -83,6 +85,12 @@ public class TelaLoginController implements Initializable {
             System.out.println("Erro no login: " + e.getMessage());
         }
     }
+
+    private void irParaTelaAdmin() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaAdmin.fxml", "Admin Dashboard");
+    }
+
 
     private void irParaTela() {
         ScreenManager sm = ScreenManager.getInstance();
