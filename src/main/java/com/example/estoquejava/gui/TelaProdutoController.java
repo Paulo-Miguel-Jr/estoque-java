@@ -1,19 +1,19 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.repository.ProdutoRepositorio;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class TelaProdutoController implements Initializable {
+public class TelaProdutoController {
 
     @FXML
     private Button adicionarButton;
@@ -57,6 +57,9 @@ public class TelaProdutoController implements Initializable {
     @FXML
     private Button gerarRelatorioButton;
 
+    @FXML
+    private Button voltarButton;
+
     private ProdutoRepositorio produtoRepositorio;
 
     public TelaProdutoController() {
@@ -64,12 +67,13 @@ public class TelaProdutoController implements Initializable {
         produtoRepositorio = ProdutoRepositorio.getInstance();
     }
 
+    /*
     @FXML
     public void initialize() {
         adicionarButton.setOnAction(event -> adicionarProduto());
         listarProdutosButton.setOnAction(event -> listarTodosProdutos());
-    }
-
+    } */
+    @FXML
     private void adicionarProduto() {
         try {
             String nome = nomeTextField.getText();
@@ -107,6 +111,7 @@ public class TelaProdutoController implements Initializable {
         estoqueMinimoTextField.clear();
     }
 
+    @FXML
     private void listarTodosProdutos() {
         Produto[] produtos = produtoRepositorio.listarTodos();  //Pega todos os produtos do repositório
         if (produtos.length == 0) {
@@ -127,6 +132,7 @@ public class TelaProdutoController implements Initializable {
     }
 
     //Gerar o relatório de produtos em baixa e exibir no TextArea
+    @FXML
     private void gerarRelatorioProdutosEmBaixa() {
         String relatorio = produtoRepositorio.gerarRelatorioProdutosEmBaixa();
         listaProdutosTextArea.setText(relatorio);
@@ -140,10 +146,12 @@ public class TelaProdutoController implements Initializable {
         alert.showAndWait();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    @FXML
+    void irParaTelaPrincipal(ActionEvent event) {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
+
 }
 
 

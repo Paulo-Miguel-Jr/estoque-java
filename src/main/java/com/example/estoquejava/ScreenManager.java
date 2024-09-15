@@ -14,12 +14,14 @@ public class ScreenManager {
     private Scene telaCadastro;
     private Scene telaPedido;
     private Scene telaFinal;
+    private Scene telaProduto;
 
     private TelaLoginController telaLoginController;
     private TelaCadastroController telaCadastroController;
     private TelaPrincipalController telaPrincipalController;
     private TelaPedidoController telaPedidoController;
     private TelaFinalController telaFinalController;
+    private TelaProdutoController telaProdutoController;
 
     private ScreenManager() {
         this.screenLoader();
@@ -60,6 +62,10 @@ public class ScreenManager {
         return telaFinal;
     }
 
+    public Scene getTelaProduto() {
+        return telaProduto;
+    }
+
     public TelaLoginController getTelaLoginController() {
         return telaLoginController;
     }
@@ -78,6 +84,10 @@ public class ScreenManager {
 
     public TelaFinalController getTelaFinalController() {
         return telaFinalController;
+    }
+
+    public TelaProdutoController getTelaProdutoController() {
+        return telaProdutoController;
     }
 
 
@@ -105,6 +115,10 @@ public class ScreenManager {
             this.telaFinal = new Scene(loader.load());
             this.telaFinalController = loader.getController();
 
+            loader = new FXMLLoader(getClass().getResource("TelaProduto.fxml"));
+            this.telaProduto = new Scene(loader.load());
+            this.telaProdutoController = loader.getController();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -120,6 +134,7 @@ public class ScreenManager {
             case "TelaCadastro.fxml" -> stage.setScene(telaCadastro);
             case "TelaPedido.fxml" -> stage.setScene(telaPedido);
             case "TelaFinal.fxml" -> stage.setScene(telaFinal);
+            case "TelaProduto.fxml" -> stage.setScene(telaProduto);
         }
         stage.setTitle(titleScreen);
 

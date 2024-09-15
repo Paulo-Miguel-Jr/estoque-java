@@ -42,7 +42,7 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         return true;
     }
 
-    // Checar se o produto já existe no repositório (por nome ou ID)
+    //Checar se o produto já existe no repositório (por nome ou ID)
     private boolean produtoDuplicado(Produto produto) {
         for (int i = 0; i < contador; i++) {
             if (produtos[i].getNome().equalsIgnoreCase(produto.getNome()) || produtos[i].getId() == produto.getId()) {
