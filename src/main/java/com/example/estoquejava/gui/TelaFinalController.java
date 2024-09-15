@@ -78,9 +78,9 @@ public class TelaFinalController implements Initializable {
     @FXML
     public void verPedido() {
         ScreenManager sm = ScreenManager.getInstance();
-        TelaPedidoController telaPedidoController = sm.getTelaPedidoController();
-        telaPedidoController.setPedidoAtual(pedidoAtual);
-        sm.changeScreen("TelaVerPedido.fxml", "TelaVerPedido");
+        TelaVerPedidoController telaVerPedidoController = sm.getTelaVerPedidoController();
+        telaVerPedidoController.setPedido(pedidoAtual);
+        sm.changeScreen("TelaVerPedido.fxml", "Tela Ver Pedido");
     }
 
     @FXML
