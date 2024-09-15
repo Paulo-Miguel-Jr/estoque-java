@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.security.PublicKey;
+
 public class ScreenManager {
     private static ScreenManager instance;
     private static Stage stage;
@@ -15,6 +17,7 @@ public class ScreenManager {
     private Scene telaPedido;
     private Scene telaFinal;
     private Scene telaProduto;
+    private Scene telaVerPedido;
 
     private TelaLoginController telaLoginController;
     private TelaCadastroController telaCadastroController;
@@ -22,6 +25,7 @@ public class ScreenManager {
     private TelaPedidoController telaPedidoController;
     private TelaFinalController telaFinalController;
     private TelaProdutoController telaProdutoController;
+    private TelaVerPedidoController telaVerPedidoController;
 
     private ScreenManager() {
         this.screenLoader();
@@ -66,6 +70,8 @@ public class ScreenManager {
         return telaProduto;
     }
 
+    public Scene getTelaVerPedido() {return telaVerPedido; }
+
     public TelaLoginController getTelaLoginController() {
         return telaLoginController;
     }
@@ -89,6 +95,8 @@ public class ScreenManager {
     public TelaProdutoController getTelaProdutoController() {
         return telaProdutoController;
     }
+
+    public TelaVerPedidoController getTelaVerPedidoController () {return telaVerPedidoController; }
 
 
     private void screenLoader() {
@@ -119,6 +127,10 @@ public class ScreenManager {
             this.telaProduto = new Scene(loader.load());
             this.telaProdutoController = loader.getController();
 
+            loader = new FXMLLoader(getClass().getResource("TelaVerPedido.fxml"));
+            this.telaVerPedido = new Scene(loader.load());
+            this.telaVerPedidoController = loader.getController();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -136,6 +148,7 @@ public class ScreenManager {
             case "TelaPedido.fxml" -> stage.setScene(telaPedido);
             case "TelaFinal.fxml" -> stage.setScene(telaFinal);
             case "TelaProduto.fxml" -> stage.setScene(telaProduto);
+            case "TelaVerPedidoo.fxml" -> stage.setScene(telaProduto);
         }
         stage.setTitle(titleScreen);
 
