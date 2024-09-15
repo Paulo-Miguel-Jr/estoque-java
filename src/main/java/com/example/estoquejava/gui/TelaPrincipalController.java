@@ -6,6 +6,7 @@ import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.PedidoController;
 import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.models.ItemPedidoController;
+import com.example.estoquejava.repository.ProdutoRepositorio;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,9 +43,12 @@ public class TelaPrincipalController implements Initializable {
     private PedidoController pedidoController;
     private ItemPedidoController itemPedidoController;
     private Pedido pedidoAtual;
+    private ProdutoRepositorio produtoRepositorio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        produtoRepositorio = ProdutoRepositorio.getInstance();
+
         configurarColunas();
         carregarTableViewProduto();
 
@@ -71,11 +75,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     private void carregarTableViewProduto() {
-        Produto p1 = new Produto("Arroz", 1, 8.99, 20, "pacote", 5);
+        /*Produto p1 = new Produto("Arroz", 1, 8.99, 20, "pacote", 5);
         Produto p2 = new Produto("Feijão", 2, 6.99, 30, "pacote", 10);
 
         observableListProduto.addAll(p1, p2);
-        tabela.setItems(observableListProduto);
+        tabela.setItems(observableListProduto);*/
+
+        Produto[] produtos = produtoRepositorio.listarTodos(); // Obtém produtos do arquivo
+        observableListProduto.addAll(produtos); // Adiciona os produtos na lista
+        tabela.setItems(observableListProduto); // Atualiza a tabela
     }
 
     @FXML

@@ -10,7 +10,6 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         ScreenManager.setStg(stage);
-        //URL resource = Application.class.getResource("TelaLogin.fxml");
 
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("TelaLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 916, 538);
