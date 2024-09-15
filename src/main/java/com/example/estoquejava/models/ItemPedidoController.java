@@ -1,5 +1,6 @@
 package com.example.estoquejava.models;
 
+import com.example.estoquejava.models.exceptions.ItemPedNaoEncontException;
 import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
 public class ItemPedidoController {
@@ -37,4 +38,9 @@ public class ItemPedidoController {
     public void listarItensPedido() {
         itens.listarItensPedidos();
     }
+
+    public void atualizarItemPedido(ItemPedido itemAtualizado) {
+        itens.atualizarItemPedido(itemAtualizado);
+    }
+
 }

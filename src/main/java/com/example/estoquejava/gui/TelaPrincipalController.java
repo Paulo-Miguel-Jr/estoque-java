@@ -95,13 +95,23 @@ public class TelaPrincipalController implements Initializable {
     private void adicionarItem(ActionEvent event) {
         Produto produtoSelecionado = tabela.getSelectionModel().getSelectedItem();
         if (produtoSelecionado != null) {
+            double quantidadeSelecionada = Double.parseDouble(comboBox.getSelectionModel().getSelectedItem());
             ItemPedido itemPedido = new ItemPedido(produtoSelecionado);
-            itemPedido.setQuantidade(Double.parseDouble(comboBox.getSelectionModel().getSelectedItem()));
+            itemPedido.setQuantidade(quantidadeSelecionada);
             pedidoAtual.adicionarItemPedido(itemPedido); //adiciona o item ao pedido
+
+            produtoSelecionado.setQuantidade(produtoSelecionado.getQuantidade() - quantidadeSelecionada);
+
+            // Atualiza o repositório com a nova quantidade
+            produtoRepositorio.atualizarProduto(produtoSelecionado);
+            produtoRepositorio.salvarArquivo();
 
             itemPedidoController.adicionarItemPedido(itemPedido); //adiciona o item no repositório
 
             pedidoController.criarPedido(pedidoAtual); //atualizar o pedido no sistema
+
+            carregarTableViewProduto();
+
             ScreenManager sm = ScreenManager.getInstance();
             TelaPedidoController telaPedidoController = sm.getTelaPedidoController();
             telaPedidoController.setPedidoAtual(pedidoAtual);

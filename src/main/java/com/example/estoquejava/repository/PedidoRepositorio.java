@@ -196,6 +196,61 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
 
     }
 
+    public void gerarRelatorioPedidoPendente() {
+        System.out.println("Relatório de Pedidos Pendentes:");
+        System.out.println("------------------------------");
+
+        boolean encontrouPedidoPendente = false;
+
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null && pedidos[i].getStatus() == StatusPedido.PENDENTE) {
+                System.out.println(pedidos[i]);
+                encontrouPedidoPendente = true;
+            }
+        }
+
+        if (!encontrouPedidoPendente) {
+            System.out.println("Nenhum pedido pendente encontrado.");
+        }
+    }
+
+    public void gerarRelatorioPedidoCancelado() {
+        System.out.println("Relatório de Pedidos Cancelados:");
+        System.out.println("-------------------------------");
+
+        boolean encontrouPedidoCancelado = false;
+
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null && pedidos[i].getStatus() == StatusPedido.CANCELADO) {
+                System.out.println(pedidos[i]);
+                encontrouPedidoCancelado = true;
+            }
+        }
+
+        if (!encontrouPedidoCancelado) {
+            System.out.println("Nenhum pedido cancelado encontrado.");
+        }
+    }
+
+
+    public void gerarRelatorioPedidoProcessado() {
+        System.out.println("Relatório de Pedidos Processados:");
+        System.out.println("-------------------------------");
+
+        boolean encontrouPedidoProcessado = false;
+
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null && pedidos[i].getStatus() == StatusPedido.PROCESSADO) {
+                System.out.println(pedidos[i]);
+                encontrouPedidoProcessado = true;
+            }
+        }
+
+        if (!encontrouPedidoProcessado) {
+            System.out.println("Nenhum pedido processado encontrado.");
+        }
+    }
+
 }
 
 

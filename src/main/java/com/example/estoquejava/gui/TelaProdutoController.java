@@ -64,12 +64,6 @@ public class TelaProdutoController {
         produtoRepositorio = ProdutoRepositorio.getInstance();
     }
 
-    /*
-    @FXML
-    public void initialize() {
-        adicionarButton.setOnAction(event -> adicionarProduto());
-        listarProdutosButton.setOnAction(event -> listarTodosProdutos());
-    } */
     @FXML
     private void adicionarProduto() {
         try {

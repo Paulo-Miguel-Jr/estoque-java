@@ -56,6 +56,7 @@ public class TestePedido {
 
                 System.out.println("===========================");
 
+
                 int[] idsExistentes = {1, 2};
                 for (int id : idsExistentes) {
                     int index = pedidoRepositorio.getIdPedido(id);
@@ -66,6 +67,15 @@ public class TestePedido {
                 System.out.println("Índice do pedido com ID 150: " + invalidIndex);
 
                 System.out.println("===========================");
+
+                System.out.println("==============PEDIDOS CANCELADOS=============");
+                pedidoRepositorio.gerarRelatorioPedidoCancelado();
+
+                System.out.println("==============PEDIDOS PENDENTES=============");
+                pedidoRepositorio.gerarRelatorioPedidoPendente();
+
+                System.out.println("==============PEDIDOS PROCESSADOS=============");
+                pedidoRepositorio.gerarRelatorioPedidoProcessado();
 
             } catch (PedidoRepCheioException e) {
                 System.err.println("Erro ao adicionar pedido: " + e.getMessage());
