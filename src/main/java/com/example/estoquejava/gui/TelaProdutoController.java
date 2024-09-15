@@ -73,19 +73,45 @@ public class TelaProdutoController {
     @FXML
     private void adicionarProduto() {
         try {
-            String nome = nomeTextField.getText();
+            String nome = nomeTextField.getText().trim();
+            if (nome.isEmpty()) {
+                exibirAlerta("Erro", "O nome do produto não pode ser vazio.", Alert.AlertType.ERROR);
+                return;
+            }
+            if (nome.length() < 3) {
+                exibirAlerta("Erro", "O nome do produto deve ter pelo menos 3 caracteres.", Alert.AlertType.ERROR);
+                return;
+            }
+
             double preco = Double.parseDouble(precoTextField.getText().replace(",","."));
+            if (preco <= 0) {
+                exibirAlerta("Erro", "O preço deve ser um valor positivo.", Alert.AlertType.ERROR);
+                return;
+            }
+
             double quantidade = Double.parseDouble(quantidadeTextField.getText());
-            String unidadeDeMedida = unidadeDeMedidaTextField.getText();
+            if (quantidade < 0) {
+                exibirAlerta("Erro", "A quantidade não pode ser negativa.", Alert.AlertType.ERROR);
+                return;
+            }
+
+            String unidadeDeMedida = unidadeDeMedidaTextField.getText().trim();
+            if (unidadeDeMedida.isEmpty()) {
+                exibirAlerta("Erro", "A unidade de medida não pode ser vazia.", Alert.AlertType.ERROR);
+                return;
+            }
+
             double estoqueMinimo = Double.parseDouble(estoqueMinimoTextField.getText());
+            if (estoqueMinimo < 0) {
+                exibirAlerta("Erro", "O estoque mínimo não pode ser negativo.", Alert.AlertType.ERROR);
+                return;
+            }
 
             //Gerar um novo ID baseado na quantidade de produtos já existentes
             int novoId = produtoRepositorio.getQuantidadeProdutos() + 1;
 
-            // Criar novo produto
+            //criar novo produto
             Produto novoProduto = new Produto(nome, novoId, preco, quantidade, unidadeDeMedida, estoqueMinimo);
-
-            // Adicionar o produto ao repositório (que cuida de validações)
             produtoRepositorio.adicionarProduto(novoProduto);
 
             // Salvar os dados no arquivo após a adição
@@ -99,6 +125,7 @@ public class TelaProdutoController {
             exibirAlerta("Erro", "Por favor, insira valores numéricos válidos!", Alert.AlertType.ERROR);
         }
     }
+
 
     private void limparCampos() {
         nomeTextField.clear();
