@@ -58,11 +58,6 @@ public class TelaCadastroController {
         sm.changeScreen("TelaLogin.fxml", "TelaLogin");
     }
 
-    @FXML
-    private void irParaTelaPrincipal() {
-        ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
-    }
 
     private void validarSenha(String usuario, String senha, String senhaConfirm) {
         if (usuario == null || usuario.trim().isEmpty()) {
