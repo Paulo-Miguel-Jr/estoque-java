@@ -130,7 +130,8 @@ public class ScreenManager {
 
         switch (fileNameFxml) {
             case "TelaLogin.fxml" -> stage.setScene(telaLogin);
-            case "TelaPrincipal.fxml" -> stage.setScene(telaPrincipal);
+            case "TelaPrincipal.fxml" -> {
+                telaPrincipalController.atualizarTableView() ; stage.setScene(telaPrincipal);}
             case "TelaCadastro.fxml" -> stage.setScene(telaCadastro);
             case "TelaPedido.fxml" -> stage.setScene(telaPedido);
             case "TelaFinal.fxml" -> stage.setScene(telaFinal);

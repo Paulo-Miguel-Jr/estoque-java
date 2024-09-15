@@ -83,6 +83,14 @@ public class TelaPrincipalController implements Initializable {
         tabela.setItems(observableListProduto); // Atualiza a tabela
     }
 
+    public void atualizarTableView() {
+
+        observableListProduto.clear(); //limpa a lista atual de produtos
+        Produto[] produtos = produtoRepositorio.listarTodos(); // Obtém produtos do arquivo
+        observableListProduto.addAll(produtos); // Adiciona os produtos na lista
+        tabela.setItems(observableListProduto); // Atualiza a tabela
+    }
+
     @FXML
     private void adicionarItem(ActionEvent event) {
         Produto produtoSelecionado = tabela.getSelectionModel().getSelectedItem();

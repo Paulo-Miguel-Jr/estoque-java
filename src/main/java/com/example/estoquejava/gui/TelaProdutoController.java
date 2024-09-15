@@ -74,7 +74,7 @@ public class TelaProdutoController {
     private void adicionarProduto() {
         try {
             String nome = nomeTextField.getText();
-            double preco = Double.parseDouble(precoTextField.getText());
+            double preco = Double.parseDouble(precoTextField.getText().replace(",","."));
             double quantidade = Double.parseDouble(quantidadeTextField.getText());
             String unidadeDeMedida = unidadeDeMedidaTextField.getText();
             double estoqueMinimo = Double.parseDouble(estoqueMinimoTextField.getText());
