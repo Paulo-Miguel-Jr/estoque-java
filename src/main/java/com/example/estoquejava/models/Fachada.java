@@ -116,6 +116,9 @@ public class Fachada {
         itemPedidoController.listarItensPedido();
     }
 
+    public void atualizarItemPedido(ItemPedido itemAtualizado) {
+        itemPedidoController.atualizarItemPedido(itemAtualizado);
+    }
 
     //métodos Produto===========================================================
 

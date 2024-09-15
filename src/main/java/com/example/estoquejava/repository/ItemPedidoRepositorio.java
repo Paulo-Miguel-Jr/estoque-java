@@ -133,4 +133,16 @@ public  class ItemPedidoRepositorio implements IItemPedidoRepositorio, Serializa
             }
         }
     }
+
+    public void atualizarItemPedido(ItemPedido itemAtualizado) throws ItemPedNaoEncontException {
+        int indice = getIdItemPedido(itemAtualizado.getIdItem());
+
+        if (indice == -1) {
+            throw new ItemPedNaoEncontException("Item de pedido não encontrado.");
+        } else {
+            itemPedido[indice] = itemAtualizado;
+            System.out.println("Item de pedido atualizado com sucesso.");
+        }
+    }
+
 }
