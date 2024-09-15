@@ -28,7 +28,7 @@ public class TelaPrincipalController implements Initializable {
     private Label labelQuantidade;
 
     @FXML
-    private Button buttonAdcProd, buttonRmvProd, buttonAdcCart, irCarrinho;
+    private Button buttonAdcProd, buttonRmvProd, buttonAdcCart, irCarrinho, atualizarButton;
 
     @FXML
     private ComboBox<String> comboBox;
@@ -74,13 +74,10 @@ public class TelaPrincipalController implements Initializable {
         colunaQuantidade.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getQuantidade())));
     }
 
+    @FXML
     private void carregarTableViewProduto() {
-        /*Produto p1 = new Produto("Arroz", 1, 8.99, 20, "pacote", 5);
-        Produto p2 = new Produto("Feijão", 2, 6.99, 30, "pacote", 10);
 
-        observableListProduto.addAll(p1, p2);
-        tabela.setItems(observableListProduto);*/
-
+        observableListProduto.clear(); //limpa a lista atual de produtos
         Produto[] produtos = produtoRepositorio.listarTodos(); // Obtém produtos do arquivo
         observableListProduto.addAll(produtos); // Adiciona os produtos na lista
         tabela.setItems(observableListProduto); // Atualiza a tabela
@@ -102,6 +99,34 @@ public class TelaPrincipalController implements Initializable {
             telaPedidoController.setPedidoAtual(pedidoAtual);
             sm.changeScreen("TelaPedido.fxml", "TelaPedido");
         }
+    }
+
+    @FXML
+    private void removerProduto(ActionEvent event) {
+        Produto produtoSelecionado = tabela.getSelectionModel().getSelectedItem();
+
+        if (produtoSelecionado != null) {
+            boolean removido = produtoRepositorio.removerProdutoPorId(produtoSelecionado.getId()); // Remove o produto do repositório
+
+            if (removido) {
+                carregarTableViewProduto(); // Atualiza a tabela após a remoção
+                produtoRepositorio.salvarArquivo(); // Salva as mudanças no arquivo
+
+                exibirAlerta(Alert.AlertType.INFORMATION, "Produto Removido", "O produto foi removido com sucesso.");
+            } else {
+                exibirAlerta(Alert.AlertType.ERROR, "Erro ao Remover", "Ocorreu um erro ao tentar remover o produto.");
+            }
+        } else {
+            exibirAlerta(Alert.AlertType.WARNING, "Nenhum Produto Selecionado", "Por favor, selecione um produto para remover.");
+        }
+    }
+
+    private void exibirAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     @FXML

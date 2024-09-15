@@ -37,10 +37,15 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Button>
-            <Button fx:id="buttonRmvProd" mnemonicParsing="false" text="Remover Produto">
+            <Button fx:id="buttonRmvProd" mnemonicParsing="false" onAction="#removerProduto" text="Remover Produto">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Button>
+            <Button fx:id="atualizarButton" mnemonicParsing="false" onAction="#carregarTableViewProduto" prefHeight="25.0" prefWidth="87.0" text="Atualizar">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
             <Button fx:id="buttonAdcCart" mnemonicParsing="false" onAction="#adicionarItem" text="Adicionar no carrinho">
                <HBox.margin>
                   <Insets left="110.0" top="10.0" />
