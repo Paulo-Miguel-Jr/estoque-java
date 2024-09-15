@@ -130,6 +130,12 @@ public class TelaPedidoController implements Initializable {
             pedidoAtual.setStatus(StatusPedido.PROCESSADO);
             pedidoController.atualizarPedido(pedidoAtual);
             mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Finalizado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
+
+            // Passando o pedido para a tela final
+            ScreenManager sm = ScreenManager.getInstance();
+            TelaFinalController telaFinalController = sm.getTelaFinalController();
+            telaFinalController.setPedidoAtual(pedidoAtual);
+
             verFinal();
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Erro ao Finalizar Pedido", "Erro ao finalizar pedido: " + e.getMessage());
