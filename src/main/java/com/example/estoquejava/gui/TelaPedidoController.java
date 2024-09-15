@@ -124,7 +124,7 @@ public class TelaPedidoController implements Initializable {
 
     @FXML
     public void verFinal() {
-        mudarTela("TelaFinal");
+        mudarTela("TelaFinal.fxml");
     }
 
     @FXML
