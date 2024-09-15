@@ -4,23 +4,16 @@ import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.*;
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.repository.ProdutoRepositorio;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -187,21 +180,51 @@ public class TelaPedidoController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar Cancelamento");
         alert.setHeaderText("Você realmente deseja cancelar o pedido?");
-        alert.setContentText("O pedido será cancelado e a tela será resetada.");
+        alert.setContentText("O pedido será cancelado e os itens serão devolvidos ao estoque.");
 
         Optional<ButtonType> result = alert.showAndWait();
-          if (result.isPresent() && result.get() == ButtonType.OK) {
-              pedidoAtual.setStatus(StatusPedido.CANCELADO);
-              pedidoAtual.limparItens();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            ProdutoRepositorio produtoRepositorio = ProdutoRepositorio.getInstance();
 
-              pedidoController.atualizarPedido(pedidoAtual); // Atualiza o repositório de pedidos (ou o controlador, se necessário)
+            // Percorre todos os itens exibidos na TableView
+            ObservableList<ItemPedido> itensTableView = tableView.getItems();
+            for (ItemPedido item : itensTableView) {
+                if (item != null && item.getProduto() != null) {
+                    Produto produto = item.getProduto();
+                    double quantidadeRemovida = item.getQuantidade();
 
-              tableView.setItems(FXCollections.observableArrayList());
-              labelValorTotal.setText("R$ 0.00");
+                    // Recupera o produto do repositório
+                    Produto produtoNoRepositorio = produtoRepositorio.obterProdutoPorId(produto.getId());
 
-              pedidoAtual = null;
-          }
-   }
+                    if (produtoNoRepositorio != null) {
+                        // Devolve a quantidade removida ao estoque
+                        produtoNoRepositorio.setQuantidade(produtoNoRepositorio.getQuantidade() + quantidadeRemovida);
+
+                        // Atualiza o repositório com a nova quantidade
+                        produtoRepositorio.atualizarProduto(produtoNoRepositorio);
+                    } else {
+                        mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Produto não encontrado no repositório: " + produto.getNome());
+                    }
+                }
+            }
+
+            // Atualiza o status do pedido para CANCELADO
+            pedidoAtual.setStatus(StatusPedido.CANCELADO);
+            pedidoAtual.limparItens();  // Limpa os itens do pedido
+
+            // Atualiza o repositório de pedidos
+            pedidoController.atualizarPedido(pedidoAtual);
+
+            // Limpa a TableView e atualiza o valor total
+            tableView.setItems(FXCollections.observableArrayList());
+            labelValorTotal.setText("R$ 0.00");
+
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Cancelado", "O pedido foi cancelado e os itens foram devolvidos ao estoque.");
+
+            // Resetando o pedido atual
+            pedidoAtual = null;
+        }
+    }
 
     private void cancelarPedidoConfirmado() {
         tableView.getItems().clear();
