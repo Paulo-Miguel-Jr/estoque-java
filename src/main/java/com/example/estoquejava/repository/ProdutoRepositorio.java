@@ -173,6 +173,18 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         }
     }
 
+    //atualizar um produto no repositório
+    public boolean atualizarProduto(Produto produtoAtualizado) {
+        for (int i = 0; i < contador; i++) {
+            if (produtos[i].getId() == produtoAtualizado.getId()) {
+                produtos[i] = produtoAtualizado; //Atualiza o produto no array
+                salvarArquivo();
+                return true; //retorna vedadeiro se a atualização acontecer
+            }
+        }
+        return false; //Retorna falso se o produto não for encontrado
+    }
+
     private static ProdutoRepositorio lerDoArquivo() {
         ProdutoRepositorio instanciaLocal = null;
 

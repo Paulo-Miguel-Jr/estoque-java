@@ -5,6 +5,7 @@ import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
 import com.example.estoquejava.repository.ItemPedidoRepositorio;
+import com.example.estoquejava.repository.ProdutoRepositorio;
 
 public class Fachada {
 
