@@ -8,6 +8,7 @@ import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.InvalidPedidoException;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
 import com.example.estoquejava.repository.PedidoRepositorio;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -37,12 +38,13 @@ public class TelaFinalController implements Initializable {
     private ListView<String> listViewItensPedido;
 
     private PedidoController pedidoController;
-    private Pedido pedidoFinalizado;
+    private Pedido pedidoAtual;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pedidoController = new PedidoController();
-        if (pedidoFinalizado != null) {
+        if (pedidoAtual != null) {
             setarLabel();
         }
     }
@@ -50,7 +52,7 @@ public class TelaFinalController implements Initializable {
 
     @FXML
     public void setarLabel() {
-        double valorTotal = pedidoFinalizado.calcularValorTotal();
+        double valorTotal = pedidoAtual.calcularValorTotal();
         labelValorFinalizado.setText(String.format("%.2f", valorTotal));
     }
 
@@ -67,49 +69,19 @@ public class TelaFinalController implements Initializable {
 
     @FXML
     public void verPedido() {
-
-        if (pedidoFinalizado == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nenhum Pedido Finalizado");
-            alert.setHeaderText(null);
-            alert.setContentText("Nenhum pedido foi finalizado recentemente.");
-            alert.showAndWait();
-            return;
-        }
-
-        try {
-            List<ItemPedido> itens = List.of(pedidoFinalizado.getItensPedido());
-            listViewItensPedido.getItems().clear();
-
-            if (itens == null || itens.isEmpty()) {
-                listViewItensPedido.getItems().add("Nenhum item encontrado no pedido.");
-            } else {
-                for (ItemPedido item : itens) {
-                    listViewItensPedido.getItems().add(
-                            "Produto: " + item.getProduto().getNome() +
-                                    " - Quantidade: " + item.getQuantidade() +
-                                    " - Valor Unitário: " + item.getProduto().getPreco()
-                    );
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Erro ao exibir itens do pedido: " + e.getMessage());
-            alert.showAndWait();
-        }
+        ScreenManager sm = ScreenManager.getInstance();
+        TelaPedidoController telaPedidoController = sm.getTelaPedidoController();
+        telaPedidoController.setPedidoAtual(pedidoAtual);
+        sm.changeScreen("TelaVerPedido.fxml", "TelaVerPedido");
     }
 
     @FXML
     public void cancelarPedidoFinalizado() {
-        if (pedidoFinalizado == null) {
+        if (pedidoAtual == null) {
             mostrarAlerta(Alert.AlertType.WARNING, "Nenhum Pedido para Cancelar", "Nenhum pedido foi finalizado recentemente para cancelar.");
             return;
         }
 
-        // Confirmação de cancelamento
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacao.setTitle("Confirmação de Cancelamento");
         confirmacao.setHeaderText(null);
@@ -118,19 +90,16 @@ public class TelaFinalController implements Initializable {
         Optional<ButtonType> result = confirmacao.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                // Atualiza o status do pedido para CANCELADO
-                pedidoFinalizado.setStatus(StatusPedido.CANCELADO);
+                pedidoAtual.setStatus(StatusPedido.CANCELADO);
 
-                // Atualiza o repositório com o status cancelado
-                pedidoController.atualizarPedido(pedidoFinalizado); // Isso deve garantir que o pedido no repositório também esteja atualizado
+                pedidoController.atualizarPedido(pedidoAtual);
 
-                // Exibe mensagem de sucesso
-                mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Cancelado", "O pedido com ID " + pedidoFinalizado.getIdPedido() + " foi cancelado com sucesso.");
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Cancelado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi cancelado com sucesso.");
 
-                // Atualiza a interface para refletir o cancelamento
-                listViewItensPedido.getItems().clear(); // Limpa a lista de itens do pedido
-                labelValorFinalizado.setText("R$ 0.00"); // Reseta o valor total do pedido
-                pedidoFinalizado = null; // Reseta o pedido finalizado, já que ele foi cancelado
+
+                listViewItensPedido.getItems().clear();
+                labelValorFinalizado.setText("R$ 0.00");
+                pedidoAtual = null;
 
             } catch (PedNaoEncontException e) {
                 mostrarAlerta(Alert.AlertType.WARNING, "Pedido Não Encontrado", "Pedido não encontrado com o ID fornecido.");
