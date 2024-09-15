@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class TelaFinalController implements Initializable {
     @FXML
-    private Button buttonVer, buttonCancelar, buttonOutroPedido;;
+    private Button buttonVer, buttonOutroPedido;;
 
     @FXML
     private ImageView image;
@@ -83,71 +83,6 @@ public class TelaFinalController implements Initializable {
         sm.changeScreen("TelaVerPedido.fxml", "Tela Ver Pedido");
     }
 
-    @FXML
-    public void cancelarPedidoFinalizado() {
-        if (pedidoAtual == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Nenhum Pedido para Cancelar", "Nenhum pedido foi finalizado recentemente para cancelar.");
-            return;
-        }
-
-        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacao.setTitle("Confirmação de Cancelamento");
-        confirmacao.setHeaderText(null);
-        confirmacao.setContentText("Você tem certeza que deseja cancelar o pedido finalizado?");
-
-        Optional<ButtonType> result = confirmacao.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                ProdutoRepositorio produtoRepositorio = ProdutoRepositorio.getInstance();
-
-                // Devolvendo os itens ao estoque
-                ObservableList<ItemPedido> itensListView = listViewItensPedido.getItems();
-                for (ItemPedido item : itensListView) {
-                    if (item != null && item.getProduto() != null) {
-                        Produto produto = item.getProduto();
-                        double quantidadeRemovida = item.getQuantidade();
-
-                        // Recupera o produto do repositório
-                        Produto produtoNoRepositorio = produtoRepositorio.obterProdutoPorId(produto.getId());
-
-                        if (produtoNoRepositorio != null) {
-                            // Devolve a quantidade ao estoque
-                            produtoNoRepositorio.setQuantidade(produtoNoRepositorio.getQuantidade() + quantidadeRemovida);
-
-                            // Atualiza o repositório com a nova quantidade
-                            produtoRepositorio.atualizarProduto(produtoNoRepositorio);
-                        } else {
-                            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Produto não encontrado no repositório: " + produto.getNome());
-                        }
-                    }
-                }
-
-                // Atualiza o status do pedido para CANCELADO
-                pedidoAtual.setStatus(StatusPedido.CANCELADO);
-                pedidoAtual.limparItens();  // Limpa os itens do pedido
-
-                // Atualiza o repositório de pedidos
-                pedidoController.atualizarPedido(pedidoAtual);
-
-                // Limpa a ListView e atualiza o valor total
-                listViewItensPedido.getItems().clear();
-                labelValorFinalizado.setText("R$ 0.00");
-
-                mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Cancelado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi cancelado e os itens foram devolvidos ao estoque.");
-
-                // Resetando o pedido atual
-                pedidoAtual = null;
-
-            } catch (PedNaoEncontException e) {
-                mostrarAlerta(Alert.AlertType.WARNING, "Pedido Não Encontrado", "Pedido não encontrado com o ID fornecido.");
-            } catch (InvalidPedidoException e) {
-                mostrarAlerta(Alert.AlertType.WARNING, "Pedido Não Cancelável", e.getMessage());
-            } catch (Exception e) {
-                e.printStackTrace();
-                mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao cancelar pedido: " + e.getMessage());
-            }
-        }
-    }
 
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String conteudo) {
