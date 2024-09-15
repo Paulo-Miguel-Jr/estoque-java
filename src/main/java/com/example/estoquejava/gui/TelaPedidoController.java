@@ -154,32 +154,25 @@ public class TelaPedidoController implements Initializable {
         ItemPedido itemSelecionado = tableView.getSelectionModel().getSelectedItem();
 
         if (itemSelecionado != null) {
-            // Recupera o produto associado ao item selecionado
             Produto produto = itemSelecionado.getProduto();
             double quantidadeRemovida = itemSelecionado.getQuantidade();
 
-            // Adiciona novamente a quantidade removida ao estoque do produto no repositório
             ProdutoRepositorio produtoRepositorio = ProdutoRepositorio.getInstance();
             Produto produtoNoRepositorio = produtoRepositorio.obterProdutoPorId(produto.getId());
 
             if (produtoNoRepositorio != null) {
-                // Atualiza a quantidade do produto no repositório
                 produtoNoRepositorio.setQuantidade(produtoNoRepositorio.getQuantidade() + quantidadeRemovida);
 
-                // Atualiza o repositório com a nova quantidade
                 produtoRepositorio.atualizarProduto(produtoNoRepositorio);
             } else {
                 mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Produto não encontrado no repositório.");
                 return;
             }
 
-            // Remove o item do pedido
             pedidoAtual.removerItemPedido(itemSelecionado);
 
-            // Atualiza o pedido no repositório
             pedidoController.atualizarPedido(pedidoAtual);
 
-            // Atualiza a TableView
             tableView.setItems(FXCollections.observableArrayList(pedidoAtual.getItens()));
             setarLabel();
 
