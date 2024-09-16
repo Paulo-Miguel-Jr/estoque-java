@@ -55,7 +55,7 @@ public class ItemPedido implements Serializable {
     }
 
     public void setQuantidade(double quantidade) {
-        if (quantidade <= 0) {
+        if (quantidade < 0) {
             throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
         }
         this.quantidade = quantidade;

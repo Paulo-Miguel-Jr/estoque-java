@@ -35,12 +35,14 @@ public class ProdutoController {
     }
 
     public boolean removerProdutoPorId(int id) {
-        obterProdutoPorId(id);
+        Produto produto = obterProdutoPorId(id);
+        if (produto == null) {
+            throw new InvalidPedidoException("Produto com ID " + id + " não encontrado.");
+        }
         return produtoRepositorio.removerProdutoPorId(id);
     }
 
     public Produto[] buscarProdutosPorNome(String nome) {
-        buscarProdutosPorNome(nome);
         return produtoRepositorio.buscarProdutosPorNome(nome);
     }
 

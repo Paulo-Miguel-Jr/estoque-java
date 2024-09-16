@@ -27,6 +27,14 @@ public class Produto implements Serializable {
         this.estoqueMinimo = estoqueMinimo;
     }
 
+    public Produto(String nome, int id, double preco, double quantidade, double estoqueMinimo) {
+        this.nome = nome;
+        this.id = id;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.estoqueMinimo = estoqueMinimo;
+    }
+
     public Produto() {}
 
     public String getNome() {

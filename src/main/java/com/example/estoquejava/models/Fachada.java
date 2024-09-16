@@ -2,9 +2,7 @@ package com.example.estoquejava.models;
 
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
-import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
-import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
 public class Fachada {
 
@@ -21,6 +19,8 @@ public class Fachada {
     private Fachada() {
         this.usuarioController = new UsuarioController();
         this.pedidoController = new PedidoController();
+        this.produtoController = new ProdutoController();
+        this.itemPedidoController = new ItemPedidoController();
     }
 
     public static Fachada getInstancia() {
@@ -80,8 +80,9 @@ public class Fachada {
         pedidoController.processarVenda(idPedido);
     }
 
-    public void listarPedidos() {
+    public Pedido[] listarPedidos() {
         pedidoRepositorio.listarPedidos();
+        return new Pedido[0];
     }
 
     public void adicionarItemAoPedido(int idPedido, ItemPedido item) {pedidoController.adicionarItemAoPedido(idPedido, item );}
