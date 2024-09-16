@@ -97,6 +97,17 @@ public class Fachada {
         }
     }
 
+    public void gerarRelatorioPedidoPendente() {
+        pedidoController.gerarRelatorioPedidoPendente();
+    }
+
+    public void gerarRelatorioPedidoCancelado() {
+        pedidoController.gerarRelatorioPedidoCancelado();
+    }
+
+    public void gerarRelatorioPedidoProcessado() {
+        pedidoController.gerarRelatorioPedidoProcessado();
+    }
 
     //métodos ItemPedido===========================================================
 

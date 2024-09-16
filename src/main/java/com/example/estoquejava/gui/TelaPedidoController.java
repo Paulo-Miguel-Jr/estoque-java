@@ -3,6 +3,7 @@ package com.example.estoquejava.gui;
 import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.*;
 import com.example.estoquejava.models.enums.StatusPedido;
+import com.example.estoquejava.repository.PedidoRepositorio;
 import com.example.estoquejava.repository.ProdutoRepositorio;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -54,9 +55,11 @@ public class TelaPedidoController implements Initializable {
     private ObservableList<ItemPedido> listaItens;
     private Pedido pedidoAtual;
     private PedidoController pedidoController;
+    private PedidoRepositorio pedidoRepositorio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        pedidoRepositorio = new PedidoRepositorio();
         configurarColunas();
         listaItens = FXCollections.observableArrayList();
         pedidoController = new PedidoController();
@@ -130,6 +133,7 @@ public class TelaPedidoController implements Initializable {
             pedidoController.processarVenda(pedidoAtual.getIdPedido());
             pedidoAtual.setStatus(StatusPedido.PROCESSADO);
             pedidoController.atualizarPedido(pedidoAtual);
+            pedidoRepositorio.salvarArquivo();
             mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Finalizado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
 
             // Passando o pedido para a tela final

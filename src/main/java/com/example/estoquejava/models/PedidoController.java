@@ -87,4 +87,17 @@ public class PedidoController {
     private int gerarIdPedido() {
         return pedidoRepositorio.gerarNovoId();
     }
+
+    public void gerarRelatorioPedidoPendente() {
+        pedidoRepositorio.gerarRelatorioPedidoPendente();
+    }
+
+    public void gerarRelatorioPedidoCancelado() {
+        pedidoRepositorio.gerarRelatorioPedidoCancelado();
+    }
+
+    public void gerarRelatorioPedidoProcessado() {
+        pedidoRepositorio.gerarRelatorioPedidoProcessado();
+    }
+
 }

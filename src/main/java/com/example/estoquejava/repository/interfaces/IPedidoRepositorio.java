@@ -22,5 +22,11 @@ public interface IPedidoRepositorio {
 
     void processarVenda(int idPedido) throws PedNaoEncontException;
 
+    void gerarRelatorioPedidoPendente();
+
+    void gerarRelatorioPedidoCancelado();
+
+    void gerarRelatorioPedidoProcessado();
+
 
 }
