@@ -19,12 +19,6 @@ public class TelaProdutoController implements Initializable {
     private Button adicionarButton;
 
     @FXML
-    private Button adcQuantidadeButton;
-
-    @FXML
-    private TextField adcQuantidadeTextField;
-
-    @FXML
     private Label estoqueMinimoLabel;
 
     @FXML
@@ -47,9 +41,6 @@ public class TelaProdutoController implements Initializable {
 
     @FXML
     private TextField quantidadeTextField;
-
-    @FXML
-    private TextField idProdutoTextField;
 
     @FXML
     private ComboBox<UnidadeDeMedida> unidadeDeMedidaComboBox;
@@ -120,53 +111,15 @@ public class TelaProdutoController implements Initializable {
             Produto novoProduto = new Produto(nome, novoId, preco, quantidade, unidadeDeMedida, estoqueMinimo);
             produtoRepositorio.adicionarProduto(novoProduto);
 
-            //Salvar os dados no arquivo
+            // Salvar os dados no arquivo após a adição
             produtoRepositorio.salvarArquivo();
 
-            //Limpar os campos após adicionar
+            // Limpar os campos após adicionar
             limparCampos();
             exibirAlerta("Sucesso", "Produto adicionado com sucesso!", Alert.AlertType.INFORMATION);
 
         } catch (NumberFormatException e) {
             exibirAlerta("Erro", "Por favor, insira valores numéricos válidos!", Alert.AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    void adicionarQuantidade(ActionEvent event) {
-        try {
-            //ID do produto do campo de texto
-            int idProduto = Integer.parseInt(idProdutoTextField.getText().trim());
-            System.out.println(idProduto);
-            //quantidade a ser adicionada do campo de texto
-            int quantidadeAdicional = Integer.parseInt(adcQuantidadeTextField.getText().trim());
-            System.out.println(quantidadeAdicional);
-            if (quantidadeAdicional <= 0) {
-                exibirAlerta("Erro", "A quantidade deve ser maior que zero.", Alert.AlertType.ERROR);
-                return;
-            }
-
-            Produto produto = produtoRepositorio.obterProdutoPorId(idProduto);
-
-            if (produto != null) {
-                //atualiz a quantidade do produto
-                double novaQuantidade = produto.getQuantidade() + (double)quantidadeAdicional;
-                produto.setQuantidade(novaQuantidade);
-
-                //atualiza o repositório com a nova quantidade
-                produtoRepositorio.atualizarProduto(produto);
-                produtoRepositorio.salvarArquivo();
-
-                exibirAlerta("Sucesso", "Quantidade adicionada com sucesso ao produto " + produto.getNome() + ".", Alert.AlertType.INFORMATION);
-
-                //Limpa os campos de texto
-                idProdutoTextField.clear();
-                quantidadeTextField.clear();
-            } else {
-                exibirAlerta("Erro", "Produto não encontrado com o ID especificado.", Alert.AlertType.ERROR);
-            }
-        } catch (NumberFormatException e) {
-            exibirAlerta("Erro", "Por favor, insira um ID e uma quantidade válidos.", Alert.AlertType.ERROR);
         }
     }
 
