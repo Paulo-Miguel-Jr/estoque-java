@@ -19,7 +19,7 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     private static final long serialVersionUID = 1234567890123456789L;
 
     public PedidoRepositorio() {
-        this.pedidos = new Pedido[100];
+        this.pedidos = new Pedido[500];
         proxIdLivre = 0;
         this.itemPedidoRepositorio = ItemPedidoRepositorio.getInstance();
     }

@@ -11,7 +11,7 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 12345012345L;
 
-    public static final int LIMITE_ITENS = 100;
+    public static final int LIMITE_ITENS = 500;
 
     private int idPedido;
     private LocalDate dataPedido;
