@@ -36,12 +36,12 @@ public class UsuarioController {
     }
 
     public void removerUsuario(int id) {
-        buscarUsuarioPorId(id); // Valida se o usuário existe
+        buscarUsuarioPorId(id);
         usuarioRepositorio.removerUsuario(id);
     }
 
     public void atualizarUsuario(Usuario usuario) {
-        buscarUsuarioPorId(usuario.getId()); // Valida se o usuário existe
+        buscarUsuarioPorId(usuario.getId());
         usuarioRepositorio.atualizarUsuario(usuario);
     }
 

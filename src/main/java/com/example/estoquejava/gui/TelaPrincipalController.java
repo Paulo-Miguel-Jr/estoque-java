@@ -80,18 +80,18 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private void carregarTableViewProduto() {
 
-        observableListProduto.clear(); //limpa a lista atual de produtos
-        Produto[] produtos = produtoRepositorio.listarTodos(); // Obtém produtos do arquivo
-        observableListProduto.addAll(produtos); // Adiciona os produtos na lista
-        tabela.setItems(observableListProduto); // Atualiza a tabela
+        observableListProduto.clear();
+        Produto[] produtos = produtoRepositorio.listarTodos(); //carrega produtos do arquivo
+        observableListProduto.addAll(produtos);
+        tabela.setItems(observableListProduto); //Atualiza a tabela
     }
 
     public void atualizarTableView() {
 
-        observableListProduto.clear(); //limpa a lista atual de produtos
-        Produto[] produtos = produtoRepositorio.listarTodos(); // Obtém produtos do arquivo
-        observableListProduto.addAll(produtos); // Adiciona os produtos na lista
-        tabela.setItems(observableListProduto); // Atualiza a tabela
+        observableListProduto.clear();
+        Produto[] produtos = produtoRepositorio.listarTodos();
+        observableListProduto.addAll(produtos);
+        tabela.setItems(observableListProduto);
     }
 
     @FXML

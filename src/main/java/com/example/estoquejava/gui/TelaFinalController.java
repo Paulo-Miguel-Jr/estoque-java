@@ -11,20 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
-import com.example.estoquejava.models.Produto;
-import com.example.estoquejava.models.enums.StatusPedido;
-import com.example.estoquejava.models.exceptions.InvalidPedidoException;
-import com.example.estoquejava.models.exceptions.PedNaoEncontException;
-import com.example.estoquejava.repository.PedidoRepositorio;
-import com.example.estoquejava.repository.ProdutoRepositorio;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class TelaFinalController implements Initializable {

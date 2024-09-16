@@ -80,7 +80,7 @@ public class TelaLoginController implements Initializable {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Imprime o stack trace completo no console
+            e.printStackTrace(); //Imprime o stack trace completo no console
             showAlert(Alert.AlertType.ERROR, "Erro", e.getMessage());
             System.out.println("Erro no login: " + e.getMessage());
         }

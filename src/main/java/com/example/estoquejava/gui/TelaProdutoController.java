@@ -63,7 +63,6 @@ public class TelaProdutoController implements Initializable {
     private ProdutoRepositorio produtoRepositorio;
 
     public TelaProdutoController() {
-        // Inicializar o repositório usando o padrão Singleton
         produtoRepositorio = ProdutoRepositorio.getInstance();
     }
 
@@ -111,10 +110,8 @@ public class TelaProdutoController implements Initializable {
             Produto novoProduto = new Produto(nome, novoId, preco, quantidade, unidadeDeMedida, estoqueMinimo);
             produtoRepositorio.adicionarProduto(novoProduto);
 
-            // Salvar os dados no arquivo após a adição
             produtoRepositorio.salvarArquivo();
 
-            // Limpar os campos após adicionar
             limparCampos();
             exibirAlerta("Sucesso", "Produto adicionado com sucesso!", Alert.AlertType.INFORMATION);
 
