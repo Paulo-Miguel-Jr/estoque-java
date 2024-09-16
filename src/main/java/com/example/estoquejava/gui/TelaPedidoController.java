@@ -3,6 +3,7 @@ package com.example.estoquejava.gui;
 import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.*;
 import com.example.estoquejava.models.enums.StatusPedido;
+import com.example.estoquejava.repository.PedidoRepositorio;
 import com.example.estoquejava.repository.ProdutoRepositorio;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -54,11 +55,16 @@ public class TelaPedidoController implements Initializable {
     private ObservableList<ItemPedido> listaItens;
     private Pedido pedidoAtual;
     private PedidoController pedidoController;
+    private PedidoRepositorio pedidoRepositorio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        pedidoRepositorio = PedidoRepositorio.getInstance();
+
         configurarColunas();
         listaItens = FXCollections.observableArrayList();
+        itemPedidoController = new ItemPedidoController();
         pedidoController = new PedidoController();
     }
 
@@ -100,8 +106,17 @@ public class TelaPedidoController implements Initializable {
     }
 
     private void atualizarInterfaceComPedido(Pedido pedido) {
-        tableView.setItems(FXCollections.observableArrayList(pedido.getItens()));
+
+        atualizarTableViewItens();
         setarLabel();
+    }
+
+    private void atualizarTableViewItens() {
+        listaItens.clear(); // Limpa a lista atual de itens
+        if (pedidoAtual != null) {
+            listaItens.addAll(pedidoAtual.getItens()); // Adiciona os itens do pedido à lista
+            tableView.setItems(listaItens); // Atualiza a TableView
+        }
     }
 
     @FXML
@@ -130,8 +145,14 @@ public class TelaPedidoController implements Initializable {
             pedidoController.processarVenda(pedidoAtual.getIdPedido());
             pedidoAtual.setStatus(StatusPedido.PROCESSADO);
             pedidoController.atualizarPedido(pedidoAtual);
+            pedidoRepositorio.atualizarPedido(pedidoAtual);
+
+
+            pedidoRepositorio.salvarArquivo();
+
             mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Finalizado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
 
+            listaItens.clear();
             // Passando o pedido para a tela final
             ScreenManager sm = ScreenManager.getInstance();
             TelaFinalController telaFinalController = sm.getTelaFinalController();
