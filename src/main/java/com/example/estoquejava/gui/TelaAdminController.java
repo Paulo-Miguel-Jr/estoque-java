@@ -1,5 +1,6 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.Produto;
@@ -14,6 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
@@ -23,6 +25,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TelaAdminController {
+
+    @FXML
+    private Button buttonvoltar;
+
+    @FXML
+    private ImageView image;
 
     @FXML
     private Button btnGerarRelatorioUsuarios;
@@ -40,6 +48,13 @@ public class TelaAdminController {
         btnGerarRelatorioUsuarios.setOnAction(event -> gerarRelatorioUsuariosPDF());
         btnGerarRelatorioProdutos.setOnAction(event -> gerarRelatorioProdutosPDF());
         btnGerarRelatorioPedidos.setOnAction(event -> gerarRelatorioPedidosPDF());
+    }
+
+    @FXML
+    public void voltarLogin() {
+        ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScreen("TelaLogin.fxml", "TelaLogin");
+
     }
 
     private void gerarRelatorioUsuariosPDF() {
