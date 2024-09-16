@@ -55,11 +55,11 @@ public class TelaPedidoController implements Initializable {
     private ObservableList<ItemPedido> listaItens;
     private Pedido pedidoAtual;
     private PedidoController pedidoController;
-
     private PedidoRepositorio pedidoRepositorio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         pedidoRepositorio = PedidoRepositorio.getInstance();
 
         configurarColunas();
@@ -146,6 +146,9 @@ public class TelaPedidoController implements Initializable {
             pedidoAtual.setStatus(StatusPedido.PROCESSADO);
             pedidoController.atualizarPedido(pedidoAtual);
             pedidoRepositorio.atualizarPedido(pedidoAtual);
+
+
+            pedidoRepositorio.salvarArquivo();
 
             mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Finalizado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
 
