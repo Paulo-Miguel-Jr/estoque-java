@@ -14,7 +14,7 @@ public interface IPedidoRepositorio {
 
     void atualizarPedido(Pedido pedido) throws PedNaoEncontException;
 
-    void listarPedidos();
+    Pedido[] listarPedidos();
 
     Pedido procurarPedido(int idPedido) throws PedNaoEncontException;
 

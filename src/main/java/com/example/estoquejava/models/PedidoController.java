@@ -86,7 +86,7 @@ public class PedidoController {
         }
     }
 
-    public Pedido[] listarPedidos() {pedidoRepositorio.listarPedidos();}
+    public Pedido[] listarPedidos() {return pedidoRepositorio.listarPedidos();}
 
     private int gerarIdPedido() {
         return pedidoRepositorio.gerarNovoId();

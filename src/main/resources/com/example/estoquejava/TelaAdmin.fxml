@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="538.0" prefWidth="916.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.estoquejava.gui.TelaAdminController">
+    <children>
+        <Button fx:id="btnGerarRelatorioUsuarios" layoutX="386.0" layoutY="144.0" text="Gerar Relatório usuários" />
+      <Button fx:id="btnGerarRelatorioProdutos" layoutX="386.0" layoutY="183.0" text="Gerar Relatório produtos" />
+      <Button fx:id="btnGerarRelatorioPedidos" layoutX="386.0" layoutY="230.0" text="Gerar Relatório pedidos" />
+    </children>
+</AnchorPane>

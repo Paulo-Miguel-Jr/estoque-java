@@ -12,6 +12,8 @@ public class ScreenManager {
     private static Stage stage;
 
     private Scene telaLogin;
+
+    private Scene telaAdmin;
     private Scene telaPrincipal;
     private Scene telaCadastro;
     private Scene telaPedido;
@@ -24,6 +26,7 @@ public class ScreenManager {
     private TelaPrincipalController telaPrincipalController;
     private TelaPedidoController telaPedidoController;
     private TelaFinalController telaFinalController;
+    private TelaAdminController telaAdminController;
     private TelaProdutoController telaProdutoController;
     private TelaVerPedidoController telaVerPedidoController;
 
@@ -36,6 +39,14 @@ public class ScreenManager {
             instance = new ScreenManager();
         }
         return instance;
+    }
+
+    public Scene getTelaAdmin() {
+        return telaAdmin;
+    }
+
+    public void setTelaAdmin(Scene telaAdmin) {
+        this.telaAdmin = telaAdmin;
     }
 
     public static Stage getStg() {
@@ -84,6 +95,9 @@ public class ScreenManager {
         return telaCadastroController;
     }
 
+    public TelaAdminController getTelaAdminController(){
+        return telaAdminController;
+    }
     public TelaPedidoController getTelaPedidoController() {
         return telaPedidoController;
     }
@@ -131,6 +145,11 @@ public class ScreenManager {
             this.telaVerPedido = new Scene(loader.load());
             this.telaVerPedidoController = loader.getController();
 
+            loader = new FXMLLoader(getClass().getResource("TelaAdmin.fxml"));
+            this.telaAdmin = new Scene(loader.load());
+            this.telaAdminController = loader.getController();
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -149,6 +168,7 @@ public class ScreenManager {
             case "TelaFinal.fxml" -> stage.setScene(telaFinal);
             case "TelaProduto.fxml" -> stage.setScene(telaProduto);
             case "TelaVerPedidoo.fxml" -> stage.setScene(telaProduto);
+            case "TelaAdmin.fxml" -> stage.setScene(telaAdmin);
         }
         stage.setTitle(titleScreen);
 
