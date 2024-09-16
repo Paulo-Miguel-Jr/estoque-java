@@ -1,6 +1,7 @@
 module com.example.estoquejava {
     requires javafx.controls;
     requires javafx.fxml;
+    requires itextpdf;
 
 
     opens com.example.estoquejava to javafx.fxml;

@@ -138,12 +138,13 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     }
 
     @Override
-    public void listarPedidos() {
+    public Pedido[] listarPedidos() {
         for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i] != null) {
                 System.out.println(pedidos[i]);
             }
         }
+        return new Pedido[0];
     }
 
     @Override
