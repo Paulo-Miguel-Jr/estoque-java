@@ -9,6 +9,3 @@ Siga as etapas abaixo para executar a aplicação frontend em sua máquina local
 
 ### Pré-requisitos
 - Certifique-se de possuir o JDK 17+ em sua máquina juntamente com o JavaFX devidamente configurado.
-
-### UML
- - https://kub.sh/4128ec
