@@ -75,7 +75,8 @@ public class TelaPedidoController implements Initializable {
         colunaQuantidade.setCellValueFactory(cellData -> {
             ItemPedido item = cellData.getValue();
             if (item != null) {
-                return new SimpleStringProperty(String.valueOf(item.getQuantidade()));
+                int quantidadeComoInt = (int) item.getQuantidade();
+                return new SimpleStringProperty(String.valueOf(quantidadeComoInt));
             } else {
                 return new SimpleStringProperty("");
             }

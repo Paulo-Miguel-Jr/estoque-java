@@ -8,7 +8,7 @@ import com.example.estoquejava.repository.PedidoRepositorio;
 import java.time.LocalDate;
 
 public class TestePedido {
-
+/*
         public static void main(String[] args) {
             PedidoRepositorio pedidoRepositorio = PedidoRepositorio.getInstance();
 
@@ -24,7 +24,7 @@ public class TestePedido {
                 System.out.println("Pedidos após adição:");
                 pedidoRepositorio.listarPedidos();
 
-                Produto produto1 = new Produto("Produto 1", 156, 50.00, 10, "quilo", 1);
+                Produto produto1 = new Produto("Produto 1", 156, 50.00, 10, "Kg", 1);
                 Produto produto2 = new Produto("Produto 2", 158, 30.00, 20, "unidade", 5);
                 Produto produto3 = new Produto("Produto 3", 160, 25.00, 10, "quilo", 1);
                 Produto produto4 = new Produto("Produto 4", 162, 10.00, 10, "quilo", 1);
@@ -84,7 +84,7 @@ public class TestePedido {
             } catch (LimiteItensAlcancadoException e) {
                 System.err.println("Erro ao adicionar item ao pedido: " + e.getMessage());
             }
-        }
+        }*/
     }
 
 

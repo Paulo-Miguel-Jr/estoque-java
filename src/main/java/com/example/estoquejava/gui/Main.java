@@ -27,6 +27,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("hello");
+        /*
         // Cria uma instância do repositório de pedidos
         PedidoRepositorio pedidoRepositorio = PedidoRepositorio.getInstance();
 
@@ -114,7 +116,7 @@ public class Main {
             System.err.println("Erro ao processar pedido: " + e.getMessage());
         } catch (LimiteItensAlcancadoException e) {
             System.err.println("Erro ao adicionar item ao pedido: " + e.getMessage());
-        }
+        }*/
     }
 }
 
