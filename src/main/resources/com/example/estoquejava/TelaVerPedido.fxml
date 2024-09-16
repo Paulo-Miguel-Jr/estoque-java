@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #77D3A4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoquejava.gui.TelaVerPedidoController">
+   <children>
+      <Label fx:id="labelPedido" layoutX="221.0" layoutY="14.0" text="Pedido:">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="scrollPane" layoutX="92.0" layoutY="85.0" prefHeight="249.0" prefWidth="413.0">
+        <content>
+          <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="417.0">
+               <children>
+                  <TableView fx:id="tableView" layoutX="-1.0" prefHeight="245.0" prefWidth="407.0">
+                    <columns>
+                      <TableColumn fx:id="item" prefWidth="209.0" text="ITEM" />
+                      <TableColumn fx:id="preco" prefWidth="92.0" text="PREÇO" />
+                        <TableColumn fx:id="quantidade" prefWidth="100.0" text="QUANTIDADE" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="voltar" layoutX="274.0" layoutY="350.0" mnemonicParsing="false" onAction="#voltarTelaFinal" style="-fx-background-color: #000000;" text="Voltar" textFill="#f5efef" />
+   </children>
+</AnchorPane>

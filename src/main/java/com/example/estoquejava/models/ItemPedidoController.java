@@ -1,5 +1,6 @@
 package com.example.estoquejava.models;
 
+import com.example.estoquejava.models.exceptions.ItemPedNaoEncontException;
 import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
 public class ItemPedidoController {
@@ -18,9 +19,9 @@ public class ItemPedidoController {
         }
     }
 
-    public void removerItemPedido(int idItem) {
-        if (idItem > 0) {
-            itens.removerItemPedido(idItem);
+    public void removerItemPedido(ItemPedido itemPedido) {
+        if (itemPedido != null) {
+            itens.removerItemPedido(itemPedido);
         } else {
             throw new IllegalArgumentException("ID deve ser positivo.");
         }
@@ -37,4 +38,9 @@ public class ItemPedidoController {
     public void listarItensPedido() {
         itens.listarItensPedidos();
     }
+
+    public void atualizarItemPedido(ItemPedido itemAtualizado) {
+        itens.atualizarItemPedido(itemAtualizado);
+    }
+
 }

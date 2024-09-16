@@ -24,24 +24,24 @@ public class PedidoController {
 
     public void removerPedido(int idPedido) throws PedNaoEncontException, InvalidPedidoException {
         Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
-        if (pedido == null) {
-            throw new PedNaoEncontException("Pedido não encontrado com o ID: " + idPedido);
-        }
-        if (pedido.getStatus() == StatusPedido.PROCESSADO || pedido.getStatus() == StatusPedido.CANCELADO) {
-            throw new InvalidPedidoException("Não é possível remover um pedido que já foi processado ou cancelado.");
-        }
+      //  if (pedido == null) {
+      //      throw new PedNaoEncontException("Pedido não encontrado com o ID: " + idPedido);
+     //   }
+     //   if (pedido.getStatus() == StatusPedido.PROCESSADO || pedido.getStatus() == StatusPedido.CANCELADO) {
+     //       throw new InvalidPedidoException("Não é possível remover um pedido que já foi processado ou cancelado.");
+     //   }
         pedidoRepositorio.removerPedido(idPedido);
     }
 
     public void atualizarPedido(Pedido pedido) throws PedNaoEncontException, InvalidPedidoException {
         validarPedido(pedido);
         Pedido pedidoExistente = pedidoRepositorio.procurarPedido(pedido.getIdPedido());
-        if (pedidoExistente == null) {
-            throw new PedNaoEncontException("Pedido não encontrado com o ID: " + pedido.getIdPedido());
-        }
-        if (pedidoExistente.getStatus() == StatusPedido.PROCESSADO || pedidoExistente.getStatus() == StatusPedido.CANCELADO) {
-            throw new InvalidPedidoException("Não é possível atualizar um pedido que já foi processado ou cancelado.");
-        }
+      //  if (pedidoExistente == null) {
+      //      throw new PedNaoEncontException("Pedido não encontrado com o ID: " + pedido.getIdPedido());
+     //   }
+     //   if (pedidoExistente.getStatus() == StatusPedido.PROCESSADO || pedidoExistente.getStatus() == StatusPedido.CANCELADO) {
+     //       throw new InvalidPedidoException("Não é possível atualizar um pedido que já foi processado ou cancelado.");
+     //   }
         pedidoRepositorio.atualizarPedido(pedido);
     }
 
@@ -55,19 +55,17 @@ public class PedidoController {
 
     public void processarVenda(int idPedido) throws PedNaoEncontException, InvalidPedidoException {
         Pedido pedido = procurarPedido(idPedido);
-        if (pedido.getStatus() != StatusPedido.PENDENTE) {
-            throw new InvalidPedidoException("O pedido deve estar pendente para ser processado.");
-        }
+        //if (pedido.getStatus() != StatusPedido.PENDENTE) {
+        //    throw new InvalidPedidoException("O pedido deve estar pendente para ser processado.");
+       // }
         pedidoRepositorio.processarVenda(idPedido);
     }
 
-    public void cancelarPedido(int idPedido) throws PedNaoEncontException {
-        Pedido pedido = procurarPedido(idPedido);
-        if (pedido.getStatus() == StatusPedido.PENDENTE) {
+    public void cancelarPedido(Pedido pedido) {
+        if (pedido != null) {
             pedido.setStatus(StatusPedido.CANCELADO);
-            pedidoRepositorio.atualizarPedido(pedido);
-        } else {
-            throw new InvalidPedidoException("Somente pedidos pendentes podem ser cancelados.");
+            pedido.limparItens(); // Remove todos os itens do pedido
+            atualizarPedido(pedido);  // Atualiza o pedido no repositório
         }
     }
 
@@ -89,4 +87,17 @@ public class PedidoController {
     private int gerarIdPedido() {
         return pedidoRepositorio.gerarNovoId();
     }
+
+    public void gerarRelatorioPedidoPendente() {
+        pedidoRepositorio.gerarRelatorioPedidoPendente();
+    }
+
+    public void gerarRelatorioPedidoCancelado() {
+        pedidoRepositorio.gerarRelatorioPedidoCancelado();
+    }
+
+    public void gerarRelatorioPedidoProcessado() {
+        pedidoRepositorio.gerarRelatorioPedidoProcessado();
+    }
+
 }

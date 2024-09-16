@@ -5,21 +5,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class ScreenManager {
     private static ScreenManager instance;
     private static Stage stage;
 
     private Scene telaLogin;
+
+    private Scene telaAdmin;
     private Scene telaPrincipal;
     private Scene telaCadastro;
     private Scene telaPedido;
     private Scene telaFinal;
+    private Scene telaProduto;
+    private Scene telaVerPedido;
 
     private TelaLoginController telaLoginController;
     private TelaCadastroController telaCadastroController;
     private TelaPrincipalController telaPrincipalController;
     private TelaPedidoController telaPedidoController;
     private TelaFinalController telaFinalController;
+    private TelaAdminController telaAdminController;
+    private TelaProdutoController telaProdutoController;
+    private TelaVerPedidoController telaVerPedidoController;
 
     private ScreenManager() {
         this.screenLoader();
@@ -30,6 +38,14 @@ public class ScreenManager {
             instance = new ScreenManager();
         }
         return instance;
+    }
+
+    public Scene getTelaAdmin() {
+        return telaAdmin;
+    }
+
+    public void setTelaAdmin(Scene telaAdmin) {
+        this.telaAdmin = telaAdmin;
     }
 
     public static Stage getStg() {
@@ -60,6 +76,12 @@ public class ScreenManager {
         return telaFinal;
     }
 
+    public Scene getTelaProduto() {
+        return telaProduto;
+    }
+
+    public Scene getTelaVerPedido() {return telaVerPedido; }
+
     public TelaLoginController getTelaLoginController() {
         return telaLoginController;
     }
@@ -72,6 +94,9 @@ public class ScreenManager {
         return telaCadastroController;
     }
 
+    public TelaAdminController getTelaAdminController(){
+        return telaAdminController;
+    }
     public TelaPedidoController getTelaPedidoController() {
         return telaPedidoController;
     }
@@ -79,6 +104,13 @@ public class ScreenManager {
     public TelaFinalController getTelaFinalController() {
         return telaFinalController;
     }
+
+    public TelaProdutoController getTelaProdutoController() {
+        return telaProdutoController;
+    }
+
+    public TelaVerPedidoController getTelaVerPedidoController () {return telaVerPedidoController; }
+
 
     private void screenLoader() {
         try {
@@ -104,6 +136,19 @@ public class ScreenManager {
             this.telaFinal = new Scene(loader.load());
             this.telaFinalController = loader.getController();
 
+            loader = new FXMLLoader(getClass().getResource("TelaProduto.fxml"));
+            this.telaProduto = new Scene(loader.load());
+            this.telaProdutoController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("TelaVerPedido.fxml"));
+            this.telaVerPedido = new Scene(loader.load());
+            this.telaVerPedidoController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("TelaAdmin.fxml"));
+            this.telaAdmin = new Scene(loader.load());
+            this.telaAdminController = loader.getController();
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -115,10 +160,14 @@ public class ScreenManager {
 
         switch (fileNameFxml) {
             case "TelaLogin.fxml" -> stage.setScene(telaLogin);
-            case "TelaPrincipal.fxml" -> stage.setScene(telaPrincipal);
+            case "TelaPrincipal.fxml" -> {
+                telaPrincipalController.atualizarTableView() ; stage.setScene(telaPrincipal);}
             case "TelaCadastro.fxml" -> stage.setScene(telaCadastro);
             case "TelaPedido.fxml" -> stage.setScene(telaPedido);
             case "TelaFinal.fxml" -> stage.setScene(telaFinal);
+            case "TelaProduto.fxml" -> stage.setScene(telaProduto);
+            case "TelaVerPedidoo.fxml" -> stage.setScene(telaProduto);
+            case "TelaAdmin.fxml" -> stage.setScene(telaAdmin);
         }
         stage.setTitle(titleScreen);
 

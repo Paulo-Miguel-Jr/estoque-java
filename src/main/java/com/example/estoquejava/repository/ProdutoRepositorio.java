@@ -30,7 +30,7 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
     }
 
     //validação de dados
-    private boolean validarProduto(Produto produto) {
+    public boolean validarProduto(Produto produto) {
         if (produto.getNome() == null || produto.getNome().isEmpty()) {
             System.out.println("Nome do produto é obrigatório.");
             return false;
@@ -42,17 +42,32 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         return true;
     }
 
+    //Checar se o produto já existe no repositório (por nome ou ID)
+    private boolean produtoDuplicado(Produto produto) {
+        for (int i = 0; i < contador; i++) {
+            if (produtos[i].getNome().equalsIgnoreCase(produto.getNome()) || produtos[i].getId() == produto.getId()) {
+                return true; // Produto duplicado
+            }
+        }
+        return false;
+    }
+
     @Override
     public void adicionarProduto(Produto produto) {
-        if (contador < produtos.length) {
-            if (validarProduto(produto)) {
+        if (contador >= produtos.length) {
+            System.out.println("Repositório cheio, não é possível adicionar mais produtos.");
+            return;
+        }
+
+        if (validarProduto(produto)) {
+            if (!produtoDuplicado(produto)) {
                 produtos[contador++] = produto;
                 adicionarHistorico("Produto adicionado: " + produto.getNome());
             } else {
-                System.out.println("Produto inválido. Não foi possível adicionar.");
+                System.out.println("Produto duplicado. Não foi possível adicionar.");
             }
         } else {
-            System.out.println("Repositório cheio, não é possível adicionar mais produtos.");
+            System.out.println("Produto inválido. Não foi possível adicionar.");
         }
     }
 
@@ -120,13 +135,26 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
     }
 
     @Override
-    public void gerarRelatorioProdutosEmBaixa() {
-        System.out.println("Relatório de Produtos em Baixa Quantidade:");
-        for (int i = 0; i < contador; i++) {
-            if (produtos[i].getQuantidade() < produtos[i].getEstoqueMinimo()) {
-                System.out.println(produtos[i]);
+    public String gerarRelatorioProdutosEmBaixa() {
+        StringBuilder relatorio = new StringBuilder();
+        relatorio.append("Relatório de Produtos em Baixa Quantidade:\n");
+
+        for (Produto produto : listarTodos()) {
+            if (produto.getQuantidade() < produto.getEstoqueMinimo()) {
+                relatorio.append("ID: ").append(produto.getId())
+                        .append(", Nome: ").append(produto.getNome())
+                        .append(", Quantidade: ").append(produto.getQuantidade())
+                        .append(", Estoque Mínimo: ").append(produto.getEstoqueMinimo())
+                        .append("\n");
             }
         }
+
+        // Verifica se nenhum produto está em baixa quantidade
+        if (relatorio.length() == "Relatório de Produtos em Baixa Quantidade:\n".length()) {
+            return "Todos os produtos estão com estoque adequado.";
+        }
+
+        return relatorio.toString();
     }
 
     @Override
@@ -143,6 +171,18 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         } else {
             System.out.println("Histórico de alterações cheio.");
         }
+    }
+
+    //atualizar um produto no repositório
+    public boolean atualizarProduto(Produto produtoAtualizado) {
+        for (int i = 0; i < contador; i++) {
+            if (produtos[i].getId() == produtoAtualizado.getId()) {
+                produtos[i] = produtoAtualizado; //Atualiza o produto no array
+                salvarArquivo();
+                return true; //retorna vedadeiro se a atualização acontecer
+            }
+        }
+        return false; //Retorna falso se o produto não for encontrado
     }
 
     private static ProdutoRepositorio lerDoArquivo() {
@@ -195,6 +235,9 @@ public class ProdutoRepositorio implements IProdutoRepositorio, Serializable {
         }
     }
 
+    public int gerarNovoId() {
+        return contador + 1;
+    }
 
     @Override
     public int getQuantidadeProdutos() {

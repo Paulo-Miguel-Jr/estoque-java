@@ -14,13 +14,19 @@ public interface IPedidoRepositorio {
 
     void atualizarPedido(Pedido pedido) throws PedNaoEncontException;
 
-    void listarPedidos();
+    Pedido[] listarPedidos();
 
     Pedido procurarPedido(int idPedido) throws PedNaoEncontException;
 
     void adicionarItemAoPedido (int idPedido, ItemPedido item) throws PedNaoEncontException;
 
     void processarVenda(int idPedido) throws PedNaoEncontException;
+
+    void gerarRelatorioPedidoPendente();
+
+    void gerarRelatorioPedidoCancelado();
+
+    void gerarRelatorioPedidoProcessado();
 
 
 }

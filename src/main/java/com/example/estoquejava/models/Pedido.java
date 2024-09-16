@@ -1,6 +1,7 @@
 package com.example.estoquejava.models;
 
 import com.example.estoquejava.models.enums.StatusPedido;
+import com.example.estoquejava.models.exceptions.ItemPedNaoEncontException;
 import com.example.estoquejava.models.exceptions.LimiteItensAlcancadoException;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 12345012345L;
 
-    public static final int LIMITE_ITENS = 100;
+    public static final int LIMITE_ITENS = 500;
 
     private int idPedido;
     private LocalDate dataPedido;
@@ -69,6 +70,14 @@ public class Pedido implements Serializable {
         this.status = status;
     }
 
+    public ItemPedido[] getItens() {
+        return itensPedido;
+    }
+
+    public ItemPedido[] getItensPedido() {
+        return itensPedido;
+    }
+
     public double calcularValorTotal() {
         double total = 0;
         for (int i = 0; i < quantidadeItens; i++) {
@@ -77,6 +86,11 @@ public class Pedido implements Serializable {
             }
         }
         return total;
+    }
+
+    public void limparItens() {
+        this.itensPedido = new ItemPedido[itensPedido.length];
+        this.quantidadeItens = 0;
     }
 
     public void adicionarItemPedido(ItemPedido item) throws LimiteItensAlcancadoException {
@@ -88,6 +102,30 @@ public class Pedido implements Serializable {
             throw new LimiteItensAlcancadoException("Não é possível adicionar mais itens. Limite de itens alcançado.");
         }
     }
+
+    public void removerItemPedido(ItemPedido item) throws ItemPedNaoEncontException {
+        boolean itemRemovido = false;
+
+        for (int i = 0; i < quantidadeItens; i++) {
+            if (itensPedido[i].equals(item)) {
+                for (int j = i; j < quantidadeItens - 1; j++) {
+                    itensPedido[j] = itensPedido[j + 1];
+                }
+
+                itensPedido[quantidadeItens - 1] = null;
+                quantidadeItens--;
+                itemRemovido = true;
+                break;
+            }
+        }
+
+        if (!itemRemovido) {
+            throw new ItemPedNaoEncontException("Item não encontrado no pedido.");
+        }
+
+        this.valorTotal = calcularValorTotal();
+    }
+
 
     @Override
     public String toString() {
@@ -110,11 +148,4 @@ public class Pedido implements Serializable {
         return sb.toString();
     }
 
-    public ItemPedido[] getItens() {
-        return itensPedido;
-    }
-
-    public ItemPedido[] getItensPedido() {
-        return itensPedido;
-    }
 }

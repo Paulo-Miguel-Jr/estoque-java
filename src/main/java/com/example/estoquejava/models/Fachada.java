@@ -2,9 +2,7 @@ package com.example.estoquejava.models;
 
 import com.example.estoquejava.models.enums.StatusPedido;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
-import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.example.estoquejava.repository.PedidoRepositorio;
-import com.example.estoquejava.repository.ItemPedidoRepositorio;
 
 public class Fachada {
 
@@ -12,6 +10,7 @@ public class Fachada {
 
     private UsuarioController usuarioController;
     private PedidoController pedidoController;
+    private ProdutoController produtoController;
 
     private PedidoRepositorio pedidoRepositorio;
     private ItemPedidoController itemPedidoController;
@@ -20,6 +19,8 @@ public class Fachada {
     private Fachada() {
         this.usuarioController = new UsuarioController();
         this.pedidoController = new PedidoController();
+        this.produtoController = new ProdutoController();
+        this.itemPedidoController = new ItemPedidoController();
     }
 
     public static Fachada getInstancia() {
@@ -79,8 +80,9 @@ public class Fachada {
         pedidoController.processarVenda(idPedido);
     }
 
-    public void listarPedidos() {
+    public Pedido[] listarPedidos() {
         pedidoRepositorio.listarPedidos();
+        return new Pedido[0];
     }
 
     public void adicionarItemAoPedido(int idPedido, ItemPedido item) {pedidoController.adicionarItemAoPedido(idPedido, item );}
@@ -95,6 +97,17 @@ public class Fachada {
         }
     }
 
+    public void gerarRelatorioPedidoPendente() {
+        pedidoController.gerarRelatorioPedidoPendente();
+    }
+
+    public void gerarRelatorioPedidoCancelado() {
+        pedidoController.gerarRelatorioPedidoCancelado();
+    }
+
+    public void gerarRelatorioPedidoProcessado() {
+        pedidoController.gerarRelatorioPedidoProcessado();
+    }
 
     //métodos ItemPedido===========================================================
 
@@ -102,8 +115,8 @@ public class Fachada {
         itemPedidoController.adicionarItemPedido(item);
     };
 
-    public void removerItemPedido(int idItem){
-        itemPedidoController.removerItemPedido(idItem);
+    public void removerItemPedido(ItemPedido itemPedido){
+        itemPedidoController.removerItemPedido(itemPedido);
     }
 
     public ItemPedido buscarItemPedido(int idItem){
@@ -114,4 +127,45 @@ public class Fachada {
         itemPedidoController.listarItensPedido();
     }
 
+
+    //métodos Produto===========================================================
+
+    public void adicionarProduto(Produto produto) {
+        produtoController.adicionarProduto(produto);
+    }
+
+    public Produto obterProdutoPorId(int id) {
+        return produtoController.obterProdutoPorId(id);
+    }
+
+    public Produto[] listarTodos() {
+        return produtoController.listarTodos();
+    }
+
+    public boolean removerProdutoPorId(int id) {
+        return produtoController.removerProdutoPorId(id);
+    }
+
+    public Produto[] buscarProdutosPorNome(String nome) {
+        buscarProdutosPorNome(nome);
+        return produtoController.buscarProdutosPorNome(nome);
+    }
+
+    public void atualizarPrecos(double percentual) {
+        produtoController.atualizarPrecos(percentual);
+    }
+
+    public void notificarProdutosEmBaixa() {
+        produtoController.notificarProdutosEmBaixa();
+    }
+
+    public void gerarRelatorioProdutosEmBaixa() {
+        produtoController.gerarRelatorioProdutosEmBaixa();
+    }
+
+    public void listarHistoricoAlteracoes() {
+        produtoController.listarHistoricoAlteracoes();
+    }
+    
 }
+

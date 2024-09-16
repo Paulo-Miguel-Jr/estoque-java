@@ -12,16 +12,17 @@ import java.io.*;
 
 public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     private Pedido[] pedidos;
+
+
+
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
     private ItemPedidoRepositorio itemPedidoRepositorio;
 
-
     private static final long serialVersionUID = 1234567890123456789L;
 
-
     public PedidoRepositorio() {
-        this.pedidos = new Pedido[100];
+        this.pedidos = new Pedido[500];
         proxIdLivre = 0;
         this.itemPedidoRepositorio = ItemPedidoRepositorio.getInstance();
     }
@@ -95,7 +96,6 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     }
 
     public int gerarNovoId() {
-
         return proxIdLivre + 1;
     }
 
@@ -127,11 +127,6 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
             salvarArquivo();
         }
     }
-   //else {
-    //            pedidos[indice] = pedidos[proxIdLivre - 1];
-    //            pedidos[proxIdLivre - 1] = null;
-    //            proxIdLivre--;
-    //        }
 
 
     @Override
@@ -146,13 +141,25 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     }
 
     @Override
-    public void listarPedidos() {
+    public Pedido[] listarPedidos() {
+        int count = 0;
         for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i] != null) {
-                System.out.println(pedidos[i]);
+                count++;
             }
         }
+        Pedido[] resultado = new Pedido[count];
+        int index = 0;
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null) {
+                resultado[index++] = pedidos[i];
+            }
+        }
+
+        return resultado;
     }
+
+
 
     @Override
     public Pedido procurarPedido(int idPedido) {
@@ -188,14 +195,6 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
         salvarArquivo();
     }
 
-    //    if (pedido != null) {
-//            pedido.adicionarItemPedido(item);
-    //      } else {
-    //           throw new PedNaoEncontException("Pedido não encontrado.");
-    //       }
-//}
-
-
     public void processarVenda(int idPedido) throws PedNaoEncontException {
         int indice = getIdPedido(idPedido);
         if (indice == -1) {
@@ -212,6 +211,64 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
 
     }
 
+    public void gerarRelatorioPedidoPendente() {
+        System.out.println("Relatório de Pedidos Pendentes:");
+        System.out.println("------------------------------");
+
+        boolean encontrouPedidoPendente = false;
+
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null && pedidos[i].getStatus() == StatusPedido.PENDENTE) {
+                System.out.println(pedidos[i]);
+                encontrouPedidoPendente = true;
+            }
+        }
+
+        if (!encontrouPedidoPendente) {
+            System.out.println("Nenhum pedido pendente encontrado.");
+        }
+    }
+
+    public void gerarRelatorioPedidoCancelado() {
+        System.out.println("Relatório de Pedidos Cancelados:");
+        System.out.println("-------------------------------");
+
+        boolean encontrouPedidoCancelado = false;
+
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null && pedidos[i].getStatus() == StatusPedido.CANCELADO) {
+                System.out.println(pedidos[i]);
+                encontrouPedidoCancelado = true;
+            }
+        }
+
+        if (!encontrouPedidoCancelado) {
+            System.out.println("Nenhum pedido cancelado encontrado.");
+        }
+    }
+
+
+    public void gerarRelatorioPedidoProcessado() {
+        System.out.println("Relatório de Pedidos Processados:");
+        System.out.println("-------------------------------");
+
+        boolean encontrouPedidoProcessado = false;
+
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null && pedidos[i].getStatus() == StatusPedido.PROCESSADO) {
+                System.out.println(pedidos[i]);
+                encontrouPedidoProcessado = true;
+            }
+        }
+
+        if (!encontrouPedidoProcessado) {
+            System.out.println("Nenhum pedido processado encontrado.");
+        }
+    }
+
+    public Pedido[] getPedidos() {
+        return pedidos;
+    }
 }
 
 

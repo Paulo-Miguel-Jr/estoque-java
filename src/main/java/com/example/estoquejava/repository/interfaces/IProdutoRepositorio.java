@@ -10,9 +10,10 @@ public interface IProdutoRepositorio {
     boolean removerProdutoPorId(int id);
     Produto[] buscarProdutosPorNome(String nome);
 
+
     void atualizarPrecos(double percentual);
     void notificarProdutosEmBaixa();
-    void gerarRelatorioProdutosEmBaixa();
+    String gerarRelatorioProdutosEmBaixa();
     void listarHistoricoAlteracoes();
     int getQuantidadeProdutos();
 }
