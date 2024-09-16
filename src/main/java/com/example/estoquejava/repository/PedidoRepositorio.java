@@ -12,6 +12,9 @@ import java.io.*;
 
 public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
     private Pedido[] pedidos;
+
+
+
     private int proxIdLivre;
     private static PedidoRepositorio singletonPedRep;
     private ItemPedidoRepositorio itemPedidoRepositorio;
@@ -139,13 +142,23 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
 
     @Override
     public Pedido[] listarPedidos() {
+        int count = 0;
         for (int i = 0; i < proxIdLivre; i++) {
             if (pedidos[i] != null) {
-                System.out.println(pedidos[i]);
+                count++;
             }
         }
-        return new Pedido[0];
+        Pedido[] resultado = new Pedido[count];
+        int index = 0;
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i] != null) {
+                resultado[index++] = pedidos[i];
+            }
+        }
+
+        return resultado;
     }
+
 
     @Override
     public Pedido procurarPedido(int idPedido) {
@@ -252,6 +265,9 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
         }
     }
 
+    public Pedido[] getPedidos() {
+        return pedidos;
+    }
 }
 
 

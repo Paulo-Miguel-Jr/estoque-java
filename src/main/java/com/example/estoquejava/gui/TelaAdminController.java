@@ -1,5 +1,6 @@
 package com.example.estoquejava.gui;
 
+import com.example.estoquejava.models.ItemPedido;
 import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.Produto;
 import com.example.estoquejava.models.Usuario;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class TelaAdminController {
 
@@ -140,25 +142,38 @@ public class TelaAdminController {
         document.close();
     }
 
-    private void criarRelatorioPedidosPDF(File file) throws FileNotFoundException, DocumentException {
+    public void criarRelatorioPedidosPDF(File file) throws FileNotFoundException, DocumentException {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(file));
         document.open();
         document.add(new Paragraph("Relatório de Pedidos\n\n"));
+
         Pedido[] pedidos = pedidoRepositorio.listarPedidos();
         if (pedidos.length == 0) {
             document.add(new Paragraph("Nenhum pedido registrado."));
         } else {
             for (Pedido pedido : pedidos) {
-                document.add(new Paragraph("ID: " + pedido.getIdPedido()));
-                document.add(new Paragraph("Itens: " + pedido.getItensPedido()));
-                document.add(new Paragraph("Data: " + pedido.getDataPedido()));
-                document.add(new Paragraph("Valor Total: " + pedido.getValorTotal()));
+                document.add(new Paragraph("ID do Pedido: " + pedido.getIdPedido()));
+                document.add(new Paragraph("Status do Pedido: " + pedido.getStatus()));
+                document.add(new Paragraph("Itens do Pedido:"));
+                for (ItemPedido item : pedido.getItensPedido()) {
+                    if (item != null) {
+                        document.add(new Paragraph("Produto ID: " + item.getProduto().getId()));
+                        document.add(new Paragraph("Nome: " + item.getProduto().getNome()));
+                        document.add(new Paragraph("Quantidade: " + item.getProduto().getQuantidade()));
+                        document.add(new Paragraph("Preço: " + item.getProduto().getPreco()));
+                        document.add(new Paragraph("Estoque minimo: " + item.getProduto().getEstoqueMinimo()));
+
+                    }
+                }
+
+                document.add(new Paragraph("Valor Total: R$" + pedido.getValorTotal()));
                 document.add(new Paragraph("-------------------------------\n"));
             }
         }
         document.close();
-    }
+
+}
 
     private void mostrarAlerta(String titulo, String mensagem) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
