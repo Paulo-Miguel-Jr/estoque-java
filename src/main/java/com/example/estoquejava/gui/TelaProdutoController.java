@@ -22,6 +22,15 @@ public class TelaProdutoController implements Initializable {
     private Button adcQuantidadeButton;
 
     @FXML
+    private Button buttonAtualizarPreco;
+
+    @FXML
+    private TextField textFieldIdProduto;
+
+    @FXML
+    private TextField textFieldPercentual;
+
+    @FXML
     private TextField adcQuantidadeTextField;
 
     @FXML
@@ -204,6 +213,47 @@ public class TelaProdutoController implements Initializable {
     private void gerarRelatorioProdutosEmBaixa() {
         String relatorio = produtoRepositorio.gerarRelatorioProdutosEmBaixa();
         listaProdutosTextArea.setText(relatorio);
+    }
+
+    @FXML
+    void atualizarPrecos(ActionEvent event) {
+        try {
+            // Obtém o ID do produto do TextField
+            String idProdutoTexto = textFieldIdProduto.getText();
+            int idProduto = Integer.parseInt(idProdutoTexto);
+
+            // Obtém o percentual de aumento/desconto
+            String percentualTexto = textFieldPercentual.getText();
+            double percentual = Double.parseDouble(percentualTexto);
+
+            // Busca o produto no repositório pelo ID
+            Produto produto = produtoRepositorio.obterProdutoPorId(idProduto);
+
+            if (produto != null) {
+                // Calcula o novo preço com o percentual
+                double novoPreco = produto.getPreco() * (1 + percentual / 100);
+                novoPreco = Math.round(novoPreco * 100.0) / 100.0;  //Arredonda para 2 casas decimais
+
+
+                // Atualiza o preço do produto
+                produto.setPreco(novoPreco);
+
+                // Atualiza o repositório com o novo preço
+                produtoRepositorio.atualizarProduto(produto);
+
+                // Exibe uma mensagem de sucesso
+                exibirAlerta("Preço Atualizado",
+                        "O preço do produto foi atualizado com sucesso.", Alert.AlertType.INFORMATION);
+            } else {
+                // Exibe uma mensagem de erro caso o produto não seja encontrado
+                exibirAlerta("Produto Não Encontrado",
+                        "Nenhum produto foi encontrado com o ID fornecido.", Alert.AlertType.ERROR);
+            }
+        } catch (NumberFormatException e) {
+            // Exibe uma mensagem de erro caso o ID ou percentual não sejam válidos
+            exibirAlerta("Erro de Formato",
+                    "O ID do produto ou o percentual não são válidos.", Alert.AlertType.ERROR);
+        }
     }
 
     private void exibirAlerta(String titulo, String mensagem, Alert.AlertType tipo) {
