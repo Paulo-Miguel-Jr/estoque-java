@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -61,7 +62,23 @@
             </TextField>
             <Button fx:id="adicionarButton" mnemonicParsing="false" onAction="#adicionarProduto" text="Adicionar">
                <VBox.margin>
-                  <Insets left="10.0" top="40.0" />
+                  <Insets bottom="20.0" left="10.0" top="15.0" />
+               </VBox.margin>
+            </Button>
+            <AnchorPane maxHeight="3.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
+            <TextField fx:id="idProdutoTextField" maxHeight="25.0" maxWidth="50.0" prefHeight="25.0" prefWidth="50.0" promptText="ID">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="adcQuantidadeTextField" maxHeight="25.0" maxWidth="50.0" prefHeight="25.0" prefWidth="50.0" promptText="qtd">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="adcQuantidadeButton" mnemonicParsing="false" onAction="#adicionarQuantidade" text="Adicionar Quantidade">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Button>
          </children>
