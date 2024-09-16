@@ -71,8 +71,11 @@ public class TelaFinalController implements Initializable {
 
     @FXML
     public void iniciarOutroPedido() {
-        pedidoAtual = null;
-        irParaTelaPrincipal();
+        if (pedidoAtual != null) {
+            pedidoAtual.limparItens(); // Limpa os itens do pedido atual para garantir que não acumulem
+        }
+        pedidoAtual = null; // Reseta o pedido atual
+        irParaTelaPrincipal(); // Volta para a tela principal
     }
 
     @FXML
