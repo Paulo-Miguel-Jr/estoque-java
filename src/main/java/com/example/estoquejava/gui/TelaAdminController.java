@@ -10,19 +10,17 @@ import com.example.estoquejava.repository.UsuarioRepositorio;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TelaAdminController {
 
@@ -142,7 +140,7 @@ public class TelaAdminController {
         document.close();
     }
 
-    public void criarRelatorioPedidosPDF(File file) throws FileNotFoundException, DocumentException {
+    private void criarRelatorioPedidosPDF(File file) throws FileNotFoundException, DocumentException {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(file));
         document.open();
@@ -152,28 +150,33 @@ public class TelaAdminController {
         if (pedidos.length == 0) {
             document.add(new Paragraph("Nenhum pedido registrado."));
         } else {
+            //adicionei um conjunto para armazenar os IDs dos pedidos adicionados
+            Set<Integer> pedidosAdicionados = new HashSet<>();
+
             for (Pedido pedido : pedidos) {
-                document.add(new Paragraph("ID do Pedido: " + pedido.getIdPedido()));
-                document.add(new Paragraph("Status do Pedido: " + pedido.getStatus()));
-                document.add(new Paragraph("Itens do Pedido:"));
-                for (ItemPedido item : pedido.getItensPedido()) {
-                    if (item != null) {
-                        document.add(new Paragraph("Produto ID: " + item.getProduto().getId()));
-                        document.add(new Paragraph("Nome: " + item.getProduto().getNome()));
-                        document.add(new Paragraph("Quantidade: " + item.getProduto().getQuantidade()));
-                        document.add(new Paragraph("Preço: " + item.getProduto().getPreco()));
-                        document.add(new Paragraph("Estoque minimo: " + item.getProduto().getEstoqueMinimo()));
+                if (!pedidosAdicionados.contains(pedido.getIdPedido())) {
+                    document.add(new Paragraph("ID do Pedido: " + pedido.getIdPedido()));
+                    document.add(new Paragraph("Status do Pedido: " + pedido.getStatus()));
+                    document.add(new Paragraph("Itens do Pedido:"));
 
+                    for (ItemPedido item : pedido.getItensPedido()) {
+                        if (item != null) {
+                            document.add(new Paragraph("  - Produto ID: " + item.getProduto().getId()));
+                            document.add(new Paragraph("    Nome: " + item.getProduto().getNome()));
+                            document.add(new Paragraph("    Quantidade: " + item.getQuantidade()));
+                            document.add(new Paragraph("    Preço Unitário: R$" + item.getProduto().getPreco()));
+                            document.add(new Paragraph("    Estoque Mínimo: " + item.getProduto().getEstoqueMinimo()));
+                        }
                     }
-                }
+                    document.add(new Paragraph("Valor Total: R$" + pedido.getValorTotal()));
+                    document.add(new Paragraph("-------------------------------\n"));
 
-                document.add(new Paragraph("Valor Total: R$" + pedido.getValorTotal()));
-                document.add(new Paragraph("-------------------------------\n"));
+                    pedidosAdicionados.add(pedido.getIdPedido());
+                }
             }
         }
         document.close();
-
-}
+    }
 
     private void mostrarAlerta(String titulo, String mensagem) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);

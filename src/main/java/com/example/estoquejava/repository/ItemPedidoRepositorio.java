@@ -1,11 +1,9 @@
 package com.example.estoquejava.repository;
 
 import com.example.estoquejava.models.ItemPedido;
-import com.example.estoquejava.models.Pedido;
 import com.example.estoquejava.models.exceptions.ItemPedNaoEncontException;
 import com.example.estoquejava.models.exceptions.ItemPedidoRepCheioException;
 import com.example.estoquejava.models.exceptions.PedNaoEncontException;
-import com.example.estoquejava.models.exceptions.PedidoRepCheioException;
 import com.example.estoquejava.repository.interfaces.IItemPedidoRepositorio;
 
 import java.io.*;
