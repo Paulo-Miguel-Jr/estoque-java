@@ -29,6 +29,10 @@ public class Pedido implements Serializable {
         this.status = status;
     }
 
+    public Pedido (int idPedido) {
+        this.idPedido = idPedido;
+    }
+
     public Pedido() {
         this.itensPedido = new ItemPedido[LIMITE_ITENS];
         this.quantidadeItens = 0;

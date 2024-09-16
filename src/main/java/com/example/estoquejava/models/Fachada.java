@@ -21,6 +21,7 @@ public class Fachada {
         this.pedidoController = new PedidoController();
         this.produtoController = new ProdutoController();
         this.itemPedidoController = new ItemPedidoController();
+        this.pedidoRepositorio = PedidoRepositorio.getInstance();
     }
 
     public static Fachada getInstancia() {

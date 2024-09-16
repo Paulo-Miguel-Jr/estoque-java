@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 
 public class TelaFinalController implements Initializable {
     @FXML
-    private Button buttonVer, buttonOutroPedido;;
+    private Button buttonVer;
 
     @FXML
     private ImageView image;
@@ -76,14 +76,6 @@ public class TelaFinalController implements Initializable {
         }
         pedidoAtual = null; // reseta o pedido
         irParaTelaPrincipal();
-    }
-
-    @FXML
-    public void verPedido() {
-        ScreenManager sm = ScreenManager.getInstance();
-        TelaVerPedidoController telaVerPedidoController = sm.getTelaVerPedidoController();
-        telaVerPedidoController.setPedido(pedidoAtual);
-        sm.changeScreen("TelaVerPedido.fxml", "Tela Ver Pedido");
     }
 
 

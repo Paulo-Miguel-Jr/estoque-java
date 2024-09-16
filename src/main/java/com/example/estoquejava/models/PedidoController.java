@@ -48,7 +48,7 @@ public class PedidoController {
     public Pedido procurarPedido(int idPedido) throws PedNaoEncontException {
         Pedido pedido = pedidoRepositorio.procurarPedido(idPedido);
         if (pedido == null) {
-            throw new PedNaoEncontException("Pedido não encontrado com o ID: " + idPedido);
+           throw new PedNaoEncontException("Pedido não encontrado com o ID: " + idPedido);
         }
         return pedido;
     }

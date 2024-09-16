@@ -161,11 +161,10 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
 
 
 
-    @Override
     public Pedido procurarPedido(int idPedido) {
-        for (Pedido pedido : pedidos) {
-            if (pedido.getIdPedido() == idPedido) {
-                return pedido;
+        for (int i = 0; i < proxIdLivre; i++) {
+            if (pedidos[i].getIdPedido() == idPedido) {
+                return pedidos[i];
             }
         }
         return null;
