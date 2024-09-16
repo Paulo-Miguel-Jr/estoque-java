@@ -2,15 +2,18 @@ package com.example.estoquejava.gui;
 
 import com.example.estoquejava.ScreenManager;
 import com.example.estoquejava.models.Produto;
+import com.example.estoquejava.models.enums.UnidadeDeMedida;
 import com.example.estoquejava.repository.ProdutoRepositorio;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.io.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-
-public class TelaProdutoController {
+public class TelaProdutoController implements Initializable {
 
     @FXML
     private Button adicionarButton;
@@ -40,7 +43,7 @@ public class TelaProdutoController {
     private TextField quantidadeTextField;
 
     @FXML
-    private TextField unidadeDeMedidaTextField;
+    private ComboBox<UnidadeDeMedida> unidadeDeMedidaComboBox;
 
     @FXML
     private Label unidadeLabel;
@@ -89,9 +92,9 @@ public class TelaProdutoController {
                 return;
             }
 
-            String unidadeDeMedida = unidadeDeMedidaTextField.getText().trim();
-            if (unidadeDeMedida.isEmpty()) {
-                exibirAlerta("Erro", "A unidade de medida não pode ser vazia.", Alert.AlertType.ERROR);
+            UnidadeDeMedida unidadeDeMedida = unidadeDeMedidaComboBox.getValue();
+            if (unidadeDeMedida == null) {
+                exibirAlerta("Erro", "Por favor, selecione uma unidade de medida.", Alert.AlertType.ERROR);
                 return;
             }
 
@@ -125,7 +128,7 @@ public class TelaProdutoController {
         nomeTextField.clear();
         precoTextField.clear();
         quantidadeTextField.clear();
-        unidadeDeMedidaTextField.clear();
+        unidadeDeMedidaComboBox.getSelectionModel().clearSelection();
         estoqueMinimoTextField.clear();
     }
 
@@ -170,6 +173,10 @@ public class TelaProdutoController {
         sm.changeScreen("TelaPrincipal.fxml", "TelaPrincipal");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        unidadeDeMedidaComboBox.getItems().setAll(UnidadeDeMedida.values());
+    }
 }
 
 

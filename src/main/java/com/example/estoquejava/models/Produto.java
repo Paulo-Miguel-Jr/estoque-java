@@ -1,6 +1,8 @@
 package com.example.estoquejava.models;
 
 
+import com.example.estoquejava.models.enums.UnidadeDeMedida;
+
 import java.io.Serializable;
 
 public class Produto implements Serializable {
@@ -11,12 +13,12 @@ public class Produto implements Serializable {
     private int id;
     private double preco;
     private double quantidade;
-    private String unidadeDeMedida;
+    private UnidadeDeMedida unidadeDeMedida;
     private double estoqueMinimo;
 
 
 
-    public Produto(String nome, int id, double preco, double quantidade, String unidadeDeMedida, double estoqueMinimo) {
+    public Produto(String nome, int id, double preco, double quantidade, UnidadeDeMedida unidadeDeMedida, double estoqueMinimo) {
         this.nome = nome;
         this.id = id;
         this.preco = preco;
@@ -59,11 +61,11 @@ public class Produto implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public String getUnidadeDeMedida() {
+    public UnidadeDeMedida getUnidadeDeMedida() {
         return unidadeDeMedida;
     }
 
-    public void setUnidadeDeMedida(String unidadeDeMedida) {
+    public void setUnidadeDeMedida(UnidadeDeMedida unidadeDeMedida) {
         this.unidadeDeMedida = unidadeDeMedida;
     }
 

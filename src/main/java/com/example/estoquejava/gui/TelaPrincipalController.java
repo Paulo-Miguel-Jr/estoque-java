@@ -71,7 +71,10 @@ public class TelaPrincipalController implements Initializable {
     private void configurarColunas() {
         colunaProduto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
         colunaPreco.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getPreco())));
-        colunaQuantidade.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getQuantidade())));
+        colunaQuantidade.setCellValueFactory(cellData -> {
+            int quantidadeComoInt = (int) cellData.getValue().getQuantidade();
+            return new SimpleStringProperty(String.valueOf(quantidadeComoInt));
+        });
     }
 
     @FXML
