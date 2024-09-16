@@ -117,11 +117,11 @@ public class PedidoRepositorio implements IPedidoRepositorio, Serializable {
         if (indice == -1) {
             throw new PedNaoEncontException("Pedido não encontrado.");
         } else {
-            // Move todos os elementos após o índice para uma posição anterior
+            // move os elementos após o índice para uma posição anterior
             for (int i = indice; i < proxIdLivre - 1; i++) {
                 pedidos[i] = pedidos[i + 1];
             }
-            // Limpa o último elemento, que foi movido para frente
+            // limpa o ultm elemento, o que foi movido para frente
             pedidos[proxIdLivre - 1] = null;
             proxIdLivre--;
             salvarArquivo();
