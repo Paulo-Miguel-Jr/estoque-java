@@ -59,7 +59,6 @@ public class TelaPedidoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         pedidoRepositorio = PedidoRepositorio.getInstance();
 
         configurarColunas();
@@ -106,16 +105,15 @@ public class TelaPedidoController implements Initializable {
     }
 
     private void atualizarInterfaceComPedido(Pedido pedido) {
-
         atualizarTableViewItens();
         setarLabel();
     }
 
     private void atualizarTableViewItens() {
-        listaItens.clear(); // Limpa a lista atual de itens
+        listaItens.clear();
         if (pedidoAtual != null) {
-            listaItens.addAll(pedidoAtual.getItens()); // Adiciona os itens do pedido à lista
-            tableView.setItems(listaItens); // Atualiza a TableView
+            listaItens.addAll(pedidoAtual.getItens()); // adc os itens do pedido à lista
+            tableView.setItems(listaItens); // atualiza a tabela
         }
     }
 
@@ -153,7 +151,7 @@ public class TelaPedidoController implements Initializable {
             mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Finalizado", "O pedido com ID " + pedidoAtual.getIdPedido() + " foi finalizado com sucesso.");
 
             listaItens.clear();
-            // Passando o pedido para a tela final
+            //passa o pedido para a TelaFinal
             ScreenManager sm = ScreenManager.getInstance();
             TelaFinalController telaFinalController = sm.getTelaFinalController();
             telaFinalController.setPedidoAtual(pedidoAtual);
@@ -191,9 +189,7 @@ public class TelaPedidoController implements Initializable {
             }
 
             pedidoAtual.removerItemPedido(itemSelecionado);
-
             pedidoController.atualizarPedido(pedidoAtual);
-
             tableView.setItems(FXCollections.observableArrayList(pedidoAtual.getItens()));
             setarLabel();
 
@@ -214,21 +210,19 @@ public class TelaPedidoController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             ProdutoRepositorio produtoRepositorio = ProdutoRepositorio.getInstance();
 
-            // Percorre todos os itens exibidos na TableView
+            // percorre os itens exibidos na tabela
             ObservableList<ItemPedido> itensTableView = tableView.getItems();
             for (ItemPedido item : itensTableView) {
                 if (item != null && item.getProduto() != null) {
                     Produto produto = item.getProduto();
                     double quantidadeRemovida = item.getQuantidade();
 
-                    // Recupera o produto do repositório
+                    // recupera o produto do repositório
                     Produto produtoNoRepositorio = produtoRepositorio.obterProdutoPorId(produto.getId());
 
                     if (produtoNoRepositorio != null) {
-                        // Devolve a quantidade removida ao estoque
                         produtoNoRepositorio.setQuantidade(produtoNoRepositorio.getQuantidade() + quantidadeRemovida);
 
-                        // Atualiza o repositório com a nova quantidade
                         produtoRepositorio.atualizarProduto(produtoNoRepositorio);
                     } else {
                         mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Produto não encontrado no repositório: " + produto.getNome());
@@ -236,21 +230,18 @@ public class TelaPedidoController implements Initializable {
                 }
             }
 
-            // Atualiza o status do pedido para CANCELADO
             pedidoAtual.setStatus(StatusPedido.CANCELADO);
-            pedidoAtual.limparItens();  // Limpa os itens do pedido
+            pedidoAtual.limparItens();
 
-            // Atualiza o repositório de pedidos
             pedidoController.atualizarPedido(pedidoAtual);
 
-            // Limpa a TableView e atualiza o valor total
+            // limpa a tabela e atualiza o valor
             tableView.setItems(FXCollections.observableArrayList());
             labelValorTotal.setText("R$ 0.00");
 
             mostrarAlerta(Alert.AlertType.INFORMATION, "Pedido Cancelado", "O pedido foi cancelado e os itens foram devolvidos ao estoque.");
 
-            // Resetando o pedido atual
-            pedidoAtual = null;
+            pedidoAtual = null; // reseta o pedido atual
         }
     }
 

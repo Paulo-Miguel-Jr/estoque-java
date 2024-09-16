@@ -64,10 +64,12 @@ public class PedidoController {
     public void cancelarPedido(Pedido pedido) {
         if (pedido != null) {
             pedido.setStatus(StatusPedido.CANCELADO);
-            pedido.limparItens(); // Remove todos os itens do pedido
-            atualizarPedido(pedido);  // Atualiza o pedido no repositório
+            pedido.limparItens();
+            atualizarPedido(pedido);
         }
     }
+
+
 
     public void adicionarItemAoPedido(int idPedido, ItemPedido item) throws PedNaoEncontException, LimiteItensAlcancadoException, InvalidPedidoException {
         Pedido pedido = procurarPedido(idPedido);
@@ -83,6 +85,8 @@ public class PedidoController {
             throw new InvalidPedidoException("O pedido deve conter pelo menos um item.");
         }
     }
+
+    public Pedido[] listarPedidos() {pedidoRepositorio.listarPedidos();}
 
     private int gerarIdPedido() {
         return pedidoRepositorio.gerarNovoId();
